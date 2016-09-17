@@ -1,0 +1,50 @@
+{
+  "name": "ualfutures-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for UAL Futures' website",
+  "scripts": {
+    "favicon": "node favicon.js && echo 'Now copy contents of favicon.html into your HTML files.'",
+    "build:js": "browserify ./javascripts/custom.js -o ./javascripts/main.js -d",
+    "build:css": "lessc ./stylesheets/style.less | postcss --use autoprefixer > ./stylesheets/style.css",
+    "build": "npm run build:js && npm run build:css",
+    "precompile": "npm run build",
+    "compile:js": "uglifyjs -m --screw-ie8 -c drop_console=true,warnings=false ./javascripts/main.js > ./javascripts/main.min.js",
+    "compile:css": "cleancss ./stylesheets/style.css > ./stylesheets/style.min.css",
+    "compile": "npm run compile:js && npm run compile:css",
+    "prewatch": "npm run compile",
+    "watch": "http-server & open http://localhost:8080/ && onchange './stylesheets/!(normalize.min|style|style.min).css' './javascripts/!(script|main|mian.min|vendor/**).js' -v -- npm run compile",
+    "predeploy:dev": "npm run compile",
+    "deploy:dev": "echo 'ualfutures.surge.sh' > CNAME && surge .",
+    "deploy:prod": "echo 'Hold on there, you haven't defined anything!'",
+    "predeploy": "npm run compile",
+    "deploy": "npm run deploy:prod"
+  },
+  "author": "Kenneth Lim <limzy.kenneth@gmail.com> (http://designerken.be)",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "autoprefixer": "~5.2.0",
+    "browserify": "~13.0.1",
+    "browserify-shim": "~3.8.9",
+    "clean-css": "~3.4.12",
+    "favicons": "^4.7.1",
+    "http-server": "^0.9.0",
+    "less": "^2.7.1",
+    "onchange": "~2.4.0",
+    "open": "0.0.5",
+    "postcss-cli": "~2.5.2",
+    "uglify-js": "~2.6.2"
+  },
+  "dependencies": {
+    "smark": "^2.0.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "underscore": "global:_",
+    "backbone": "global:Backbone"
+  }
+}
