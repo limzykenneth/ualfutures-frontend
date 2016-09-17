@@ -12,7 +12,7 @@
     "compile:css": "cleancss ./stylesheets/style.css > ./stylesheets/style.min.css",
     "compile": "npm run compile:js && npm run compile:css",
     "prewatch": "npm run compile",
-    "watch": "http-server & open http://localhost:8080/ && onchange './stylesheets/!(normalize.min|style|style.min).css' './javascripts/!(script|main|mian.min|vendor/**).js' -v -- npm run compile",
+    "watch": "http-server & open http://localhost:8080/ && onchange './stylesheets/style.less' './javascripts/!(script|main|mian.min|vendor/**).js' -v -- npm run compile",
     "predeploy:dev": "npm run compile",
     "deploy:dev": "echo 'ualfutures.surge.sh' > CNAME && surge .",
     "deploy:prod": "echo 'Hold on there, you haven't defined anything!'",

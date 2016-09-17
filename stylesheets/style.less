@@ -1,17 +1,21 @@
+@primary-color: #C9FEE8;
+@secondary-color: #272964;
+@display-font: 'graphik_webbold', 'Helvetica', sans-serif;
+@text-font: "Inconsolata", monospace;
+
+
 /* default settings (layout only, NOT for typographic details) */
 
-a:link{
-	text-decoration:none;
-	color:#fff;
-}
-
-a:visited{
-	text-decoration:none;
-	color:#fff;
+a{
+	text-decoration: none;
+	color: @secondary-color;
 }
 
 body{
-	background-color:#26266e;
+	background-color: @primary-color;
+	font-family: @text-font;
+	color: @secondary-color;
+	font-size: 16pt;
 }
 
 
@@ -19,35 +23,59 @@ body{
 
 
 h1{
-	font-family: "Gill Sans", "Helvetica", sans-serif;
-	font-size: 4em;
+	font-family: @display-font;
+	font-size: 3em;
 }
+
 h2{
-	font-family:Georgia,serif;
-	font-size:3em;
-}
-h3{
+	font-family: @display-font;
 	font-size:2em;
 }
-h4{
-	font-size:1.5em;
-}
-h5{
-	font-size:1em;
-}
-h6{
-	font-size:0.5em;
-}
+
 p{
+	a:link{
+		text-decoration: underline;
+	}
 
-}
-
-div{
-	
+	a:hover{
+		text-decoration: none;
+	}
 }
 
 
 
 /* custom modifications */
+#page-header{
+	margin: 0 auto;
+	width: 90%;
+	max-width: 1100px;
+	height: 10vw;
+	font-weight: bold;
+	font-family: @display-font;
 
+	transition: height 0.5s ease;
+
+	&.active{
+		position: fixed;
+		height: 200px;
+	}
+
+	span{
+		margin-right: 4em;
+
+		h2{
+			display: inline-block;
+		}
+	}
+}
+
+#page-content{
+	width: 100vw;
+
+	section{
+		margin: 0 auto;
+		width: 90%;
+		max-width: 1100px;
+	}
+}
 

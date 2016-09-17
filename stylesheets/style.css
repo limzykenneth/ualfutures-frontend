@@ -1,34 +1,55 @@
 /* default settings (layout only, NOT for typographic details) */
-a:link {
+a {
   text-decoration: none;
-  color: #fff;
-}
-a:visited {
-  text-decoration: none;
-  color: #fff;
+  color: #272964;
 }
 body {
-  background-color: #26266e;
+  background-color: #C9FEE8;
+  font-family: "Inconsolata", monospace;
+  color: #272964;
+  font-size: 16pt;
 }
 /* default typography presets */
 h1 {
-  font-family: "Gill Sans", "Helvetica", sans-serif;
-  font-size: 4em;
-}
-h2 {
-  font-family: Georgia,serif;
+  font-family: 'graphik_webbold', 'Helvetica', sans-serif;
   font-size: 3em;
 }
-h3 {
+h2 {
+  font-family: 'graphik_webbold', 'Helvetica', sans-serif;
   font-size: 2em;
 }
-h4 {
-  font-size: 1.5em;
+p a:link {
+  text-decoration: underline;
 }
-h5 {
-  font-size: 1em;
-}
-h6 {
-  font-size: 0.5em;
+p a:hover {
+  text-decoration: none;
 }
 /* custom modifications */
+#page-header {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1100px;
+  height: 10vw;
+  font-weight: bold;
+  font-family: 'graphik_webbold', 'Helvetica', sans-serif;
+  -webkit-transition: height 0.5s ease;
+          transition: height 0.5s ease;
+}
+#page-header.active {
+  position: fixed;
+  height: 200px;
+}
+#page-header span {
+  margin-right: 4em;
+}
+#page-header span h2 {
+  display: inline-block;
+}
+#page-content {
+  width: 100vw;
+}
+#page-content section {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1100px;
+}
