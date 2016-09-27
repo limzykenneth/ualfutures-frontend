@@ -88,12 +88,15 @@ p a:hover {
 #page-header .logo {
   font-family: 'Graphik', 'Helvetica', sans-serif;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 37px;
   line-height: 30px;
   margin: 0 auto;
   margin-top: 26px;
   width: 75%;
   max-width: 1100px;
+}
+#page-header .logo a {
+  color: #fff;
 }
 @media only screen and (max-width: 700px) {
   #page-header .logo {
