@@ -6,7 +6,7 @@
 @secondary-font: "Inconsolata", monospace;
 @text-font: 'Helvetica', sans-serif;
 @small: ~"only screen and (max-width: 479px)";
-@medium: ~"only screen and (max-width: 967px)";
+@medium: ~"only screen and (max-width: 970px)";
 @large: ~"only screen and (max-width: 1300px)";
 @retina: ~"only screen and (min-width: 2880px)";
 
@@ -113,6 +113,20 @@ p{
 			clear: left;
 			padding-bottom: 2rem;
 
+			#mce-responses{
+				margin-left: 0px;
+				padding-left: 0px;
+
+				.response{
+					position: relative;
+					top: 0.5rem;
+					font-family: @secondary-font;
+					font-size: 1rem;
+					line-height: 1.2rem;
+					margin-bottom: 2.5rem;
+				}
+			}
+
 			form{
 				padding: 0;
 
@@ -125,6 +139,7 @@ p{
 
 					@media @medium{
 						display: block;
+						height: auto;
 					}
 				}
 
@@ -152,24 +167,15 @@ p{
 
 				.clear{
 					width: 100%;
+					margin-top: -5rem;
+
+					@media @medium{
+						margin-top: 0px;
+					}
 
 					#mc-embedded-subscribe{
 						.mc-field-group;
-
-						height: 55px;
-						display: inline-block;
-						
-						margin-right: 20px;
-						border: 2px solid @text-color;
-						border-radius: 0;
-						padding-left: 10px;
-						padding-right: 10px;
-						
-						box-shadow: 5px 5px 0px #271d66;
-
-						&:hover{
-							box-shadow: 3px 3px 0px #271d66;
-						}
+						.box-shadow-box;
 					}
 				}
 
@@ -200,6 +206,24 @@ p{
 				}
 			}
 		}
+
+		.social-media{
+			width: 100%;
+			font-family: @secondary-font;
+			text-align: center;
+			font-size: 0.6em;
+
+			a{
+				.box-shadow-box;
+				width: 30%;
+				margin-bottom: 2rem;
+				padding-top: 5px;
+
+				@media @medium{
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 
@@ -209,5 +233,24 @@ p{
 	margin-top: 10px;
 	color: @text-color;
 	text-align: center;
+}
+
+.box-shadow-box{
+	height: 55px;
+	display: inline-block;
+	
+	margin-right: 20px;
+	border: 2px solid @text-color;
+	border-radius: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	box-shadow: 5px 5px 0px #271d66;
+
+	transition: all 0.1s ease;
+
+	&:hover{
+		box-shadow: 3px 3px 0px #271d66;
+	}
 }
 
