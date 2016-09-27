@@ -1,10 +1,20 @@
-@primary-color: #C9FEE8;
-@secondary-color: #272964;
-@display-font: 'graphik_webbold', 'Helvetica', sans-serif;
-@text-font: "Inconsolata", monospace;
+@primary-color: #faf8f8;
+@secondary-color: #623ef9;
+@text-color: #623ef9;
+@secondary-text-color: #271e68;
+@display-font: 'Graphik', 'Helvetica', sans-serif;
+@secondary-font: "Inconsolata", monospace;
+@text-font: 'Helvetica', sans-serif;
+@small: ~"only screen and (max-width: 479px)";
+@medium: ~"only screen and (max-width: 967px)";
+@large: ~"only screen and (max-width: 1300px)";
+@retina: ~"only screen and (min-width: 2880px)";
 
 
 /* default settings (layout only, NOT for typographic details) */
+*{
+	box-sizing: border-box;
+}
 
 a{
 	text-decoration: none;
@@ -12,10 +22,11 @@ a{
 }
 
 body{
-	background-color: @primary-color;
+	overflow-x: hidden;
 	font-family: @text-font;
-	color: @secondary-color;
+	color: @text-color;
 	font-size: 16pt;
+	background: @primary-color url(img/ual-futures-dot-background.png);
 }
 
 
@@ -46,36 +57,157 @@ p{
 
 /* custom modifications */
 #page-header{
-	margin: 0 auto;
-	width: 90%;
-	max-width: 1100px;
-	height: 10vw;
-	font-weight: bold;
-	font-family: @display-font;
+	top: 0px;
+	position: fixed;
+	width: 100vw;
+	height: 80px;
+	padding: 0px;
+	background: @secondary-color;
+	z-index: 9999;
+	color: #fff;
 
-	transition: height 0.5s ease;
+	.ual{
 
-	&.active{
-		position: fixed;
-		height: 200px;
+		img{
+			position: absolute;
+			top: 23px;
+			margin-left: 1.5rem;
+			width: 65px;
+			height: auto;
+			display: block;
+		}
 	}
 
-	span{
-		margin-right: 4em;
-
-		h2{
-			display: inline-block;
-		}
+	.logo{
+		font-family: @display-font;
+		font-weight: bold;
+		font-size: 30px;
+		line-height: 30px;
+		margin: 0 auto;
+		margin-top: 26px;
+		width: 75%;
+		max-width: 1100px;
 	}
 }
 
 #page-content{
-	width: 100vw;
+	width: 100%;
 
-	section{
+	.coming-soon{
+		font-family: @display-font;
+		font-weight: bold;
 		margin: 0 auto;
-		width: 90%;
+		font-size: 30px;
+		line-height: 40px;
+		letter-spacing: 0.02em;
+		margin-top: 150px;
+		width: 75%;
 		max-width: 1100px;
+
+		p em{
+			font-style: normal;
+			color: @secondary-text-color;
+		}
+
+		#mc_embed_signup{
+			clear: left;
+			padding-bottom: 2rem;
+
+			form{
+				padding: 0;
+
+				#mc_embed_signup_scroll{
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+					width: 100%;
+					height: 15rem;
+
+					@media @medium{
+						display: block;
+					}
+				}
+
+				input[type=text], input[type=email]{
+					background: @primary-color;
+					border-radius: 0;
+					border: 2px solid @text-color;
+				}
+				::-webkit-input-placeholder {
+					.input-placeholder;
+				}
+
+				::-moz-placeholder {
+					.input-placeholder;
+				}
+
+				:-ms-input-placeholder {  
+					.input-placeholder;  
+				}
+
+				div.mce_inline_error{
+					position: relative;
+					height: 35px !important;
+				}
+
+				.clear{
+					width: 100%;
+
+					#mc-embedded-subscribe{
+						.mc-field-group;
+
+						height: 55px;
+						display: inline-block;
+						
+						margin-right: 20px;
+						border: 2px solid @text-color;
+						border-radius: 0;
+						padding-left: 10px;
+						padding-right: 10px;
+						
+						box-shadow: 5px 5px 0px #271d66;
+
+						&:hover{
+							box-shadow: 3px 3px 0px #271d66;
+						}
+					}
+				}
+
+				select{
+					border: 2px solid @text-color;
+					height: 47px;
+				}
+
+				.mc-field-group{
+					background: @primary-color;
+					width: 30%;
+					font-size: 0.6em;
+					font-family: @secondary-font;
+					text-align: center;
+					color: @text-color;
+					
+					margin-right: 1.5rem;
+					height: 55px;
+
+					&>*{
+						height: 55px;
+					}
+
+					@media @medium{
+						width: 100%;
+						margin-bottom: 2rem;
+					}
+				}
+			}
+		}
 	}
+}
+
+.input-placeholder{
+	font-family: @secondary-font;
+	font-size: 1em;
+	margin-top: 10px;
+	color: @text-color;
+	text-align: center;
 }
 

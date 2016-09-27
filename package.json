@@ -15,7 +15,7 @@
     "watch": "http-server & open http://localhost:8080/ && onchange './stylesheets/style.less' './javascripts/!(script|main|mian.min|vendor/**).js' -v -- npm run compile",
     "predeploy:dev": "npm run compile",
     "deploy:dev": "echo 'ualfutures.surge.sh' > CNAME && surge .",
-    "deploy:prod": "echo 'Hold on there, you haven't defined anything!'",
+    "deploy:prod": "echo 'ualfutures.studio' > CNAME && surge .",
     "predeploy": "npm run compile",
     "deploy": "npm run deploy:prod"
   },
