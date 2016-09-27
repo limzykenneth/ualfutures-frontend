@@ -8,7 +8,7 @@
 
 a{
 	text-decoration: none;
-	color: @secondary-color;
+	color: #fff;
 }
 
 body{
@@ -87,14 +87,31 @@ p{
 		margin-top: 26px;
 		width: 75%;
 		max-width: 1100px;
-		
-		a{
-			color: #fff;
-		}
 
 		@media @small{
 			width: 200px;
 			display: inline-block;
+		}
+	}
+
+	.social-media{
+		position: absolute;
+		right: 0px;
+		top: 1.7rem;
+		margin-right: 3rem;
+
+		a{
+			margin-right: 0.5rem;
+		}
+
+		.icon-link{
+			@media @x-small{
+				display: none;
+			}
+		}
+
+		.menu-burger{
+			
 		}
 	}
 }
@@ -228,24 +245,6 @@ p{
 						width: 100%;
 						margin-bottom: 2rem;
 					}
-				}
-			}
-		}
-
-		.social-media{
-			width: 100%;
-			font-family: @secondary-font;
-			text-align: center;
-			font-size: 0.6em;
-
-			a{
-				.box-shadow-box;
-				width: 30%;
-				margin-bottom: 2rem;
-				padding-top: 5px;
-
-				@media @medium{
-					width: 100%;
 				}
 			}
 		}

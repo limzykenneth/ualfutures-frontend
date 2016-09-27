@@ -21,6 +21,11 @@ $(document).ready(function() {
 			$(".response").css("display", "none");
 		}
 	});
+
+	$("#page-header .mebu-burger").click(function(e) {
+		e.preventDefault();
+		
+	});
 });
 
 function gifDisplay(dis, gifList){

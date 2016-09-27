@@ -28,7 +28,7 @@
 }
 a {
   text-decoration: none;
-  color: #623ef9;
+  color: #fff;
 }
 body {
   overflow-x: hidden;
@@ -95,13 +95,24 @@ p a:hover {
   width: 75%;
   max-width: 1100px;
 }
-#page-header .logo a {
-  color: #fff;
-}
 @media only screen and (max-width: 700px) {
   #page-header .logo {
     width: 200px;
     display: inline-block;
+  }
+}
+#page-header .social-media {
+  position: absolute;
+  right: 0px;
+  top: 1.7rem;
+  margin-right: 3rem;
+}
+#page-header .social-media a {
+  margin-right: 0.5rem;
+}
+@media only screen and (max-width: 470px) {
+  #page-header .social-media .icon-link {
+    display: none;
   }
 }
 #page-content {
@@ -267,35 +278,6 @@ p a:hover {
   #page-content .coming-soon #mc_embed_signup form .mc-field-group {
     width: 100%;
     margin-bottom: 2rem;
-  }
-}
-#page-content .coming-soon .social-media {
-  width: 100%;
-  font-family: "Inconsolata", monospace;
-  text-align: center;
-  font-size: 0.6em;
-}
-#page-content .coming-soon .social-media a {
-  height: 55px;
-  display: inline-block;
-  margin-right: 20px;
-  border: 2px solid #623ef9;
-  border-radius: 0;
-  padding-left: 10px;
-  padding-right: 10px;
-  box-shadow: 5px 5px 0px #271d66;
-  -webkit-transition: all 0.1s ease;
-          transition: all 0.1s ease;
-  width: 30%;
-  margin-bottom: 2rem;
-  padding-top: 5px;
-}
-#page-content .coming-soon .social-media a:hover {
-  box-shadow: 3px 3px 0px #271d66;
-}
-@media only screen and (max-width: 970px) {
-  #page-content .coming-soon .social-media a {
-    width: 100%;
   }
 }
 .input-placeholder {
