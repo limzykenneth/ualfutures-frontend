@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Graphik';
+  src: url('fonts/Graphik-Light.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Graphik';
+  src: url('fonts/Graphik-Bold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('fonts/Inconsolata-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('fonts/Inconsolata-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 /* default settings (layout only, NOT for typographic details) */
 * {
   box-sizing: border-box;
@@ -39,13 +63,27 @@ p a:hover {
   z-index: 9999;
   color: #fff;
 }
+#page-header .ual {
+  display: block;
+}
+@media only screen and (max-width: 700px) {
+  #page-header .ual {
+    display: inline-block;
+  }
+}
 #page-header .ual img {
   position: absolute;
   top: 23px;
   margin-left: 1.5rem;
   width: 65px;
   height: auto;
-  display: block;
+  display: inline-block;
+}
+@media only screen and (max-width: 700px) {
+  #page-header .ual img {
+    position: relative;
+    top: 0px;
+  }
 }
 #page-header .logo {
   font-family: 'Graphik', 'Helvetica', sans-serif;
@@ -56,6 +94,12 @@ p a:hover {
   margin-top: 26px;
   width: 75%;
   max-width: 1100px;
+}
+@media only screen and (max-width: 700px) {
+  #page-header .logo {
+    width: 200px;
+    display: inline-block;
+  }
 }
 #page-content {
   width: 100%;
@@ -80,6 +124,11 @@ p a:hover {
   margin-top: 120px;
   width: 75%;
   max-width: 1100px;
+}
+@media only screen and (max-width: 700px) {
+  #page-content .coming-soon {
+    width: 80%;
+  }
 }
 #page-content .coming-soon p em {
   font-style: normal;
