@@ -180,7 +180,7 @@ p a:hover {
   border-radius: 0;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 5px 5px 0px #271d66;
+  box-shadow: 5px 5px 0px #623ef9;
   -webkit-transition: all 0.1s ease;
           transition: all 0.1s ease;
   background-color: #faf8f8;
@@ -196,7 +196,7 @@ p a:hover {
   padding: 1rem;
 }
 #page-content .coming-soon #mc_embed_signup #mce-responses .response:hover {
-  box-shadow: 3px 3px 0px #271d66;
+  box-shadow: 3px 3px 0px #623ef9;
 }
 #page-content .coming-soon #mc_embed_signup form {
   padding: 0;
@@ -275,7 +275,7 @@ p a:hover {
   border-radius: 0;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 5px 5px 0px #271d66;
+  box-shadow: 5px 5px 0px #623ef9;
   -webkit-transition: all 0.1s ease;
           transition: all 0.1s ease;
 }
@@ -289,7 +289,7 @@ p a:hover {
   }
 }
 #page-content .coming-soon #mc_embed_signup form .clear #mc-embedded-subscribe:hover {
-  box-shadow: 3px 3px 0px #271d66;
+  box-shadow: 3px 3px 0px #623ef9;
 }
 #page-content .coming-soon #mc_embed_signup form select {
   border: 2px solid #623ef9;
@@ -329,10 +329,10 @@ p a:hover {
   border-radius: 0;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 5px 5px 0px #271d66;
+  box-shadow: 5px 5px 0px #623ef9;
   -webkit-transition: all 0.1s ease;
           transition: all 0.1s ease;
 }
 .drop-shadow-box:hover {
-  box-shadow: 3px 3px 0px #271d66;
+  box-shadow: 3px 3px 0px #623ef9;
 }
