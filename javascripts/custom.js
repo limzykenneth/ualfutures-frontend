@@ -15,6 +15,12 @@ $(document).ready(function() {
 	}, function() {
 		gifDisplay(false);
 	});
+
+	$("#mc-embedded-subscribe").click(function(e) {
+		if($("#mce-EMAIL").val() === "" || $("#mce-FNAME").val() === "" || $("mce-MMERGE9").val() === ""){
+			$(".response").css("display", "none");
+		}
+	});
 });
 
 function gifDisplay(dis, gifList){
