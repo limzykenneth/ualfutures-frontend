@@ -22,9 +22,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#page-header .mebu-burger").click(function(e) {
-		e.preventDefault();
-		
+	$("#mce-responses .response").click(function(e){
+		$(this).css('display', 'none');
 	});
 });
 

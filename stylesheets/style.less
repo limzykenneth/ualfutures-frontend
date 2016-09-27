@@ -155,17 +155,41 @@ p{
 			clear: left;
 			padding-bottom: 2rem;
 
+			.overlay{
+				display: none;
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100vw;
+				height: 100vh;
+				background-color: @primary-color;
+				opacity: 0.5;
+			}
+
 			#mce-responses{
-				margin-left: 0px;
+				position: fixed;
+				width: 100%;
+				height: auto;
+				left: 0;
+				top: 40vh;
+				margin: 0 auto;
 				padding-left: 0px;
+				cursor: pointer;
 
 				.response{
+					.drop-shadow-box;
+
+					background-color: @primary-color;
 					position: relative;
+					width: 50%;
+					height: auto;
 					top: 0.5rem;
 					font-family: @secondary-font;
 					font-size: 1rem;
 					line-height: 1.2rem;
+					margin-left: 25%;
 					margin-bottom: 2.5rem;
+					padding: 1rem;
 				}
 			}
 
@@ -217,7 +241,7 @@ p{
 
 					#mc-embedded-subscribe{
 						.mc-field-group;
-						.box-shadow-box;
+						.drop-shadow-box;
 					}
 				}
 
@@ -259,7 +283,7 @@ p{
 	text-align: center;
 }
 
-.box-shadow-box{
+.drop-shadow-box{
 	height: 55px;
 	display: inline-block;
 	

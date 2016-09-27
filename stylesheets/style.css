@@ -152,17 +152,51 @@ p a:hover {
   clear: left;
   padding-bottom: 2rem;
 }
+#page-content .coming-soon #mc_embed_signup .overlay {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #faf8f8;
+  opacity: 0.5;
+}
 #page-content .coming-soon #mc_embed_signup #mce-responses {
-  margin-left: 0px;
+  position: fixed;
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: 40vh;
+  margin: 0 auto;
   padding-left: 0px;
+  cursor: pointer;
 }
 #page-content .coming-soon #mc_embed_signup #mce-responses .response {
+  height: 55px;
+  display: inline-block;
+  margin-right: 20px;
+  border: 2px solid #623ef9;
+  border-radius: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 5px 5px 0px #271d66;
+  -webkit-transition: all 0.1s ease;
+          transition: all 0.1s ease;
+  background-color: #faf8f8;
   position: relative;
+  width: 50%;
+  height: auto;
   top: 0.5rem;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   line-height: 1.2rem;
+  margin-left: 25%;
   margin-bottom: 2.5rem;
+  padding: 1rem;
+}
+#page-content .coming-soon #mc_embed_signup #mce-responses .response:hover {
+  box-shadow: 3px 3px 0px #271d66;
 }
 #page-content .coming-soon #mc_embed_signup form {
   padding: 0;
@@ -287,7 +321,7 @@ p a:hover {
   color: #623ef9;
   text-align: center;
 }
-.box-shadow-box {
+.drop-shadow-box {
   height: 55px;
   display: inline-block;
   margin-right: 20px;
@@ -299,6 +333,6 @@ p a:hover {
   -webkit-transition: all 0.1s ease;
           transition: all 0.1s ease;
 }
-.box-shadow-box:hover {
+.drop-shadow-box:hover {
   box-shadow: 3px 3px 0px #271d66;
 }
