@@ -125,8 +125,8 @@ p a:hover {
   left: 200px;
 }
 #page-content .gif-popup img {
-  width: 50vw;
-  height: auto;
+  width: auto;
+  height: 50vh;
 }
 #page-content .coming-soon {
   font-family: 'Graphik', 'Helvetica', sans-serif;
@@ -197,6 +197,9 @@ p a:hover {
 }
 #page-content .coming-soon #mc_embed_signup #mce-responses .response:hover {
   box-shadow: 3px 3px 0px #623ef9;
+}
+#page-content .coming-soon #mc_embed_signup #mce-responses .response a {
+  color: #271e68;
 }
 #page-content .coming-soon #mc_embed_signup form {
   padding: 0;
