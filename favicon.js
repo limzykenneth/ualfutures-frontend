@@ -7,7 +7,7 @@ var favicons = require('favicons'),
         appDescription: pjson.description,  // Your application's description. `string`
         developerName: "Kenneth Lim",   // Your (or your developer's) name. `string`
         developerURL: "http://designerken.be",// Your (or your developer's) URL. `string`
-        background: "#ff0",             // Background colour for flattened icons. `string`
+        background: "#fff",             // Background colour for flattened icons. `string`
         path: "./favicon",              // Path for overriding default icons path. `string`
         url: "/",                      // Absolute URL for OpenGraph image. `string`
         display: "standalone",          // Android display: "browser" or "standalone". `string`

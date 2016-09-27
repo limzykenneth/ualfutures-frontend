@@ -1,7 +1,7 @@
 {
   "name": "ualfutures-frontend",
   "version": "0.0.1",
-  "description": "Frontend for UAL Futures' website",
+  "description": "Exploring the futures of creativity and learning where Technology meets Art, Design, Fashion, Communications and Performance.",
   "scripts": {
     "favicon": "node favicon.js && echo 'Now copy contents of favicon.html into your HTML files.'",
     "build:js": "browserify ./javascripts/custom.js -o ./javascripts/main.js -d",
