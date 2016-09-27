@@ -60,6 +60,16 @@ p a:hover {
 #page-content {
   width: 100%;
 }
+#page-content .gif-popup {
+  display: none;
+  position: absolute;
+  top: 270px;
+  left: 200px;
+}
+#page-content .gif-popup img {
+  width: 50vw;
+  height: auto;
+}
 #page-content .coming-soon {
   font-family: 'Graphik', 'Helvetica', sans-serif;
   font-weight: bold;
@@ -67,7 +77,7 @@ p a:hover {
   font-size: 30px;
   line-height: 40px;
   letter-spacing: 0.02em;
-  margin-top: 150px;
+  margin-top: 120px;
   width: 75%;
   max-width: 1100px;
 }
