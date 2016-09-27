@@ -1,7 +1,7 @@
 var fs = require('fs');
 var pjson = require('./package.json');
 var favicons = require('favicons'),
-    source = './images/logo.png',           // Source image(s). `string`, `buffer` or array of `{ size: filepath }`
+    source = './images/favicon.png',           // Source image(s). `string`, `buffer` or array of `{ size: filepath }`
     configuration = {
         appName: "UAL Futures",            // Your application's name. `string`
         appDescription: pjson.description,  // Your application's description. `string`

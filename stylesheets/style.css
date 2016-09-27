@@ -256,9 +256,9 @@ p a:hover {
 }
 #page-content .coming-soon #mc_embed_signup form div.mce_inline_error {
   position: relative;
-  height: 35px !important;
   color: #623ef9;
-  background-color: rgba(250, 248, 248, 0.8);
+  background-color: #623ef9;
+  color: #fff;
 }
 #page-content .coming-soon #mc_embed_signup form .clear {
   width: 100%;
