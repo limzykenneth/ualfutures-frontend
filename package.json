@@ -1,6 +1,6 @@
 {
   "name": "ualfutures-frontend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Exploring the futures of creativity and learning where Technology meets Art, Design, Fashion, Communications and Performance.",
   "scripts": {
     "favicon": "node favicon.js && echo 'Now copy contents of favicon.html into your HTML files.'"
