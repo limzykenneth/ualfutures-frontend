@@ -3,36 +3,25 @@
   "version": "0.0.1",
   "description": "Exploring the futures of creativity and learning where Technology meets Art, Design, Fashion, Communications and Performance.",
   "scripts": {
-    "favicon": "node favicon.js && echo 'Now copy contents of favicon.html into your HTML files.'",
-    "build:js": "browserify ./javascripts/custom.js -o ./javascripts/main.js -d",
-    "build:css": "lessc ./stylesheets/style.less | postcss --use autoprefixer > ./stylesheets/style.css",
-    "build": "npm run build:js && npm run build:css",
-    "precompile": "npm run build",
-    "compile:js": "uglifyjs -m --screw-ie8 -c drop_console=true,warnings=false ./javascripts/main.js > ./javascripts/main.min.js",
-    "compile:css": "cleancss ./stylesheets/style.css > ./stylesheets/style.min.css",
-    "compile": "npm run compile:js && npm run compile:css",
-    "prewatch": "npm run compile",
-    "watch": "http-server & open http://localhost:8080/ && onchange './stylesheets/style.less' './javascripts/!(script|main|mian.min|vendor/**).js' -v -- npm run compile",
-    "predeploy:dev": "npm run compile",
-    "deploy:dev": "echo 'ualfutures.surge.sh' > CNAME && surge .",
-    "deploy:prod": "echo 'ualfutures.studio' > CNAME && surge .",
-    "predeploy": "npm run compile",
-    "deploy": "npm run deploy:prod"
+    "favicon": "node favicon.js && echo 'Now copy contents of favicon.html into your HTML files.'"
   },
   "author": "Kenneth Lim <limzy.kenneth@gmail.com> (http://designerken.be)",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "autoprefixer": "~5.2.0",
+    "browser-sync": "^2.17.5",
     "browserify": "~13.0.1",
     "browserify-shim": "~3.8.9",
-    "clean-css": "~3.4.12",
     "favicons": "^4.7.1",
-    "http-server": "^0.9.0",
-    "less": "^2.7.1",
-    "onchange": "~2.4.0",
-    "open": "0.0.5",
-    "postcss-cli": "~2.5.2",
-    "uglify-js": "~2.6.2"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-less": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-surge": "^0.1.0",
+    "gulp-uglify": "^2.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "smark": "^2.0.0"

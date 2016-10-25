@@ -48,3 +48,5 @@ jspm_packages
 # Assets for reference
 assets_ref
 CNAME
+dist/*
+!dist/.gitkeep
