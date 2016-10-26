@@ -16,6 +16,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean-css": "^2.0.13",
     "gulp-compile-handlebars": "^0.6.1",
+    "gulp-favicons": "^2.2.6",
     "gulp-less": "^3.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-surge": "^0.1.0",
