@@ -59,14 +59,46 @@ p{
 	max-width: 1100px;
 	margin: 0 auto;
 	margin-top: 8rem;
-}
 
-// .input-placeholder{
-// 	font-family: @secondary-font;
-// 	font-weight: normal;
-// 	font-size: 1em;
-// 	margin-top: 10px;
-// 	color: @text-color;
-// 	text-align: center;
-// }
+	.grid{
+		.grid-item{
+			background-color: @light-green;
+			color: @dark-purple;
+			margin-bottom: 10px;
+			padding: 15px;
+			width: 300px;
+			height: 200px;
+
+			&.level-1{
+				height: 400px;
+			}
+
+			&.level-2{
+				width: 600px;
+				height: 400px;
+			}
+
+			p{
+				margin-top: 0;
+			}
+
+			a{
+				color: @dark-purple;
+				font-weight: bold;
+			}
+
+			.card-subtitle{
+				position: absolute;
+				bottom: 0;
+				width: 90%;
+			}
+
+			.card-read-more{
+				position: absolute;
+				bottom: 0;
+				width: 90%;
+			}
+		}
+	}
+}
 

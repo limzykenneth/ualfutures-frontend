@@ -13,13 +13,27 @@ var gulp = require("gulp"),
 
 // Compilation tasks
 gulp.task("handlebars", function(){
-	var options = {
-		ignorePartials: true,
-		batch: ["./templates", "./templates/head", "./templates/svg"]
+	var indexData = {
+		index: true
 	};
 
+	var aboutData = {
+		about: true
+	};
+
+	var options = {
+		ignorePartials: true,
+		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates"]
+	};
+
+
+	gulp.src("templates/main.hbs")
+        .pipe(handlebars(aboutData, options))
+        .pipe(rename("about.html"))
+        .pipe(gulp.dest("dist"));
+
 	return gulp.src("templates/main.hbs")
-        .pipe(handlebars({}, options))
+        .pipe(handlebars(indexData, options))
         .pipe(rename("index.html"))
         .pipe(gulp.dest("dist"));
 });
@@ -51,7 +65,10 @@ gulp.task("javascripts", function(){
 		}
 	};
 
-	return browserify("./javascripts/custom.js")
+	return browserify("./javascripts/custom.js", {
+		debug: true,
+		standalone: "app"
+	})
         .bundle()
         .pipe(source("main.js"))
         .pipe(gulp.dest("./dist/javascripts/"))
@@ -82,6 +99,11 @@ gulp.task("copy-images", function(){
 		.pipe(gulp.dest("./dist/images"));
 });
 
+gulp.task("copy-json", function(){
+	return gulp.src("./responses/*")
+		.pipe(gulp.dest("./dist/responses"));
+});
+
 // Server
 gulp.task("server", ["default"], function(){
 	browserSync.init({
@@ -91,12 +113,13 @@ gulp.task("server", ["default"], function(){
     gulp.watch("./stylesheets/*.less", ["stylesheets"]);
     gulp.watch("./stylesheets/(normalize.min.css|fonts/*|img/*)", ["copy-css"]);
 
-    gulp.watch("./javascripts/*.js", ["javascripts"]);
+    gulp.watch("./javascripts/**/*.js", ["javascripts"]);
     gulp.watch("./javascripts/vendor/*", ["copy-libraries-js"]);
 
     gulp.watch("./templates/**/*", ["handlebars"]);
 
     gulp.watch("./images/*", ["copy-images"]);
+    gulp.watch("./responses/*", ["copy-json"]);
 
     gulp.watch("./dist/*.html").on("change", browserSync.reload);
     gulp.watch("./dist/javascripts/**/*").on("change", browserSync.reload);
@@ -120,7 +143,7 @@ gulp.task("deploy:prod", ["default"], function(){
 });
 
 
-gulp.task("static-files", ["copy-libraries-js", "copy-css", "copy-images"]);
+gulp.task("static-files", ["copy-libraries-js", "copy-css", "copy-images", "copy-json"]);
 gulp.task("default", ["handlebars", "stylesheets", "javascripts", "static-files"]);
 gulp.task("deploy", ["deploy:dev"]);
 

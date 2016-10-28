@@ -1,0 +1,35 @@
+<script type="text/template" id="media-card-view">
+	<article class="grid-item level-<%= level %>">
+		<p><a href="#"><%= category %></a></p>
+
+		<h3 class="card-title"><%= title %></h3>
+
+		<% 
+		switch(level){
+			case "0":
+				print('<p class="card-read-more"><a href="#">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></p>');
+				break;
+
+			case "1":
+				print('<p class="card-subtitle">' + subtitle + '</p>');
+				break;
+
+			case "2":
+				print('<p class="card-subtitle">' + subtitle + '</p>');
+				break;
+		}
+
+		%>
+	</article>
+</script>
+
+<script type="text/template" id="media-single-view">
+	<article>
+		<h1><%= title %></h1>
+		<p>Posted on: <%= date %></p>
+
+		<div class="media-content">
+		<%= content %>
+		</div>
+	</article>
+</script>
