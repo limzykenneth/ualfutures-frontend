@@ -1,4 +1,5 @@
 var gulp = require("gulp"),
+	gutil = require("gulp-util"),
     handlebars = require("gulp-compile-handlebars"),
     rename = require("gulp-rename"),
     less = require("gulp-less"),
@@ -7,6 +8,7 @@ var gulp = require("gulp"),
     browserify = require("browserify"),
     source = require("vinyl-source-stream"),
     buffer = require("vinyl-buffer"),
+    plumber = require("gulp-plumber"),
     uglifyjs = require("gulp-uglify"),
     surge = require("gulp-surge"),
     browserSync = require("browser-sync").create();
@@ -28,11 +30,17 @@ gulp.task("handlebars", function(){
 
 
 	gulp.src("templates/main.hbs")
+		.pipe(plumber({
+			errorHandler: onError
+		}))
         .pipe(handlebars(aboutData, options))
         .pipe(rename("about.html"))
         .pipe(gulp.dest("dist"));
 
 	return gulp.src("templates/main.hbs")
+		.pipe(plumber({
+			errorHandler: onError
+		}))
         .pipe(handlebars(indexData, options))
         .pipe(rename("index.html"))
         .pipe(gulp.dest("dist"));
@@ -46,6 +54,9 @@ gulp.task("stylesheets", function(){
 	var cleanCSSOptions = {};
 
 	return gulp.src("./stylesheets/style.less")
+		.pipe(plumber({
+			errorHandler: onError
+		}))
 		.pipe(less(lessOptions))
 		.pipe(autoprefixer())
 		.pipe(gulp.dest("./dist/stylesheets"))
@@ -70,6 +81,10 @@ gulp.task("javascripts", function(){
 		standalone: "app"
 	})
         .bundle()
+        .on("error", onError)
+        .pipe(plumber({
+			errorHandler: onError
+		}))
         .pipe(source("main.js"))
         .pipe(gulp.dest("./dist/javascripts/"))
         .pipe(buffer())
@@ -148,3 +163,7 @@ gulp.task("default", ["handlebars", "stylesheets", "javascripts", "static-files"
 gulp.task("deploy", ["deploy:dev"]);
 
 
+function onError(err){
+	gutil.log(gutil.colors.red('Error (' + err.plugin + '): ' + err.message));
+	this.emit("end");
+}
