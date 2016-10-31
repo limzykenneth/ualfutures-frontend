@@ -13,7 +13,9 @@ var genericAllView = require("./genericCollectionView.js");
 
 var app = app || {
 	media: {},
-	events: {},
+	events: {
+		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
+	},
 	opps: {}
 };
 app.media.collection = new mediaCollection();
@@ -42,6 +44,11 @@ app.start = function(){
 	app.genericAllView = new genericAllView(app.collection);
 	$("#page-content .grid").append(app.genericAllView.render());
 
+	// IMPORTANT: DO NOT FETCH BEFORE IT IS ACTUALLY NEEDED!
+	app.events.collection.each(function(el){
+		el.fetchData();
+	});
+
 	// $("#page-content .grid").append(app.media.allView.render(app.media.collection));
 
 	$("#page-content .grid").masonry({
@@ -54,6 +61,5 @@ app.start = function(){
 app.errorFetchingData = function(e){
 	console.error(e.status + " " + e.statusText);
 };
-
 
 module.exports = app;
