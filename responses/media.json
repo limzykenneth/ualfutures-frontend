@@ -1,24 +1,24 @@
-[{
-	"category": "feature",
-	"title": "How to Code Good",
-	"subtitle": "How to code really goood.",
-	"author": "Oliver Age 24",
-	"level": "0",
-	"date": ""
-},
-{
-	"category": "feature",
-	"title": "What the FAQ?",
-	"subtitle": "10 inspiring links on how to create a great portfolio.",
-	"author": "UAL Futures",
-	"level": "1",
-	"date": ""
-},
-{
-	"category": "feature",
-	"title": "AKQA Want Young Digital Makers for Paid Residency.",
-	"subtitle": "All about her studio and the cat.",
-	"author": "UAL Futures",
-	"level": "2",
-	"date": ""
-}]
+[
+  {
+    "id": 1,
+    "date": "2016-09-16T10:03:06",
+    "date_gmt": "2016-09-16T10:03:06",
+    "modified": "2016-10-31T07:45:08",
+    "modified_gmt": "2016-10-31T07:45:08",
+    "slug": "hello-world",
+    "type": "post",
+    "title": "Hello world!",
+    "content": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n",
+    "author": 1,
+    "format": "standard",
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "subtitle": "Testing ACF and REST API",
+    "level": "0",
+    "cover_photo": "http://localhost/ual_futures/wp-content/uploads/2016/09/c4jt321.png",
+    "category": "Feature",
+    "appData": "posts"
+  }
+]

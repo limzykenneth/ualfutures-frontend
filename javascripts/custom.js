@@ -8,6 +8,9 @@ var eventsCollection = require("./events/collection.js");
 
 var oppsCollection = require("./opportunities/collection.js");
 
+var genericCollection = require("./genericCollection.js");
+var genericAllView = require("./genericCollectionView.js");
+
 var app = app || {
 	media: {},
 	events: {},
@@ -30,7 +33,16 @@ app.init = function(){
 };
 
 app.start = function(){
-	$("#page-content .grid").append(app.media.allView.render(app.media.collection));
+	// Put all models into the generic collection and prepare its view
+	app.collection = new genericCollection();
+	app.collection.add(app.media.collection.toJSON());
+	app.collection.add(app.events.collection.toJSON());
+	app.collection.add(app.opps.collection.toJSON());
+
+	app.genericAllView = new genericAllView(app.collection);
+	$("#page-content .grid").append(app.genericAllView.render());
+
+	// $("#page-content .grid").append(app.media.allView.render(app.media.collection));
 
 	$("#page-content .grid").masonry({
 		itemSelector: ".grid-item",

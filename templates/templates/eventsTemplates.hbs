@@ -1,0 +1,39 @@
+<script type="text/template" id="events-card-view">
+	<article class="grid-item level-<%= level %>">
+		<p><a href="#"><%= category %></a></p>
+
+		<h3 class="card-title"><%= title %></h3>
+
+		<p><%= date %> {{!-- <%= time %><br><%= location %> --}}</p>
+	</article>
+</script>
+
+<script type="text/template" id="events-single-view">
+	<article>
+		<h1><%= title %></h1>
+
+		<div class="media-content">
+		<%= content %>
+		</div>
+	</article>
+
+	<div class="sidebar">
+		<div class="info">
+			<p>
+				<%= date %><br>
+				<%= time %>
+			</p>
+			<p>
+				<%= address %>
+			</p>
+		</div>
+
+		<div class="social-media">
+
+		</div>
+
+		<div class="upcoming">
+
+		</div>
+	</div>
+</script>

@@ -1,16 +1,19 @@
-[{
-	"category": "futures",
-	"title": "Futures Talks: #4 UX in Context",
-	"date": "",
-	"location": "Central Saint Martins, London",
-	"evenbrite": "",
-	"level": "1"
-},
-{
-	"category": "external",
-	"title": "Internet Age Media Conference",
-	"date": "",
-	"location": "Central Saint Martins, London",
-	"eventbrite": "",
-	"level": "0"
-}]
+[
+  {
+    "id": 14,
+    "date": "2016-10-30T05:57:49",
+    "date_gmt": "2016-10-30T05:57:49",
+    "modified": "2016-10-31T07:44:53",
+    "modified_gmt": "2016-10-31T07:44:53",
+    "slug": "an-evening-of-unnecessary-detail",
+    "type": "events",
+    "title": "An Evening Of Unnecessary Detail",
+    "content": "<p><span class=\"s1\">The team behind </span><span class=\"s2\"><a href=\"http://festivalofthespokennerd.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Festival of the Spoken Nerd</a></span><span class=\"s1\"> are putting on their biggest Evening of Unnecessary Detail so far. In collaboration with Conway Hall, it&#8217;s a comedy and science variety night with more </span><span class=\"s1\">unnecessary detail than ever before. To make room for all the extra unnecessary detail, several required details have had to go. So come along and see the show at a place and on a date in November, starting at a time and finishing at a different time.</span></p>\n",
+    "subtitle": "",
+    "level": "2",
+    "cover_photo": "http://localhost/ual_futures/wp-content/uploads/2016/10/https-cdn.evbuc_.com-images-22638291-18217507097-1-original.jpg",
+    "eventbrite_url": "https://www.eventbrite.co.uk/e/an-evening-of-unnecessary-detail-tickets-26662766051",
+    "category": "External",
+    "appData": "events"
+  }
+]

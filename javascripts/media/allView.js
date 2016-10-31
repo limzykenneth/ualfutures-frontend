@@ -7,6 +7,7 @@ var cardView = require("./cardView.js");
 
 var allView = Backbone.View.extend({
 	render: function(collection){
+		console.log(collection);
 		collection.each(this.addModel, this);
 		return this.$el.html();
 	},
