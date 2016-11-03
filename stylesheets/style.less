@@ -55,8 +55,7 @@ p{
 @import "header.less";
 
 #page-content{
-	width: 80%;
-	max-width: 1100px;
+	width: 60%;
 	margin: 0 auto;
 	margin-top: 8rem;
 
@@ -66,16 +65,23 @@ p{
 			color: @dark-purple;
 			margin-bottom: 10px;
 			padding: 15px;
-			width: 300px;
-			height: 200px;
+			width: ~"calc(33% - 10px)";
+			min-width: 200px;
+			height: 300px;
+			cursor: pointer;
 
 			&.level-1{
-				height: 410px;
+				height: 600px;
 			}
 
 			&.level-2{
-				width: 610px;
-				height: 410px;
+				width: ~"calc((100% / 3 * 2) - 20px)";
+				min-width: 400px;
+				height: 600px;
+			}
+
+			&:hover{
+				background-color: @purple;
 			}
 
 			p{

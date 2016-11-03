@@ -60,12 +60,11 @@ app.start = function(){
 app.startMasonry = function($selector){
 	$selector.masonry({
 		itemSelector: ".grid-item",
-		gutter: 10,
-		columnWidth: 300
+		gutter: 10
 	});
 };
 
-app.bindEvent = function(){
+app.bindEvents = function(){
 
 };
 
