@@ -16,7 +16,8 @@ var app = app || {
 	events: {
 		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
 	},
-	opps: {}
+	opps: {},
+	helpers: {}
 };
 app.media.collection = new mediaCollection();
 app.media.allView = new mediaAllView();
@@ -65,7 +66,31 @@ app.startMasonry = function($selector){
 };
 
 app.bindEvents = function(){
+	this.helpers.bindNavEvents();
+};
 
+
+///////////////////////////////////////////////////////
+//						Helpers                      //
+///////////////////////////////////////////////////////
+
+app.helpers.bindNavEvents = function(){
+	$(window).scroll(function(e) {
+		if($(window).scrollTop() > 0){
+			$("#page-header").removeClass("large").addClass("small");
+		}else{
+			$("#page-header").removeClass("small").addClass("large");
+		}
+	});
+	$("#page-header").hover(function() {
+		if($(window).scrollTop() > 0){
+			$("#page-header").removeClass("small").addClass("large");
+		}
+	}, function() {
+		if($(window).scrollTop() > 0){
+			$("#page-header").removeClass("large").addClass("small");
+		}
+	});
 };
 
 app.errorFetchingData = function(e){

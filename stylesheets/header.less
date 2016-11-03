@@ -2,16 +2,61 @@
 	top: 0px;
 	position: fixed;
 	width: 100vw;
-	height: 5.2em;
+	height: 90px;
 	z-index: 999;
 	font-size: 1rem;
+	transition: height 0.5s ease;
 
-	&.no-bg{
-		background: rgba(0, 0, 0, 0);
+	&.small{
+		height: 60px;
+
+		.ual{
+			img{
+				width: 47px;
+			}
+		}
+
+		.nav-container{
+			.logo{
+				margin-top: 1.2%;
+			}
+
+			.ualfutures-logo{
+				width: 110px;
+			}
+
+			.main-nav{
+				margin-top: 1.8%;
+				font-size: 1.3rem;
+			}
+		}
+	}
+
+	&.large{
+		.ual{
+			img{
+				width: 65px;
+			}
+		}
+
+		.nav-container{
+			.logo{
+				margin-top: 2.5%;
+			}
+
+			.ualfutures-logo{
+				width: 170px;
+			}
+
+			.main-nav{
+				margin-top: 3%;
+				font-size: 1.3rem;
+			}
+		}
 	}
 
 	.full-width-container{
-		background: @secondary-color;
+		background: @purple;
 		position: relative;
 		width: 100%;
 		height: 100%;
@@ -27,11 +72,11 @@
 
 			img{
 				position: absolute;
-				top: 23px;
+				top: 30%;
 				margin-left: 3em;
-				width: 65px;
 				height: auto;
 				display: inline-block;
+				transition: all 0.5s ease;
 
 				@media @small{
 					position: relative;
@@ -49,16 +94,16 @@
 				.title-font;
 
 				display: inline-block;
-				font-size: 37px;
-				line-height: 30px;
-				margin-top: 23px;
+				transition: all 0.5s ease;
 
 				@media @small{
 					width: 200px;
-					display: inline-block;
 				}
 
 				.ualfutures-logo{
+					height: auto;
+					transition: all 0.5s ease;
+
 					.a{
 				        fill: #fff;
 				    }
@@ -70,11 +115,14 @@
 
 				display: inline-block;
 				float: right;
-				margin-top: 2rem;
-				font-size: 1.3rem;
+				transition: all 0.5s ease;
 
 				span{
 					margin: 0 2.5rem;
+
+					&.active, &:hover{
+						border-bottom: 2px solid;
+					}
 				}
 			}
 		}
