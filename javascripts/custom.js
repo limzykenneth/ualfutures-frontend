@@ -51,11 +51,22 @@ app.start = function(){
 
 	// $("#page-content .grid").append(app.media.allView.render(app.media.collection));
 
-	$("#page-content .grid").masonry({
+	// Initialize masonry
+	app.startMasonry($("#page-content .grid"));
+
+	app.bindEvents();
+};
+
+app.startMasonry = function($selector){
+	$selector.masonry({
 		itemSelector: ".grid-item",
 		gutter: 10,
 		columnWidth: 300
 	});
+};
+
+app.bindEvent = function(){
+
 };
 
 app.errorFetchingData = function(e){
