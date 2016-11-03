@@ -55,9 +55,20 @@ p{
 @import "header.less";
 
 #page-content{
-	width: 60%;
+	width: 70%;
 	margin: 0 auto;
 	margin-top: 8rem;
+
+	.page-name{
+		text-align: center;
+	}
+
+	.page-description{
+		text-align: center;
+		background-color: @light-green;
+		padding: 1rem;
+		font-size: 2rem;
+	}
 
 	.grid{
 		.grid-item{
@@ -65,7 +76,7 @@ p{
 			color: @dark-purple;
 			margin-bottom: 10px;
 			padding: 15px;
-			width: ~"calc(33% - 10px)";
+			width: ~"calc(100% / 3 - 7px)";
 			min-width: 200px;
 			height: 300px;
 			cursor: pointer;
@@ -75,13 +86,26 @@ p{
 			}
 
 			&.level-2{
-				width: ~"calc((100% / 3 * 2) - 20px)";
+				width: ~"calc((100% / 1.5) - 4px)";
 				min-width: 400px;
 				height: 600px;
 			}
 
 			&:hover{
 				background-color: @purple;
+				color: @white;
+
+				a{
+					color: @white;
+				}
+			}
+
+			&.with-bg-image{
+				color: @secondary-text-color;
+
+				a{
+					color: @secondary-text-color;
+				}
 			}
 
 			p{
