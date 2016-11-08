@@ -55,8 +55,9 @@ p{
 @import "header.less";
 
 #page-content{
-	width: 70%;
-	margin: 0 auto;
+	width: 75%;
+	padding: 0 10px;
+	margin: 0 ~"calc(12.5% - 10px)";
 	margin-top: 8rem;
 
 	.page-name{
@@ -74,21 +75,21 @@ p{
 		.grid-item{
 			background-color: @light-green;
 			color: @dark-purple;
-			margin-bottom: 10px;
+			margin-bottom: 20px;
 			padding: 15px;
-			width: ~"calc(100% / 3 - 7px)";
+			width: ~"calc(100% / 3 - 13px)";
 			min-width: 200px;
 			height: 300px;
 			cursor: pointer;
 
 			&.level-1{
-				height: 600px;
+				height: 620px;
 			}
 
 			&.level-2{
-				width: ~"calc((100% / 1.5) - 4px)";
+				width: ~"calc((100% / 1.5) - 7px)";
 				min-width: 400px;
-				height: 600px;
+				height: 620px;
 			}
 
 			&:hover{

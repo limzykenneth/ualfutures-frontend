@@ -61,7 +61,7 @@ app.start = function(){
 app.startMasonry = function($selector){
 	$selector.masonry({
 		itemSelector: ".grid-item",
-		gutter: 10
+		gutter: 20
 	});
 };
 
