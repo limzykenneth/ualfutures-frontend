@@ -1,6 +1,9 @@
 @import "fonts.less";
 @import "variables.less";
 
+@large-font: 3.07rem; //43px
+@medium-font: 1.36rem; //19px
+
 /* default settings (layout only, NOT for typographic details) */
 *{
 	box-sizing: border-box;
@@ -14,7 +17,7 @@ a{
 html{
 	.body-font;
 
-	font-size: 15px;
+	font-size: 14px;
 	color: @text-color;
 }
 
@@ -30,13 +33,13 @@ body{
 h1{
 	.title-font;
 
-	font-size: 3em;
+	font-size: @large-font;
 }
 
 h2{
 	.title-font;
 
-	font-size:2em;
+	font-size:2rem;
 }
 
 p{
@@ -58,38 +61,44 @@ p{
 	width: 75%;
 	padding: 0 10px;
 	margin: 0 ~"calc(12.5% - 10px)";
-	margin-top: 8rem;
+	margin-top: 165px;
 
 	.page-name{
+		margin-top: 0;
 		text-align: center;
 	}
 
 	.page-description{
 		text-align: center;
-		background-color: @light-green;
-		padding: 1rem;
-		font-size: 2rem;
+		font-size: @medium-font;
+		line-height: 78px;
+		height: 82px;
+		padding-top: 4px;
+		color: @purple;
+		border: @purple 1px solid;
 	}
 
 	.grid{
 		.grid-item{
+			.secondary-font;
+
 			background-color: @light-green;
 			color: @dark-purple;
 			margin-bottom: 20px;
-			padding: 15px;
+			padding: 20px;
 			width: ~"calc(100% / 3 - 13px)";
 			min-width: 200px;
-			height: 300px;
+			height: 200px;
 			cursor: pointer;
 
 			&.level-1{
-				height: 620px;
+				height: 420px;
 			}
 
 			&.level-2{
 				width: ~"calc((100% / 1.5) - 7px)";
 				min-width: 400px;
-				height: 620px;
+				height: 420px;
 			}
 
 			&:hover{
@@ -109,13 +118,17 @@ p{
 				}
 			}
 
-			p{
-				margin-top: 0;
-			}
-
 			a{
 				color: @dark-purple;
-				font-weight: bold;
+			}
+
+			.card-category{
+				margin-top: 0;
+				margin-bottom: 25px;
+			}
+
+			.card-title{
+				.title-font;
 			}
 
 			.card-subtitle{
@@ -124,7 +137,7 @@ p{
 				width: 90%;
 			}
 
-			.card-read-more{
+			.card-subtext{
 				position: absolute;
 				bottom: 0;
 				width: 90%;

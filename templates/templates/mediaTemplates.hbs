@@ -1,25 +1,30 @@
 <script type="text/template" id="media-card-view">
 	<article class="grid-item level-<%= level %>">
-		<p><a href="#"><%= category %></a></p>
+		<p class="card-category"><a href="#"><%= category %></a></p>
 
 		<h3 class="card-title"><%= title %></h3>
 
 		<% 
-		switch(level){
-			case "0":
-				print('<p class="card-read-more"><a href="#">Read More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></p>');
-				break;
-
-			case "1":
-				print('<p class="card-subtitle">' + subtitle + '</p>');
-				break;
-
-			case "2":
-				print('<p class="card-subtitle">' + subtitle + '</p>');
-				break;
+		if (level == "1" || level == "2"){
+			print('<p class="card-subtitle">' + subtitle + '</p>');
 		}
-
 		%>
+
+		<p class="card-subtext">
+
+		<%
+		_.each(tags, function(el, i){
+			console.log(el);
+			var str = '<a href="#">';
+			str += el;
+			str += "</a>"
+			if(i < tags.length - 1){
+				str += ", ";
+			}
+			print(str);
+		});
+		%>
+		</p>
 	</article>
 </script>
 

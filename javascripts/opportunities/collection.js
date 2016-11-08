@@ -9,8 +9,8 @@ var genericCollection = require("../genericCollection.js");
 var collection = genericCollection.extend({
 	model: model,
 
-	url: "./responses/opportunities.json"
-	// url: "http://localhost/ual_futures/wp-json/wp/v2/opportunities"
+	// url: "./responses/opportunities.json"
+	url: "http://localhost/ual_futures/wp-json/wp/v2/opportunities"
 });
 
 module.exports = collection;
