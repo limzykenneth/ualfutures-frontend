@@ -139,6 +139,7 @@ gulp.task("server", ["default"], function(){
     gulp.watch("./dist/*.html").on("change", browserSync.reload);
     gulp.watch("./dist/javascripts/**/*").on("change", browserSync.reload);
     gulp.watch("./dist/stylesheets/(normalize.min.css|fonts/*|img/*)").on("change", browserSync.reload);
+    gulp.watch("./dist/responses/*").on("change", browserSync.reload);
 });
 
 
