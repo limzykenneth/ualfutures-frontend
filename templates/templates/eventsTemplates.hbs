@@ -9,10 +9,34 @@
 			<h4 class="subtitle"><%= subtitle %></h4>
 			<%
 			}
+
+			console.log(date);
+			console.log(new Date(Date.parse(date)));
 			%>
 		</div>
 
-		<p class="card-subtext"><%= date %> {{!-- <%= time %><br><%= location %> --}}</p>
+		<p class="card-subtext">
+			{{!-- <%= date %> --}}
+			<%
+				var eventDate = new Date(Date.parse(date));
+				var day = eventDate.toDateString();
+				var hour = eventDate.getHours().toString();
+				var minute = eventDate.getMinutes().toString();
+
+				if (hour.length == 1){
+					hour = "0" + hour;
+				}
+
+				if (minute.length == 1){
+					minute = "0" + hour;
+				}
+
+				var time = hour + ":" + minute;
+
+				print(day + ", " + time);
+			%>
+			<br><%= location %>
+		</p>
 	</article>
 </script>
 
