@@ -2,7 +2,15 @@
 	<article class="grid-item level-<%= level %>">
 		<p class="card-category"><a href="#"><%= category %></a></p>
 
-		<h3 class="card-title"><%= title %></h3>
+		<div class="card-title">
+			<h3 class="title"><%= title %></h3>
+			<% if (subtitle !== ""){
+			%>
+			<h4 class="subtitle"><%= subtitle %></h4>
+			<%
+			}
+			%>
+		</div>
 
 		<p class="card-subtext"><%= date %> {{!-- <%= time %><br><%= location %> --}}</p>
 	</article>

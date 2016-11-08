@@ -23,7 +23,7 @@ html{
 
 body{
 	overflow-x: hidden;
-	background: @primary-color url(img/ual-futures-dot-background.png);
+	// background: @primary-color url(img/ual-futures-dot-background.png);
 }
 
 
@@ -91,14 +91,40 @@ p{
 			height: 200px;
 			cursor: pointer;
 
+			&.level-0{
+				.card-title{
+					text-align: left;
+
+					.title{
+						margin-top: 0;
+					}
+
+					.subtitle{
+						display: none;
+					}
+				}
+			}
+
 			&.level-1{
 				height: 420px;
+
+				.card-title{
+					position: relative;
+					top: ~"calc(50% - 20px - 1rem)";
+					transform: translateY(-50%);
+				}
 			}
 
 			&.level-2{
 				width: ~"calc((100% / 1.5) - 7px)";
 				min-width: 400px;
 				height: 420px;
+
+				.card-title{
+					position: relative;
+					top: ~"calc(50% - 20px - 1rem)";
+					transform: translateY(-50%);
+				}
 			}
 
 			&:hover{
@@ -129,12 +155,17 @@ p{
 
 			.card-title{
 				.title-font;
-			}
 
-			.card-subtitle{
-				position: absolute;
-				bottom: 0;
-				width: 90%;
+				text-align: center;
+
+				.title{
+					font-size: 2rem;
+					margin-bottom: 0;
+				}
+
+				.subtitle{
+					margin-top: 1rem;
+				}
 			}
 
 			.card-subtext{
