@@ -128,16 +128,21 @@ p{
 			}
 
 			&:hover{
-				background-color: @purple;
-				color: @white;
+				background-color: @purple !important;
+				color: @white !important;
 
 				a{
-					color: @white;
+					color: @white !important;
+				}
+
+				.bg-image-container{
+					display: none;
 				}
 			}
 
 			&.with-bg-image{
 				color: @secondary-text-color;
+				background-color: rgba(0,0,0,0);
 
 				a{
 					color: @secondary-text-color;
@@ -148,9 +153,24 @@ p{
 				color: @dark-purple;
 			}
 
+			.bg-image-container{
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+				transform: translate(-20px, -20px);
+				z-index: -5;
+
+				.bg-image{
+					min-height: 100%;
+					min-width: 100%;
+				}
+			}
+
 			.card-category{
 				margin-top: 0;
 				margin-bottom: 25px;
+				z-index: 5;
 			}
 
 			.card-title{
