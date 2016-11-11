@@ -58,7 +58,7 @@ p{
 @import "header.less";
 
 #page-content{
-	width: 75%;
+	width: 75vw;
 	padding: 0 10px;
 	margin: 0 ~"calc(12.5% - 10px)";
 	margin-top: 165px;
@@ -86,9 +86,9 @@ p{
 			color: @dark-purple;
 			margin-bottom: 20px;
 			padding: 20px;
-			width: ~"calc(100% / 3 - 13px)";
+			width: ~"calc(75vw / 3 - 20px)";
 			min-width: 200px;
-			height: 200px;
+			height: ~"calc((75vw / 3 - 20px) * 0.75)";
 			cursor: pointer;
 
 			&.level-0{
@@ -106,7 +106,7 @@ p{
 			}
 
 			&.level-1{
-				height: 420px;
+				height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
 
 				.card-title{
 					position: relative;
@@ -116,9 +116,9 @@ p{
 			}
 
 			&.level-2{
-				width: ~"calc((100% / 1.5) - 7px)";
+				width: ~"calc((75vw / 3) * 2 - 20px)";
 				min-width: 400px;
-				height: 420px;
+				height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
 
 				.card-title{
 					position: relative;
