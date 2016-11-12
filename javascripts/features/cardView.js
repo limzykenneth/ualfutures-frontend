@@ -4,7 +4,7 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var view = Backbone.View.extend({
-	template: _.template($("#media-card-view").html()),
+	template: _.template($("#features-card-view").html()),
 
 	render: function(model){
 		renderedTemplate = this.template(model.toJSON());

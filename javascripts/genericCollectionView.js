@@ -3,7 +3,7 @@ var _ = require("underscore");
 var Backbone = require("backbone");
 Backbone.$ = $;
 
-var mediaView = require("./media/cardView.js");
+var mediaView = require("./features/cardView.js");
 var eventsView = require("./events/cardView.js");
 var oppsView = require("./opportunities/cardView.js");
 

@@ -1,8 +1,8 @@
 var $ = require("jquery");
 var _ = require("underscore");
 var Backbone = require("backbone");
-var mediaCollection = require("./media/collection.js");
-var mediaAllView = require('./media/allView.js');
+var featuresCollection = require("./features/collection.js");
+var featuresAllView = require('./features/allView.js');
 
 var eventsCollection = require("./events/collection.js");
 
@@ -12,22 +12,22 @@ var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
 
 var app = app || {
-	media: {},
+	features: {},
 	events: {
 		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
 	},
 	opps: {},
 	helpers: {}
 };
-app.media.collection = new mediaCollection();
-app.media.allView = new mediaAllView();
+app.features.collection = new featuresCollection();
+app.features.allView = new featuresAllView();
 
 app.events.collection = new eventsCollection();
 app.opps.collection = new oppsCollection();
 
 app.init = function(){
 	var deffereds = [];
-	deffereds.push(app.media.collection.fetch());
+	deffereds.push(app.features.collection.fetch());
 	deffereds.push(app.events.collection.fetch());
 	deffereds.push(app.opps.collection.fetch());
 
@@ -38,7 +38,7 @@ app.init = function(){
 app.start = function(){
 	// Put all models into the generic collection and prepare its view
 	app.collection = new genericCollection();
-	app.collection.add(app.media.collection.toJSON());
+	app.collection.add(app.features.collection.toJSON());
 	app.collection.add(app.events.collection.toJSON());
 	app.collection.add(app.opps.collection.toJSON());
 
@@ -50,7 +50,7 @@ app.start = function(){
 		el.fetchData();
 	});
 
-	// $("#page-content .grid").append(app.media.allView.render(app.media.collection));
+	// $("#page-content .grid").append(app.features.allView.render(app.features.collection));
 
 	// Initialize masonry
 	app.startMasonry($("#page-content .grid"));
