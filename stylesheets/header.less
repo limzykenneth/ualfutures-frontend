@@ -87,8 +87,8 @@
 		}
 
 		.nav-container{
-			width: ~"calc(75% - 10px)";
-			margin: 0 auto;
+			width: 75vw;
+			margin: 0 ~"calc(12.5% - 10px)";
 
 			.logo{
 				.title-font;
@@ -133,19 +133,29 @@
 		transform: translateY(-100%);
 		width: 100%;
 		background-color: @light-green;
+		transition: transform 0.3s ease;
+		height: 53px;
+		padding: 17px 0;
 
 		.dropdown-container{
-			width: 80%;
+			width: ~"calc(75vw - 20px)";
 			max-width: 1100px;
-			margin: 0 auto;
+			margin: 0 ~"calc(12.5% - 10px)";
 
-			.breadcrumbs{
-				p{
-					.title-font;
+			.sub-menu{
+				float: right;
+				font-size: 1.35rem;
 
-					margin: 0;
-					padding: 1rem 0;
-					color: @black;
+				span{
+					padding-left: 35px;
+
+					a{
+						color: @purple;
+
+						&:hover, &.active{
+							border-bottom: 2px solid;
+						}
+					}
 				}
 			}
 		}

@@ -82,6 +82,7 @@ app.helpers.bindNavEvents = function(){
 			$("#page-header").removeClass("small").addClass("large");
 		}
 	});
+
 	$("#page-header").hover(function() {
 		if($(window).scrollTop() > 0){
 			$("#page-header").removeClass("small").addClass("large");
@@ -90,6 +91,14 @@ app.helpers.bindNavEvents = function(){
 		if($(window).scrollTop() > 0){
 			$("#page-header").removeClass("large").addClass("small");
 		}
+	});
+
+	$("#page-header .main-nav #media").hover(function() {
+		$("#page-header .nav-dropdown").css("transform", "translateY(0%)");
+	});
+
+	$("#page-header").hover(function(){}, function(){
+		$("#page-header .nav-dropdown").css("transform", "translateY(-100%)");
 	});
 };
 
