@@ -4,7 +4,9 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var collection = Backbone.Collection.extend({
-	comparator: "date"
+	comparator: "date",
+	tags: ["Untagged"],
+	category: "Uncategorized"
 });
 
 module.exports = collection;

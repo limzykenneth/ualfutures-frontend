@@ -6,10 +6,12 @@ Backbone.$ = $;
 var mediaView = require("./features/cardView.js");
 var eventsView = require("./events/cardView.js");
 var oppsView = require("./opportunities/cardView.js");
+var dirView = require("./directories/cardView.js");
 
 var mView = new mediaView();
 var eView = new eventsView();
 var oView = new oppsView();
+var dView = new dirView();
 
 var view = Backbone.View.extend({
 	initialize: function(collection){
@@ -31,6 +33,8 @@ var view = Backbone.View.extend({
 			this.$el.prepend(eView.render(model));
 		}else if(type == "opportunities"){
 			this.$el.prepend(oView.render(model));
+		}else if(type == "directories"){
+			this.$el.prepend(dView.render(model));
 		}
 	}
 });

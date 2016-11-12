@@ -8,6 +8,8 @@ var eventsCollection = require("./events/collection.js");
 
 var oppsCollection = require("./opportunities/collection.js");
 
+var dirCollection = require("./directories/collection.js");
+
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
 
@@ -17,6 +19,7 @@ var app = app || {
 		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
 	},
 	opps: {},
+	dir: {},
 	helpers: {}
 };
 app.features.collection = new featuresCollection();
@@ -24,12 +27,14 @@ app.features.allView = new featuresAllView();
 
 app.events.collection = new eventsCollection();
 app.opps.collection = new oppsCollection();
+app.dir.collection = new dirCollection();
 
 app.init = function(){
 	var deffereds = [];
 	deffereds.push(app.features.collection.fetch());
 	deffereds.push(app.events.collection.fetch());
 	deffereds.push(app.opps.collection.fetch());
+	deffereds.push(app.dir.collection.fetch());
 
 	$.when.apply($, deffereds)
 		.then(app.start, app.errorFetchingData);
@@ -41,6 +46,7 @@ app.start = function(){
 	app.collection.add(app.features.collection.toJSON());
 	app.collection.add(app.events.collection.toJSON());
 	app.collection.add(app.opps.collection.toJSON());
+	app.collection.add(app.dir.collection.toJSON());
 
 	app.genericAllView = new genericAllView(app.collection);
 	$("#page-content .grid").append(app.genericAllView.render());

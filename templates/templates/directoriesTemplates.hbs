@@ -1,0 +1,54 @@
+<script type="text/template" id="directories-card-view">
+	<article class="grid-item level-<%= level %>
+		<%
+			if(cover_photo !== false){
+				print(' with-bg-image ">');
+		%>
+			<div class="bg-image-container">
+				<img class="bg-image" src="<%= cover_photo %>">
+			</div>
+		<%
+			}else{
+				print('">');
+			}
+		%>
+
+		<p class="card-category"><a href="#"><%= category %></a></p>
+
+		<div class="card-title">
+			<h3 class="title"><%= title %></h3>
+			<% if (subtitle !== ""){
+			%>
+			<h4 class="subtitle"><%= subtitle %></h4>
+			<%
+			}
+			%>
+		</div>
+
+		<p class="card-subtext">
+
+		<%
+		_.each(tags, function(el, i){
+			var str = '<a href="#">';
+			str += el;
+			str += "</a>"
+			if(i < tags.length - 1){
+				str += ", ";
+			}
+			print(str);
+		});
+		%>
+		</p>
+	</article>
+</script>
+
+<script type="text/template" id="directories-single-view">
+	<article>
+		<h1><%= title %></h1>
+		<p>Posted on: <%= date %></p>
+
+		<div class="directories-content">
+		<%= content %>
+		</div>
+	</article>
+</script>
