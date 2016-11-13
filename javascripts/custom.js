@@ -13,6 +13,8 @@ var dirCollection = require("./directories/collection.js");
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
 
+var appRouter = require("./routes.js");
+
 var app = app || {
 	features: {},
 	events: {
@@ -48,13 +50,16 @@ app.start = function(){
 	app.collection.add(app.opps.collection.toJSON());
 	app.collection.add(app.dir.collection.toJSON());
 
-	app.genericAllView = new genericAllView(app.collection);
-	$("#page-content .grid").append(app.genericAllView.render());
+	app.router = new appRouter();
+	Backbone.history.start();
+
+	// Renders the generic grid with all posts
+	app.renderGrid(app.collection, genericAllView);
 
 	// IMPORTANT: DO NOT FETCH BEFORE IT IS ACTUALLY NEEDED!
-	app.events.collection.each(function(el){
-		el.fetchData();
-	});
+	// app.events.collection.each(function(el){
+	// 	el.fetchData();
+	// });
 
 	// $("#page-content .grid").append(app.features.allView.render(app.features.collection));
 
@@ -62,6 +67,11 @@ app.start = function(){
 	app.startMasonry($("#page-content .grid"));
 
 	app.bindEvents();
+};
+
+app.renderGrid = function(collection, view){
+	var gridView = new view(collection);
+	$("#page-content .grid").html(gridView.render());
 };
 
 app.startMasonry = function($selector){

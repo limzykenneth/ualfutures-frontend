@@ -4,14 +4,22 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var routes = Backbone.Router.extend({
-	"": "main",
-	"about": "aboutPage",
+	routes:{
+		"": "main",
+		"media": "media",
+		"features": "features"
+	},
 
 	main: function(){
 
 	},
-	aboutPage: function(){
 
+	media: function(page){
+		console.log("media");
+	},
+
+	features: function(){
+		console.log("feature!");
 	}
 });
 
