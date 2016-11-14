@@ -26,24 +26,43 @@
 		</div>
 
 		<p class="card-subtext">
-			{{!-- <%= date %> --}}
 			<%
-				var eventDate = new Date(Date.parse(date));
-				var day = eventDate.toDateString();
-				var hour = eventDate.getHours().toString();
-				var minute = eventDate.getMinutes().toString();
+				var date = {}
+				date.year = event_date.slice(0, 4);
+				date.month = event_date.slice(5, 7);
+				date.day = event_date.slice(8, 10);
+				date.hour = event_date.slice(11, 13);
+				date.minute = event_date.slice(14, 16);
+				var dateObject = new Date(date.year, date.month-1, date.day, date.hour, date.minute);
+				date.weekday = dateObject.getDay();
 
-				if (hour.length == 1){
-					hour = "0" + hour;
+				switch(date.weekday){
+					case 1:
+						date.weekday = "Mon";
+						break;
+					case 2:
+						date.weekday = "Tue";
+						break;
+					case 3:
+						date.weekday = "Wed";
+						break;
+					case 4:
+						date.weekday = "Thu";
+						break;
+					case 5:
+						date.weekday = "Fri";
+						break;
+					case 6:
+						date.weekday = "Sat";
+						break;
+					case 7:
+						date.weekday = "Sun";
+						break;
 				}
 
-				if (minute.length == 1){
-					minute = "0" + hour;
-				}
+				var time = date.hour + ":" + date.minute;
 
-				var time = hour + ":" + minute;
-
-				print(day + ", " + time);
+				print(date.weekday + ", " + date.year + "/" + date.month + "/" + date.day + ", " + time);
 			%>
 			<br><%= location %>
 		</p>
