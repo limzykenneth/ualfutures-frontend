@@ -93,7 +93,9 @@ app.renderGrid = function(collection, view, viewConstructor){
 
 app.registerRoutes = function(router){
 	router.route("", function(){
-
+		$("#page-content .main-lists .page-name").text("Futures");
+		$("#page-content .grid").before("<div class='slideshow'></div>");
+		app.renderGrid(app.collection, null, genericAllView);
 	});
 
 	router.route("media(/:type)(/p:page)", function(type, page){
