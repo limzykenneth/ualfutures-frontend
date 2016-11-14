@@ -12,8 +12,8 @@
 				print('">');
 			}
 		%>
-	
-		<p class="card-category"><a href="#"><%= category %></a></p>
+
+		<p class="card-category"><a href="#"><%= app.helpers.makeTitleCase(category) %></a></p>
 
 		<div class="card-title">
 			<h3 class="title"><%= title %></h3>
