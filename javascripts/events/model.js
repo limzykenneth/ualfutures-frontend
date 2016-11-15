@@ -13,7 +13,7 @@ var model = Backbone.Model.extend({
 		var ebURL = "https://www.eventbriteapi.com/v3/events/" + ebID + "/?token=" + app.events.api_token;
 
 		var self = this;
-		$.get(ebURL, function(data) {
+		return $.get(ebURL, function(data) {
 			var ebData = {};
 			ebData.name = data.name.text;
 			ebData.description = data.description.html;
