@@ -1,5 +1,6 @@
 @import "fonts.less";
 @import "variables.less";
+@import "helpers.less";
 
 @large-font: 3.07rem; //43px
 @medium-font: 1.36rem; //19px
@@ -63,138 +64,144 @@ p{
 	margin: 0 ~"calc(12.5% - 10px)";
 	margin-top: 165px;
 
-	.page-name{
-		margin-top: 0;
-		text-align: center;
-	}
+	.main-lists{
+		.page-name{
+			margin-top: 0;
+			text-align: center;
+		}
 
-	.page-description{
-		text-align: center;
-		font-size: @medium-font;
-		line-height: 78px;
-		height: 82px;
-		padding-top: 4px;
-		color: @purple;
-		border: @purple 1px solid;
-	}
+		.page-description{
+			text-align: center;
+			font-size: @medium-font;
+			line-height: 78px;
+			height: 82px;
+			padding-top: 4px;
+			color: @purple;
+			border: @purple 1px solid;
+		}
 
-	.grid{
-		.grid-item{
-			.secondary-font;
+		.grid{
+			.grid-item{
+				.secondary-font;
 
-			background-color: @light-green;
-			color: @dark-purple;
-			margin-bottom: 20px;
-			padding: 20px;
-			width: ~"calc(75vw / 3 - 20px)";
-			min-width: 200px;
-			height: ~"calc((75vw / 3 - 20px) * 0.75)";
-			cursor: pointer;
+				background-color: @light-green;
+				color: @dark-purple;
+				margin-bottom: 20px;
+				padding: 20px;
+				width: ~"calc(75vw / 3 - 20px)";
+				min-width: 200px;
+				height: ~"calc((75vw / 3 - 20px) * 0.75)";
+				cursor: pointer;
 
-			&.level-0{
-				.card-title{
-					text-align: left;
+				&.level-0{
+					.card-title{
+						text-align: left;
 
-					.title{
-						margin-top: 0;
+						.title{
+							margin-top: 0;
+						}
+
+						.subtitle{
+							display: none;
+						}
+					}
+				}
+
+				&.level-1{
+					height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+
+					.card-title{
+						position: relative;
+						top: ~"calc(50% - 20px - 1rem)";
+						transform: translateY(-50%);
+					}
+				}
+
+				&.level-2{
+					width: ~"calc((75vw / 3) * 2 - 20px)";
+					min-width: 400px;
+					height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+
+					.card-title{
+						position: relative;
+						top: ~"calc(50% - 20px - 1rem)";
+						transform: translateY(-50%);
+					}
+				}
+
+				&:hover{
+					background-color: @purple !important;
+					color: @white !important;
+
+					a{
+						color: @white !important;
 					}
 
-					.subtitle{
+					.bg-image-container{
 						display: none;
 					}
 				}
-			}
 
-			&.level-1{
-				height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+				&.with-bg-image{
+					color: @secondary-text-color;
+					background-color: rgba(0,0,0,0);
 
-				.card-title{
-					position: relative;
-					top: ~"calc(50% - 20px - 1rem)";
-					transform: translateY(-50%);
+					a{
+						color: @secondary-text-color;
+					}
 				}
-			}
-
-			&.level-2{
-				width: ~"calc((75vw / 3) * 2 - 20px)";
-				min-width: 400px;
-				height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
-
-				.card-title{
-					position: relative;
-					top: ~"calc(50% - 20px - 1rem)";
-					transform: translateY(-50%);
-				}
-			}
-
-			&:hover{
-				background-color: @purple !important;
-				color: @white !important;
 
 				a{
-					color: @white !important;
+					color: @dark-purple;
 				}
 
 				.bg-image-container{
-					display: none;
-				}
-			}
+					position: absolute;
+					height: 100%;
+					width: 100%;
+					overflow: hidden;
+					transform: translate(-20px, -20px);
+					z-index: -5;
 
-			&.with-bg-image{
-				color: @secondary-text-color;
-				background-color: rgba(0,0,0,0);
-
-				a{
-					color: @secondary-text-color;
-				}
-			}
-
-			a{
-				color: @dark-purple;
-			}
-
-			.bg-image-container{
-				position: absolute;
-				height: 100%;
-				width: 100%;
-				overflow: hidden;
-				transform: translate(-20px, -20px);
-				z-index: -5;
-
-				.bg-image{
-					min-height: 100%;
-					min-width: 100%;
-					// filter: sepia(90%) hue-rotate(180deg);
-				}
-			}
-
-			.card-category{
-				margin-top: 0;
-				margin-bottom: 25px;
-				z-index: 5;
-			}
-
-			.card-title{
-				text-align: center;
-
-				.title{
-					.title-font;
-					font-size: 2rem;
-					margin-bottom: 0;
+					.bg-image{
+						min-height: 100%;
+						min-width: 100%;
+						// filter: sepia(90%) hue-rotate(180deg);
+					}
 				}
 
-				.subtitle{
-					.title-font;
-					margin-top: 1rem;
+				.card-category{
+					margin-top: 0;
+					margin-bottom: 25px;
+					z-index: 5;
 				}
-			}
 
-			.card-subtext{
-				position: absolute;
-				bottom: 0;
-				width: 90%;
+				.card-title{
+					text-align: center;
+
+					.title{
+						.title-font;
+						font-size: 2rem;
+						margin-bottom: 0;
+					}
+
+					.subtitle{
+						.title-font;
+						margin-top: 1rem;
+					}
+				}
+
+				.card-subtext{
+					position: absolute;
+					bottom: 0;
+					width: 90%;
+				}
 			}
 		}
+	}
+
+	.post-content{
+		@import "features.less";
 	}
 }
 

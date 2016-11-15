@@ -1,5 +1,5 @@
 <script type="text/template" id="features-card-view">
-	<article class="grid-item level-<%= level %>
+	<article href="<%= 'media/' + appData + '/post=' + slug %>" class="grid-item level-<%= level %>
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
@@ -43,12 +43,31 @@
 </script>
 
 <script type="text/template" id="features-single-view">
-	<article>
-		<h1><%= title %></h1>
-		<p>Posted on: <%= date %></p>
+	<article class="features">
+		<div class="main-content">
+			<p class="category-link"><a href=""><%= category %></a></p>
+			<h1 class="post-title">
+				<%= title %>
+				<%
+				if(subtitle !== ""){
+				%>
+					<br><%= subtitle %>
+				<%
+				}
+				%>
 
-		<div class="features-content">
-		<%= content %>
+			</h1>
+			<p class="post-date">Posted on: <%= date %></p>
+
+			<div class="features-content">
+				<%= content %>
+			</div>
+		</div>
+
+		<div class="sidebar">
+			<div><p>Sample content</p></div>
+			<div class="social-media"></div>
+			<div class="related"></div>
 		</div>
 	</article>
 </script>
