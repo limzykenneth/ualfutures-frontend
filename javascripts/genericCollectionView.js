@@ -27,7 +27,7 @@ var view = Backbone.View.extend({
 
 	addModel: function(model){
 		var type = model.get("appData");
-		if(type == "posts"){
+		if(type == "features"){
 			this.$el.prepend(mView.render(model));
 		}else if(type == "events"){
 			this.$el.prepend(eView.render(model));
