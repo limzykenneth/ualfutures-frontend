@@ -7,12 +7,15 @@ var featuresSingleView = require("./features/singleView.js");
 
 var eventsCollection = require("./events/collection.js");
 var eventsAllView = require("./events/allView.js");
+var eventsSingleView = require("./events/singleView.js");
 
 var oppsCollection = require("./opportunities/collection.js");
 var oppsAllView = require("./opportunities/allView.js");
+var oppsSingleView = require("./opportunities/singleView.js");
 
 var dirCollection = require("./directories/collection.js");
 var dirAllView = require("./directories/allView.js");
+var dirSingleView = require("./directories/singleView.js");
 
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
@@ -34,12 +37,15 @@ app.features.singleView = new featuresSingleView();
 
 app.directories.collection = new dirCollection();
 app.directories.allView = new dirAllView();
+app.directories.singleView = new dirSingleView();
 
 app.events.collection = new eventsCollection();
 app.events.allView = new eventsAllView();
+app.events.singleView = new eventsSingleView();
 
 app.opportunities.collection = new oppsCollection();
 app.opportunities.allView = new oppsAllView();
+app.opportunities.singleView = new oppsSingleView();
 
 
 app.init = function(){
