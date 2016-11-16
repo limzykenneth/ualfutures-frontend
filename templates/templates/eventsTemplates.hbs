@@ -70,31 +70,31 @@
 </script>
 
 <script type="text/template" id="events-single-view">
-	<article>
-		<h1><%= title %></h1>
+	<article class="events">
+		<header>
+			<p class="category-link"><a href=""><%= category %></a></p>
+			<h1 class="post-title">
+				<%= title %>
+				<%
+				if(subtitle !== ""){
+				%>
+					<br><%= subtitle %>
+				<%
+				}
+				%>
 
-		<div class="media-content">
-		<%= content %>
+			</h1>
+			<p class="post-date">Posted on: <%= date %></p>
+		</header>
+
+		<div class="main-content">
+			<%= content %>
+		</div>
+
+		<div class="sidebar">
+			<div><p>Sample content</p></div>
+			<div class="social-media"></div>
+			<div class="related"></div>
 		</div>
 	</article>
-
-	<div class="sidebar">
-		<div class="info">
-			<p>
-				<%= date %><br>
-				<%= time %>
-			</p>
-			<p>
-				<%= address %>
-			</p>
-		</div>
-
-		<div class="social-media">
-
-		</div>
-
-		<div class="upcoming">
-
-		</div>
-	</div>
 </script>

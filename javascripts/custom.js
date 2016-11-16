@@ -103,9 +103,10 @@ app.renderPost = function(slug, type){
 	var model = app[type].collection.findWhere({slug: slug});
 
 	if(type == "events" && typeof model.toJSON().ebData == "undefined"){
+		$("#page-content .post-content").html("");
+
 		// Fetch eventbrite data, should only be done on render and once only
 		$.when(model.fetchData()).then(function(){
-			console.log(model.toJSON());
 			$("#page-content .post-content").html(app[type].singleView.render(model));
 		});
 	}else{

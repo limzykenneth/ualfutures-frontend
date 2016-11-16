@@ -1,8 +1,9 @@
 .features{
 	display: flex;
+	flex-wrap: wrap;
 
-	.main-content{
-		width: 62%;
+	header{
+		width: 100%;
 
 		.category-link{
 			.secondary-font;
@@ -29,19 +30,28 @@
 			margin: 0;
 			font-size: 1.5rem;
 		}
+	}
 
-		.features-content{
-			.body-font;
+	.main-content{
+		.body-font;
 
-			margin-top: 40px;
-			font-size: 1.5rem;
+		width: 62%;
+		margin-top: 40px;
+		font-size: 1.5rem;
+
+		p:first-of-type{
+			margin-top: 0;
 		}
 	}
 
 	.sidebar{
 		width: 32%;
-		margin-top: 218px;
+		margin-top: 40px;
 		margin-left: 6%;
+
+		p:first-of-type{
+			margin-top: 0;
+		}
 
 		.social-media{
 			margin-top: 40px;
