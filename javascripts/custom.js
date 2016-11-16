@@ -23,12 +23,19 @@ var genericAllView = require("./genericCollectionView.js");
 var appRouter = require("./routes.js");
 
 var app = app || {
-	features: {},
+	features: {
+		requestAttempt: 0
+	},
 	events: {
+		requestAttempt: 0,
 		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
 	},
-	opportunities: {},
-	directories: {},
+	opportunities: {
+		requestAttempt: 0
+	},
+	directories: {
+		requestAttempt: 0
+	},
 	helpers: {}
 };
 app.features.collection = new featuresCollection();
@@ -47,9 +54,9 @@ app.opportunities.collection = new oppsCollection();
 app.opportunities.allView = new oppsAllView();
 app.opportunities.singleView = new oppsSingleView();
 
-
 app.init = function(){
 	var deffereds = [];
+
 	deffereds.push(app.features.collection.fetch());
 	deffereds.push(app.events.collection.fetch());
 	deffereds.push(app.opportunities.collection.fetch());
@@ -260,6 +267,11 @@ app.helpers.toggleViewMode = function(mode){
 
 app.errorFetchingData = function(e){
 	console.error(e.status + " " + e.statusText);
+	var reloadCnt = window.sessionStorage.getItem( "reloadCounter") ? parseInt(window.sessionStorage.getItem( "reloadCounter")) + 1 : 1;
+	window.sessionStorage.setItem( "reloadCounter", reloadCnt );
+	if ( reloadCnt <= 3 ){
+		location.reload(true);
+	}
 };
 
 module.exports = app;
