@@ -1,0 +1,17 @@
+<svg id="custom-filter" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id="monochrome">
+    	{{!-- Equation: Last column        = Hex value of the row's channel to Dec / 255 = v1
+    					First three column = (1 - v1) / 3 = v2  --}}
+
+    	{{!-- <feColorMatrix in="SourceGraphic" mode="matrix" values="0.2065 0.2065 0.2065 0 0.3803
+	    														0.2170 0.2170 0.2170 0 0.3490
+	    														0.0131 0.0131 0.0131 0 0.9608
+	    														0      0      0      1 0" /> --}}
+	    <feColorMatrix in="SourceGraphic" mode="matrix" values="0.2823 0.2823 0.2823 0 0.1529
+	    														0.2941 0.2941 0.2941 0 0.1176
+	    														0.1974 0.1974 0.1974 0 0.4078
+	    														0      0      0      1 0" />
+    </filter>
+  </defs>
+</svg>
