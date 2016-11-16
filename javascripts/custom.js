@@ -79,16 +79,6 @@ app.start = function(){
 
 	Backbone.history.start();
 
-	// Renders the generic grid with all posts
-	// app.renderGrid(app.collection, genericAllView);
-
-	// IMPORTANT: DO NOT FETCH BEFORE IT IS ACTUALLY NEEDED!
-	// app.events.collection.each(function(el){
-	// 	el.fetchData();
-	// });
-
-	// $("#page-content .grid").append(app.features.allView.render(app.features.collection));
-
 	// Initialize masonry
 	app.startMasonry($("#page-content .grid"));
 
@@ -224,41 +214,6 @@ app.helpers.makeTitleCase = function(str){
 	return str.replace(/\w\S*/g, function(txt){
 		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 	});
-};
-
-app.helpers.parseDate = function(date, format){
-	// var monthNamesLong = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-	// var monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	// var weekdaysLong = [null, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-	// var weekdaysShort = [null, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-	// // format = dd/mm/yy, dd/m/y, ww/dd/m/y
-	// var timestamp = new Date(date);
-
-	// var reg = {
-	// 	monthLong: /mm/,
-	// 	monthShort: /m/,
-	// 	dayLong: /ww/,
-	// 	dayShort: /w/
-	// };
-
-	// var parsedDate;
-	// if (reg.monthLong.test(format)){
-	// 	parsedDate = format.replace(reg.monthLong, monthNamesLong[timestamp.getMonth()]);
-	// }else{
-	// 	parsedDate = format.replace(reg.monthShort, monthNamesShort[timestamp.getMonth()]);
-	// }
-
-	// if (reg.dayLong.test(format)){
-	// 	parsedDate = parsedDate.replace(reg.dayLong, weekdaysLong[timestamp.getDay()]);
-	// }else{
-	// 	parsedDate = parsedDate.replace(reg.dayShort, weekdaysShort[timestamp.getDay()]);
-	// }
-
-
-	// console.log(parsedDate);
-
-	// return parsedDate;
 };
 
 app.helpers.toggleViewMode = function(mode){
