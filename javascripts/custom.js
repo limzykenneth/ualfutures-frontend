@@ -156,6 +156,7 @@ app.registerRoutes = function(router){
 
 app.startMasonry = function($selector){
 	$selector.masonry({
+		columnWidth: ".grid-item.level-0",
 		itemSelector: ".grid-item",
 		gutter: 20
 	});
