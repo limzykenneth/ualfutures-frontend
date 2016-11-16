@@ -44,7 +44,7 @@
 				%>
 
 			</h1>
-			<p class="post-date">Posted on: <%= date %></p>
+			<p class="post-date">Posted on: <%= moment(date_gmt).format("Do MMMM Y") %></p>
 		</header>
 
 		<div class="main-content">
