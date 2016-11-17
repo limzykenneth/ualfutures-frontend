@@ -37,7 +37,8 @@ var app = app || {
 		requestAttempt: 0
 	},
 	slideshow: {
-		url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
+		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
+		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
 	},
 	helpers: {}
 };
