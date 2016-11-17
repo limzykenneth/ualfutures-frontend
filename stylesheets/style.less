@@ -80,6 +80,82 @@ p{
 			border: @purple 1px solid;
 		}
 
+		.slideshow{
+			width: 100%;
+			height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+			margin-bottom: 20px;
+
+			.slide{
+				display: block;
+				width: 100%;
+				height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+				background-color: @dark-purple;
+				text-align: center;
+				overflow: hidden;
+
+				h1{
+					position: relative;
+					top: 50%;
+					transform: translateY(-100%);
+					color: @light-green;
+					margin-left: 15rem;
+					margin-right: 15rem;
+				}
+
+				img{
+					display: inline-block;
+					filter: url("#monochrome");
+					min-width: 100%;
+					min-height: 100%;
+				}
+			}
+
+			.slick-dots{
+				z-index: 10;
+				bottom: 1rem;
+
+				li{
+					margin: 0 0.5rem;
+
+					&.slick-active{
+
+					}
+
+					button{
+						&:before{
+							color: @light-green;
+							font-size: 1rem;
+						}
+					}
+				}
+			}
+
+			.slick-arrow{
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				z-index: 10;
+				cursor: pointer;
+
+				&::before{
+					display: none;
+					content: none;
+				}
+
+				i{
+					color: @light-green;
+				}
+			}
+
+			.prev{
+				left: 1rem;
+			}
+
+			.next{
+				right: 1rem;
+			}
+		}
+
 		.grid{
 			.grid-item{
 				.secondary-font;

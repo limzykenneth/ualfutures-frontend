@@ -1,0 +1,13 @@
+<script type="text/template" id="slideshow-template">
+	<div class="slideshow">
+		<% for (var i = 1; i <= slideshow.size; i++){ %>
+			<div class="slide">
+			<% if(slideshow["slide_" + i] == "Text"){ %>
+				<h1><%= slideshow["text_" + i] %></h1>
+			<% }else{ %>
+				<img src="<%= slideshow['image_' + i] %>">
+			<% } %>
+			</div>
+		<% } %>
+	</div>
+</script>

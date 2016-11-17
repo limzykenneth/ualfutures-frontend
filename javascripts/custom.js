@@ -36,6 +36,9 @@ var app = app || {
 	directories: {
 		requestAttempt: 0
 	},
+	slideshow: {
+		url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
+	},
 	helpers: {}
 };
 app.features.collection = new featuresCollection();
@@ -61,6 +64,11 @@ app.init = function(){
 	deffereds.push(app.events.collection.fetch());
 	deffereds.push(app.opportunities.collection.fetch());
 	deffereds.push(app.directories.collection.fetch());
+	deffereds.push(
+		$.getJSON(app.slideshow.url, function(data) {
+			app.slideshow.data = data;
+		})
+	);
 
 	$.when.apply($, deffereds)
 		.then(app.start, app.errorFetchingData);
@@ -82,7 +90,22 @@ app.start = function(){
 	// Initialize masonry
 	app.startMasonry($("#page-content .grid"));
 
+	// Initialize slick
+	// $("#page-content .main-lists .slideshow").slick();
+
 	app.bindEvents();
+};
+
+app.renderSlideshow = function(){
+	var slideshowTemplate = _.template($("#slideshow-template").html());
+	$("#page-content .grid").before(slideshowTemplate(app.slideshow.data[0]));
+	$("#page-content .main-lists .slideshow").slick({
+		dots: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+		prevArrow: '<span class="prev"><i class="fa fa-long-arrow-left fa-3x" aria-hidden="true"></i></span>',
+		nextArrow: '<span class="next"><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i></span>',
+	});
 };
 
 app.renderGrid = function(collection, view, viewConstructor){
@@ -117,7 +140,9 @@ app.registerRoutes = function(router){
 		$("#page-content .post-content").addClass("hide");
 
 		$("#page-content .main-lists .page-name").text("Futures");
-		$("#page-content .grid").before("<div class='slideshow'></div>");
+
+		app.renderSlideshow();
+
 		app.renderGrid(app.collection, null, genericAllView);
 		app.bindEvents();
 	});
