@@ -238,10 +238,14 @@ p{
 					overflow: hidden;
 					transform: translate(-20px, -20px);
 					z-index: -5;
+					text-align: center;
 
 					.bg-image{
+						display: inline-block;
 						min-height: 100%;
 						min-width: 100%;
+						margin-left: 50%;
+						transform: translateX(-50%);
 						// filter: sepia(90%) hue-rotate(180deg);
 						filter: url("#monochrome");
 					}
