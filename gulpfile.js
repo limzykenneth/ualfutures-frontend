@@ -25,7 +25,7 @@ gulp.task("handlebars", function(){
 
 	var options = {
 		ignorePartials: true,
-		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates"]
+		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates", "./templates/sidebar"]
 	};
 
 
