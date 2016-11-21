@@ -9,7 +9,7 @@ var genericCollection = require("../genericCollection.js");
 var collection = genericCollection.extend({
 	model: model,
 
-	// url: "./responses/media.json"
+	// url: "./responses/features.json"
 	url: "http://localhost/ual_futures/wp-json/wp/v2/posts"
 	// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/posts"
 });

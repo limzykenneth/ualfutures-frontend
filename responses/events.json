@@ -1,24 +1,25 @@
 [
   {
     "id": 14,
-    "date": "2016-11-07T08:38:50",
-    "date_gmt": "2016-11-07T08:38:50",
-    "modified": "2016-11-08T08:31:35",
-    "modified_gmt": "2016-11-08T08:31:35",
+    "date": "2016-10-30T05:57:49",
+    "date_gmt": "2016-10-30T05:57:49Z",
+    "modified": "2016-11-14T10:06:55",
+    "modified_gmt": "2016-11-14T10:06:55",
     "slug": "an-evening-of-unnecessary-detail",
     "type": "events",
     "title": "An Evening Of Unnecessary Detail",
-    "content": "",
+    "content": "<p><span class=\"s1\">The team behind </span><span class=\"s2\"><a href=\"http://festivalofthespokennerd.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Festival of the Spoken Nerd</a></span><span class=\"s1\"> are putting on their biggest Evening of Unnecessary Detail so far. In collaboration with Conway Hall, it&#8217;s a comedy and science variety night with more </span><span class=\"s1\">unnecessary detail than ever before. To make room for all the extra unnecessary detail, several required details have had to go. So come along and see the show at a place and on a date in November, starting at a time and finishing at a different time.</span></p>\n",
     "tags": [
-      "Maths",
-      "Nerd"
+      "maths",
+      "nerd"
     ],
-    "eventbrite_url": "https://www.eventbrite.co.uk/e/an-evening-of-unnecessary-detail-tickets-26662766051",
-    "subtitle": "The team behind Festival of the Spoken Nerd are putting on their biggest Evening of Unnecessary Detail so far.",
-    "level": "1",
+    "subtitle": "",
+    "level": "2",
     "cover_photo": false,
+    "eventbrite_url": "https://www.eventbrite.co.uk/e/an-evening-of-unnecessary-detail-tickets-26662766051",
     "location": "Conway Hall",
-    "category": "Talk",
+    "event_date": "2016-11-29 19:30",
+    "category": "talk",
     "appData": "events"
   }
 ]

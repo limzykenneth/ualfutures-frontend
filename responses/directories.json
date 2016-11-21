@@ -1,0 +1,23 @@
+[
+  {
+    "id": 21,
+    "date": "2016-11-14T02:18:32",
+    "date_gmt": "2016-11-14T02:18:32Z",
+    "modified": "2016-11-14T02:18:32",
+    "modified_gmt": "2016-11-14T02:18:32",
+    "slug": "sample-external-post",
+    "type": "directories",
+    "title": "Sample External post",
+    "content": "<p>Just another test.</p>\n",
+    "tags": [
+      "external",
+      "outside"
+    ],
+    "subtitle": "It came form the outside",
+    "level": "1",
+    "cover_photo": false,
+    "external_links": "https://sortedfood.com",
+    "category": "Test",
+    "appData": "directories"
+  }
+]
