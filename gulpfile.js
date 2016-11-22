@@ -25,7 +25,17 @@ gulp.task("handlebars", function(){
 
 	var options = {
 		ignorePartials: true,
-		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates", "./templates/sidebar"]
+		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates", "./templates/templates/sidebar"],
+		helpers: {
+			capitals : function(str){
+                return str.fn(this).toUpperCase();
+            },
+            titleCase: function(str){
+            	return str.fn(this).replace(/\w\S*/g, function(txt){
+					return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+				});
+            }
+		}
 	};
 
 
@@ -125,7 +135,7 @@ gulp.task("server", ["default"], function(){
         server: "./dist"
     });
 
-    gulp.watch("./stylesheets/*.less", ["stylesheets"]);
+    gulp.watch("./stylesheets/**/*.less", ["stylesheets"]);
     gulp.watch("./stylesheets/(normalize.min.css|fonts/*|img/*)", ["copy-css"]);
 
     gulp.watch("./javascripts/**/*.js", ["javascripts"]);
