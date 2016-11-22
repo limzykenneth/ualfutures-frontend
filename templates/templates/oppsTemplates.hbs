@@ -30,31 +30,5 @@
 </script>
 
 <script type="text/template" id="opps-single-view">
-	<article class="opportunities">
-		<header>
-			<p class="category-link"><a href=""><%= category %></a></p>
-			<h1 class="post-title">
-				<%= title %>
-				<%
-				if(subtitle !== ""){
-				%>
-					<br><%= subtitle %>
-				<%
-				}
-				%>
-
-			</h1>
-			<p class="post-date">Posted on: <%= moment(date_gmt).format("Do MMMM Y") %></p>
-		</header>
-
-		<div class="main-content">
-			<%= content %>
-		</div>
-
-		<div class="sidebar">
-			<div><p>Sample content</p></div>
-			<div class="social-media"></div>
-			<div class="related"></div>
-		</div>
-	</article>
+	{{> _postSingleTemplate type="opportunities" }}
 </script>

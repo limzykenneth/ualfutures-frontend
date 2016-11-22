@@ -1,0 +1,81 @@
+.single-post{
+	display: flex;
+	flex-wrap: wrap;
+
+	.back-to-nav{
+		color: @purple;
+		font-size: 1rem;
+
+		span{
+			font-size: 1.7rem;
+		}
+	}
+
+	header{
+		width: 100%;
+
+		.category-link{
+			.secondary-font;
+
+			margin: 0;
+			font-size: 1.5rem;
+
+			a{
+				color: @dark-purple;
+			}
+		}
+
+		.post-title{
+			.title-font;
+
+			margin-top: 40px;
+			margin-bottom: 20px;
+			font-size: 2.7rem;
+		}
+
+		.post-date{
+			.secondary-font;
+
+			margin: 0;
+			font-size: 1.5rem;
+		}
+	}
+
+	.main-content{
+		.body-font;
+
+		width: 62%;
+		margin-top: 40px;
+		font-size: 1.5rem;
+		line-height: 1.9rem;
+
+		p:first-of-type{
+			margin-top: 0;
+		}
+
+		blockquote{
+			margin-left: 0;
+			font-weight: bold;
+			font-size: 1.5em;
+			line-height: 1.2em;
+		}
+
+		.all-tags{
+			margin: 7rem 0;
+
+			.tag{
+				padding: 0.5rem 1.5rem;
+				color: @purple;
+				margin-right: 2.5rem;
+				border: solid 2px @purple;
+			}
+		}
+	}
+
+	@import "sidebar.less";
+}
+
+@import "features.less";
+@import "directories.less";
+@import "events.less";
+@import "opportunities.less";

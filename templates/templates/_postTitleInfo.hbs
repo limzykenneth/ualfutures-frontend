@@ -1,0 +1,15 @@
+<header>
+	<h1 class="post-title">
+		<%= title %>
+	</h1>
+		<%
+		if(subtitle !== ""){
+		%>
+			<h3><%= subtitle %></h3>
+		<%
+		}
+		%>
+
+	<p class="post-date">Posted on: <%= moment(date_gmt).format("Do MMMM Y") %></p>
+	{{!-- <p class="authors"></p> --}}
+</header>

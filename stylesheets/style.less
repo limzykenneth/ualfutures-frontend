@@ -43,6 +43,13 @@ h2{
 	font-size:2rem;
 }
 
+h3{
+	.title-font;
+
+	font-size: calc(@large-font / 2);
+	font-weight: bold;
+}
+
 p{
 	a:link{
 		text-decoration: underline;
@@ -282,10 +289,9 @@ p{
 	}
 
 	.post-content{
-		@import "features.less";
-		@import "directories.less";
-		@import "events.less";
-		@import "opportunities.less";
+		margin-bottom: 100px;
+
+		@import "posts/all.less";
 	}
 
 	@import "about.less";
