@@ -1,6 +1,14 @@
 <div class="sidebar">
 	{{#unless type}}
-	<div><p>Sample content</p></div>
+	<div class="additional-info">
+		<p>
+			<% if (appData == "events"){
+				print(moment(ebData.startTime).format("ddd D MMMM YYYY"));
+				print("<br>" + moment(ebData.startTime).format("HH:mm") + " - " + moment(ebData.endTime).format("HH:mm"));
+				// Location pending backend implementation
+			} %>
+		</p>
+	</div>
 	{{/unless}}
 
 	<div class="social-media">
