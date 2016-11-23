@@ -38,8 +38,8 @@ var app = app || {
 		requestAttempt: 0
 	},
 	slideshow: {
-		url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
-		// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
+		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
+		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
 	},
 	helpers: {}
 };
@@ -125,6 +125,31 @@ app.renderGrid = function(collection, view, viewConstructor){
 			$("#page-content .grid").addClass("directories-grid");
 		}
 	}
+
+	var $image = $("#page-content .grid .grid-item .bg-image-container .bg-image");
+
+	$image.each(function(index, el) {
+		$(this).load(function(){
+			var w = $(this).width();
+			var h = $(this).height();
+			var aspectRatio = w/h;
+			var containerAspectRatio = $(this).parents(".grid-item").width() / $(this).parents(".grid-item").height();
+
+			if(aspectRatio < containerAspectRatio){
+				// wider than container
+				$(this).css({
+					width: "100%",
+					height: "auto"
+				});
+			}else{
+				// taller than container
+				$(this).css({
+					width: "auto",
+					height: "100%"
+				});
+			}
+		});
+	});
 };
 
 app.renderPost = function(slug, type){
