@@ -108,6 +108,8 @@ app.renderSlideshow = function(){
 		prevArrow: '<span class="prev"><i class="fa fa-long-arrow-left fa-3x" aria-hidden="true"></i></span>',
 		nextArrow: '<span class="next"><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i></span>',
 	});
+
+	app.helpers.dynamicImageSize($("#page-content .slideshow .slide img"), ".slide");
 };
 
 app.renderGrid = function(collection, view, viewConstructor){
@@ -126,30 +128,7 @@ app.renderGrid = function(collection, view, viewConstructor){
 		}
 	}
 
-	var $image = $("#page-content .grid .grid-item .bg-image-container .bg-image");
-
-	$image.each(function(index, el) {
-		$(this).load(function(){
-			var w = $(this).width();
-			var h = $(this).height();
-			var aspectRatio = w/h;
-			var containerAspectRatio = $(this).parents(".grid-item").width() / $(this).parents(".grid-item").height();
-
-			if(aspectRatio < containerAspectRatio){
-				// wider than container
-				$(this).css({
-					width: "100%",
-					height: "auto"
-				});
-			}else{
-				// taller than container
-				$(this).css({
-					width: "auto",
-					height: "100%"
-				});
-			}
-		});
-	});
+	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container .bg-image"), ".grid-item");
 };
 
 app.renderPost = function(slug, type){
@@ -282,8 +261,29 @@ app.helpers.makeTitleCase = function(str){
 	});
 };
 
-app.helpers.toggleViewMode = function(mode){
+app.helpers.dynamicImageSize = function($image, parentSelector){
+	$image.each(function(index, el) {
+		$(this).load(function(){
+			var w = $(this).width();
+			var h = $(this).height();
+			var aspectRatio = w/h;
+			var containerAspectRatio = $(this).parents(parentSelector).width() / $(this).parents(parentSelector).height();
 
+			if(aspectRatio < containerAspectRatio){
+				// wider than container
+				$(this).css({
+					width: "100%",
+					height: "auto"
+				});
+			}else{
+				// taller than container
+				$(this).css({
+					width: "auto",
+					height: "100%"
+				});
+			}
+		});
+	});
 };
 
 app.errorFetchingData = function(e){
