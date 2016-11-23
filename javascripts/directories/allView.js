@@ -3,7 +3,7 @@ var _ = require("underscore");
 var Backbone = require("backbone");
 Backbone.$ = $;
 
-var cardView = require("./cardView.js");
+var cardView = require("./directoriesView.js");
 
 var allView = Backbone.View.extend({
 	render: function(collection){

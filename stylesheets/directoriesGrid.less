@@ -1,0 +1,34 @@
+&.directories-grid{
+	.grid-item{
+		// background-color: @light-purple;
+		width: ~"calc(75vw / 4 - 20px)";
+		height: ~"calc((75vw / 3 - 20px) * 0.9)";
+
+		&.with-image{
+			.card-title{
+				.title{
+					font-size: @medium-font;
+				}
+
+				.feature-image{
+					max-width: 100%;
+					filter: url("#monochrome");
+				}
+			}
+		}
+
+		.card-title{
+			text-align: left;
+
+			.subtitle{
+				margin-top: 2rem;
+				font-size: @medium-font;
+			}
+		}
+
+		.authors{
+			position: absolute;
+			bottom: 0;
+		}
+	}
+}

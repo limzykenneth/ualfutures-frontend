@@ -90,7 +90,7 @@ app.start = function(){
 	Backbone.history.start();
 
 	// Initialize masonry
-	app.startMasonry($("#page-content .grid"));
+	// app.startMasonry($("#page-content .grid"));
 
 	// Initialize slick
 	// $("#page-content .main-lists .slideshow").slick();
@@ -113,11 +113,17 @@ app.renderSlideshow = function(){
 app.renderGrid = function(collection, view, viewConstructor){
 	var gridView = view;
 
+	$("#page-content .grid").removeClass("directories-grid");
+
 	if(viewConstructor){
 		gridView = new viewConstructor(collection);
 		$("#page-content .grid").html(gridView.render());
 	}else{
 		$("#page-content .grid").html(gridView.render(collection));
+
+		if(collection == app.directories.collection){
+			$("#page-content .grid").addClass("directories-grid");
+		}
 	}
 };
 
@@ -142,6 +148,8 @@ app.registerRoutes = function(router){
 		app.renderSlideshow();
 
 		app.renderGrid(app.collection, null, genericAllView);
+		app.startMasonry($("#page-content .grid"));
+
 		app.bindEvents();
 	});
 
@@ -152,7 +160,8 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 		$grid.masonry("remove", $("#page-content .grid .grid-item"));
-		app.startMasonry($grid);
+		app.startMasonry($grid, type);
+		$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
@@ -175,12 +184,20 @@ app.registerRoutes = function(router){
 	});
 };
 
-app.startMasonry = function($selector){
-	$selector.masonry({
-		columnWidth: ".grid-item.level-0",
-		itemSelector: ".grid-item",
-		gutter: 20
-	});
+app.startMasonry = function($selector, postType){
+	if(postType == "directories"){
+		$selector.masonry({
+			columnWidth: ".grid-item",
+			itemSelector: ".grid-item",
+			gutter: 20
+		});
+	}else{
+		$selector.masonry({
+			columnWidth: ".grid-item.level-0",
+			itemSelector: ".grid-item",
+			gutter: 20
+		});
+	}
 };
 
 app.bindEvents = function(){

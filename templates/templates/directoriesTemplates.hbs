@@ -42,6 +42,36 @@
 	</article>
 </script>
 
+<script type="text/template" id="directories-4column-card">
+	<article href="<%= 'media/' + appData + '/post=' + slug %>" class="grid-item <% if(cover_photo !== false) print('with-image') %>">
+		<% if(cover_photo !== false){ %>
+
+		<div class="card-title">
+			<img class="feature-image" src="<%= cover_photo %>">
+
+			<h3 class="title"><%= title %></h3>
+
+			<p class="authors"><%= created_by %></p>
+		</div>
+
+		<% }else{ %>
+
+		<div class="card-title">
+			<h3 class="title"><%= title %></h3>
+			<% if (subtitle !== ""){
+			%>
+			<h4 class="subtitle"><%= subtitle %></h4>
+			<%
+			}
+			%>
+
+			<p class="authors"><%= created_by %></p>
+		</div>
+
+		<% } %>
+	</article>
+</script>
+
 <script type="text/template" id="directories-single-view">
 	<article class="single-post directories">
 		<div class="main-content">
