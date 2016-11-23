@@ -1,6 +1,7 @@
 var $ = require("jquery");
 var _ = require("underscore");
 var Backbone = require("backbone");
+window.smark = require("smark");
 var featuresCollection = require("./features/collection.js");
 var featuresAllView = require("./features/allView.js");
 var featuresSingleView = require("./features/singleView.js");

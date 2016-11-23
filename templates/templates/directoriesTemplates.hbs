@@ -43,5 +43,29 @@
 </script>
 
 <script type="text/template" id="directories-single-view">
-	{{> _postSingleTemplate type="directories" }}
+	<article class="single-post directories">
+		<div class="main-content">
+			<a class="back-to-nav" href="#media/directories"><i class="fa fa-long-arrow-left fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;<span>Directories</span></a>
+
+			<div class="media">
+				<%= smark.generate(external_links).html %>
+			</div>
+
+			{{> _postTitleInfo }}
+
+			<div class="all-tags">
+			<%
+				_.each(tags, function(el, i){
+			%>
+				<a href="" class="tag"><%= el %></a>
+			<%
+				})
+			%>
+			</div>
+
+			<a class="back-to-nav" href="#media/directories"><i class="fa fa-long-arrow-left fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;<span>Directories</span></a>
+		</div>
+
+		{{> sidebar type=true }}
+	</article>
 </script>
