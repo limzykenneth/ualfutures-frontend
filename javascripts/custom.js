@@ -151,8 +151,8 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .slideshow").remove();
 
 		var $grid = $("#page-content .grid");
-		app.startMasonry($grid);
 		$grid.masonry("remove", $("#page-content .grid .grid-item"));
+		app.startMasonry($grid);
 
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
