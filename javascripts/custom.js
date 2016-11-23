@@ -125,11 +125,7 @@ app.renderPost = function(slug, type){
 
 	if(type == "events" && typeof model.toJSON().ebData == "undefined"){
 		$("#page-content .post-content").html("");
-
-		// Fetch eventbrite data, should only be done on render and once only
-		$.when(model.fetchData()).then(function(){
-			$("#page-content .post-content").html(app[type].singleView.render(model));
-		});
+		$("#page-content .post-content").html(app[type].singleView.render(model));
 	}else{
 		$("#page-content .post-content").html(app[type].singleView.render(model));
 	}

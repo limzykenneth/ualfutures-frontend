@@ -8,8 +8,26 @@
 	}
 
 	.additional-info{
+		position: relative;
+		top: -20px;
 		font-size: 1.5rem;
 		line-height: 1.9rem;
+
+		ul{
+			padding-left: 2rem;
+			list-style: none;
+			margin-left: -1.5ch;
+
+			li{
+				padding-left: 0.5ch;
+				text-indent: -1ch
+			}
+
+			li:before{
+				content: "-";
+				padding-right: 0.5ch
+			}
+		}
 	}
 
 	.social-media{

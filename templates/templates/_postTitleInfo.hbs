@@ -11,5 +11,8 @@
 		%>
 
 	<p class="post-date">Posted on: <%= moment(date_gmt).format("Do MMMM Y") %></p>
-	{{!-- <p class="authors"></p> --}}
+
+	<% if (typeof created_by !== "undefined"){ %>
+	<p class="authors"><%= created_by %></p>
+	<% } %>
 </header>

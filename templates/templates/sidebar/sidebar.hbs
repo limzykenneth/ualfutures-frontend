@@ -5,7 +5,9 @@
 			<% if (appData == "events"){
 				print(moment(ebData.startTime).format("ddd D MMMM YYYY"));
 				print("<br>" + moment(ebData.startTime).format("HH:mm") + " - " + moment(ebData.endTime).format("HH:mm"));
-				// Location pending backend implementation
+				print("<br>" + ebData.address);
+			}else if (appData == "opportunities"){
+				print(opps_info);
 			} %>
 		</p>
 	</div>
