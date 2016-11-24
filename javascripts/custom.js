@@ -164,6 +164,8 @@ app.registerRoutes = function(router){
 
 		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
+
+		$(window).scrollTop(0);
 	});
 
 	router.route("media(/:type)(/p:page)", function(type, page){
@@ -186,6 +188,8 @@ app.registerRoutes = function(router){
 
 		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
+
+		$(window).scrollTop(0);
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
@@ -194,6 +198,8 @@ app.registerRoutes = function(router){
 		app.renderPost(slug, type);
 
 		app.bindEvents();
+
+		$(window).scrollTop(0);
 	});
 };
 
