@@ -57,13 +57,63 @@
 		}
 	}
 
+	&.home-page{
+		position: relative;
+
+		.full-width-container{
+			background-color: rgba(255, 255, 255, 0);
+			color: @purple;
+
+			.ual{
+				filter: brightness(0);
+			}
+
+			.nav-container{
+				text-align: center;
+
+				.logo{
+					display: inline-block;
+
+					.ualfutures-logo{
+						.a{
+							fill: @purple;
+						}
+					}
+				}
+
+				.main-nav{
+					display: none;
+				}
+			}
+
+			.home-menu{
+				.title-font;
+
+				display: block;
+				position: absolute;
+				right: 2rem;
+				top: 2.7rem;
+				font-size: 1.5rem;
+				cursor: pointer;
+
+				p{
+					margin: 0;
+				}
+			}
+		}
+
+		.nav-dropdown{
+			display: none;
+		}
+	}
+
 	.full-width-container{
 		background: @purple;
 		position: relative;
 		width: 100%;
 		height: 100%;
 		z-index: 5;
-		color: #fff;
+		color: @white;
 
 		.ual{
 			display: block;
@@ -129,6 +179,10 @@
 					}
 				}
 			}
+		}
+
+		.home-menu{
+			display: none;
 		}
 	}
 

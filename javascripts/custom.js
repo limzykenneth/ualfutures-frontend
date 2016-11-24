@@ -101,7 +101,6 @@ app.start = function(){
 app.renderSlideshow = function(){
 	var slideshowTemplate = _.template($("#slideshow-template").html());
 
-
 	$("#page-content .grid").before(slideshowTemplate(app.slideshow.data[0]));
 	$("#page-content .main-lists .slideshow").slick({
 		dots: true,
@@ -111,7 +110,7 @@ app.renderSlideshow = function(){
 		nextArrow: '<span class="next"><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i></span>',
 	});
 
-	app.helpers.dynamicImageSize($("#page-content .slideshow .slide img"), ".slide");
+	app.helpers.dynamicImageSize($("#page-content .slideshow .slide"));
 };
 
 app.renderGrid = function(collection, view, viewConstructor){
@@ -130,7 +129,7 @@ app.renderGrid = function(collection, view, viewConstructor){
 		}
 	}
 
-	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container .bg-image"), ".grid-item");
+	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
 };
 
 app.renderPost = function(slug, type){
@@ -148,8 +147,10 @@ app.registerRoutes = function(router){
 	router.route("", function(){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
-
-		$("#page-content .main-lists .page-name").text("Futures");
+		$("#page-content .main-lists .page-name").addClass("hide");
+		$("#page-header").addClass("home-page");
+		$("#page-content").addClass("home-page");
+		$("#page-content .main-lists .page-description").text("Connecting UAL students, graduates and industry.");
 
 		if(!($("#page-content .main-lists .slideshow").hasClass("slick-initialized"))){
 			app.renderSlideshow();
@@ -171,7 +172,12 @@ app.registerRoutes = function(router){
 	router.route("media(/:type)(/p:page)", function(type, page){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-header").removeClass("home-page");
+		$("#page-content").removeClass("home-page");
 		$("#page-content .main-lists .slideshow").remove();
+
+		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
 
 		var $grid = $("#page-content .grid");
 		$grid.masonry("remove", $("#page-content .grid .grid-item"));
@@ -195,6 +201,10 @@ app.registerRoutes = function(router){
 	router.route("media/:type/post=:slug", function(type, slug){
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").removeClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-header").removeClass("home-page");
+		$("#page-content").removeClass("home-page");
+
 		app.renderPost(slug, type);
 
 		app.bindEvents();
@@ -231,19 +241,21 @@ app.bindEvents = function(){
 
 app.helpers.bindNavEvents = function(){
 	$(window).scroll(function(e) {
-		if($(window).scrollTop() > 0){
-			$("#page-header").removeClass("large").addClass("small");
-		}else{
-			$("#page-header").removeClass("small").addClass("large");
+		if(!($("#page-header").hasClass("home-page"))){
+			if($(window).scrollTop() > 0){
+				$("#page-header").removeClass("large").addClass("small");
+			}else{
+				$("#page-header").removeClass("small").addClass("large");
+			}
 		}
 	});
 
 	$("#page-header").hover(function() {
-		if($(window).scrollTop() > 0){
+		if($(window).scrollTop() > 0 && !($("#page-header").hasClass("home-page"))){
 			$("#page-header").removeClass("small").addClass("large");
 		}
 	}, function() {
-		if($(window).scrollTop() > 0){
+		if($(window).scrollTop() > 0 && !($("#page-header").hasClass("home-page"))){
 			$("#page-header").removeClass("large").addClass("small");
 		}
 	});
@@ -276,23 +288,26 @@ app.helpers.makeTitleCase = function(str){
 	});
 };
 
-app.helpers.dynamicImageSize = function($image, parentSelector){
+app.helpers.dynamicImageSize = function($image){
 	$image.each(function(index, el) {
-		$(this).load(function(){
-			var w = $(this).width();
-			var h = $(this).height();
+		var $self = $(this);
+		var $child = $(this).children("img");
+		$(this).imagesLoaded(function(){
+			var w = $child.width();
+			var h = $child.height();
 			var aspectRatio = w/h;
-			var containerAspectRatio = $(this).parents(parentSelector).width() / $(this).parents(parentSelector).height();
+			var containerAspectRatio = $self.width() / $self.height();
 
+			console.log(w, h);
 			if(aspectRatio < containerAspectRatio){
 				// wider than container
-				$(this).css({
+				$child.css({
 					width: "100%",
 					height: "auto"
 				});
 			}else{
 				// taller than container
-				$(this).css({
+				$child.css({
 					width: "auto",
 					height: "100%"
 				});
