@@ -1,4 +1,7 @@
 <div class="main-content">
+	<% if (typeof external_links !== "undefined"){
+		print(smark.generate(external_links).html);
+	} %>
 	<%= content %>
 
 	<div class="all-tags">

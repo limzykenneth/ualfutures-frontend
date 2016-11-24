@@ -37,6 +37,9 @@
 				date.weekday = dateObject.getDay();
 
 				switch(date.weekday){
+					case 0:
+						date.weekday = "Sun";
+						break;
 					case 1:
 						date.weekday = "Mon";
 						break;
@@ -54,9 +57,6 @@
 						break;
 					case 6:
 						date.weekday = "Sat";
-						break;
-					case 7:
-						date.weekday = "Sun";
 						break;
 				}
 

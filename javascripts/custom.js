@@ -95,7 +95,7 @@ app.start = function(){
 	// Initialize slick
 	// $("#page-content .main-lists .slideshow").slick();
 
-	app.bindEvents();
+	// app.bindEvents();
 };
 
 app.renderSlideshow = function(){
@@ -134,6 +134,10 @@ app.renderGrid = function(collection, view, viewConstructor){
 
 app.renderPost = function(slug, type){
 	var model = app[type].collection.findWhere({slug: slug});
+
+	if(typeof model == "undefined" || app.helpers.redirectHomeFlag){
+		app.router.navigate("");
+	}
 
 	if(type == "events" && typeof model.toJSON().ebData == "undefined"){
 		$("#page-content .post-content").html("");
@@ -199,17 +203,21 @@ app.registerRoutes = function(router){
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
-		$("#page-content .main-lists").addClass("hide");
-		$("#page-content .post-content").removeClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
-		$("#page-header").removeClass("home-page");
-		$("#page-content").removeClass("home-page");
+		if(app.helpers.handleExternalLinks("media" + "/" + type + "/post=" + slug)){
+			$("#page-content .main-lists").addClass("hide");
+			$("#page-content .post-content").removeClass("hide");
+			$("#page-content .main-lists .page-name").removeClass("hide");
+			$("#page-header").removeClass("home-page");
+			$("#page-content").removeClass("home-page");
 
-		app.renderPost(slug, type);
+			app.renderPost(slug, type);
 
-		app.bindEvents();
+			app.bindEvents();
 
-		$(window).scrollTop(0);
+			$(window).scrollTop(0);
+		}else{
+			app.router.navigate("", {trigger: true});
+		}
 	});
 };
 
@@ -279,11 +287,44 @@ app.helpers.bindNavEvents = function(){
 };
 
 app.helpers.bindCardEvents = function(){
-	$("#page-content .grid .grid-item").click(function(e) {
+	$("#page-content .grid .grid-item").one("click", function(e) {
 		var slug = $(this).attr("href");
 
-		app.router.navigate(slug, {trigger: true});
+		var willTrigger = app.helpers.handleExternalLinks(slug);
+
+		if(willTrigger){
+			app.router.navigate(slug, {trigger: true});
+		}
 	});
+};
+
+app.helpers.handleExternalLinks = function(slug){
+	var slugList = slug.split("/");
+	var type = slugList[1];
+	var IDReg = /^post=(.*)$/;
+	var uniqueID = slugList[2].replace(IDReg, "$1");
+
+	var model = app[type].collection.findWhere({slug: uniqueID});
+
+	var externalLink = model.get("external_links");
+	if(typeof externalLink !== "undefined"){
+		var linkType = smark.generate(model.get("external_links")).type;
+		if(type == "directories"){
+			if(linkType == "youtube" || linkType == "vimeo" || linkType == "paragraph"){
+				$("#page-content .post-content").html(app[type].singleView.render(model));
+			}else{
+				window.open(model.get("external_links"), "_blank");
+				app.helpers.redirectHomeFlag = true;
+				return false;
+			}
+		}else if(type == "events" || type == "opportunities"){
+			window.open(model.get("external_links"), "_blank");
+			app.helpers.redirectHomeFlag = true;
+			return false;
+		}
+	}
+
+	return true;
 };
 
 app.helpers.clearAllViews = function(){
@@ -323,6 +364,8 @@ app.helpers.dynamicImageSize = function($image){
 		});
 	});
 };
+
+app.helpers.redirectHomeFlag = false;
 
 app.errorFetchingData = function(e){
 	console.error(e.status + " " + e.statusText);

@@ -78,7 +78,16 @@
 			<a class="back-to-nav" href="#media/directories"><i class="fa fa-long-arrow-left fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;<span>Directories</span></a>
 
 			<div class="media">
-				<%= smark.generate(external_links).html %>
+				<%
+					var sObject = smark.generate(external_links);
+					if(sObject.type == "youtube" || sObject.type == "vimeo"){
+						print(sObject.html);
+					}else{
+						var $element = $(external_links);
+						$element.addClass("smark");
+						print($element.clone().wrap('<div/>').parent().html());
+					}
+				%>
 			</div>
 
 			{{> _postTitleInfo }}
