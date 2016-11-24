@@ -27,7 +27,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "smark": "^2.0.0"
+    "smark": "https://github.com/limzykenneth/smark.git#dev"
   },
   "browserify": {
     "transform": [
