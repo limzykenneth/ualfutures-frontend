@@ -267,6 +267,15 @@ app.helpers.bindNavEvents = function(){
 	$("#page-header").hover(function(){}, function(){
 		$("#page-header .nav-dropdown").css("transform", "translateY(-100%)");
 	});
+
+	$("#page-header .home-menu").hover(function() {
+		$("#page-header .nav-slide-in").css("right", "0");
+	});
+
+	$("#page-header").hover(function(){},
+	function() {
+		$("#page-header .nav-slide-in").css("right", "calc(0px - 15em)");
+	});
 };
 
 app.helpers.bindCardEvents = function(){
@@ -298,7 +307,6 @@ app.helpers.dynamicImageSize = function($image){
 			var aspectRatio = w/h;
 			var containerAspectRatio = $self.width() / $self.height();
 
-			console.log(w, h);
 			if(aspectRatio < containerAspectRatio){
 				// wider than container
 				$child.css({
