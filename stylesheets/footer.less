@@ -1,0 +1,46 @@
+footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #fafaf8;
+	padding: 1rem;
+
+	.footer-container{
+		width: 75vw;
+		margin: 0 ~"calc(12.5% - 10px)";
+
+		.social-media{
+			float: left;
+
+			span{
+				margin-right: 1rem;
+
+				.fa{
+					font-size: 1.5em;
+					color: @dark-purple;
+					opacity: 0.8;
+
+					&:hover{
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		.newsletter{
+			float: right;
+			margin-right: 1.5rem;
+			margin-top: 5px;
+
+			a{
+				color: @dark-purple;
+				opacity: 0.8;
+
+				&:hover{
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
