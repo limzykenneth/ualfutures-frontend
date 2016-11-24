@@ -100,6 +100,8 @@ app.start = function(){
 
 app.renderSlideshow = function(){
 	var slideshowTemplate = _.template($("#slideshow-template").html());
+
+
 	$("#page-content .grid").before(slideshowTemplate(app.slideshow.data[0]));
 	$("#page-content .main-lists .slideshow").slick({
 		dots: true,
@@ -149,11 +151,18 @@ app.registerRoutes = function(router){
 
 		$("#page-content .main-lists .page-name").text("Futures");
 
-		app.renderSlideshow();
+		if(!($("#page-content .main-lists .slideshow").hasClass("slick-initialized"))){
+			app.renderSlideshow();
+		}
+
+		var $grid = $("#page-content .grid");
+
+		app.startMasonry($grid);
+		$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
 		app.renderGrid(app.collection, null, genericAllView);
-		app.startMasonry($("#page-content .grid"));
 
+		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
 	});
 
