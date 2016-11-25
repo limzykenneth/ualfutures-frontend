@@ -93,6 +93,21 @@ gulp.task("javascripts", function(){
 		}
 	};
 
+	browserify("./javascripts/about.js", {
+		debug: true
+	})
+		.bundle()
+		.on("error", onError)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+		.pipe(source("about.js"))
+		.pipe(gulp.dest("./dist/javascripts/"))
+		.pipe(buffer())
+		.pipe(uglifyjs(uglifyOptions))
+		.pipe(rename("about.min.js"))
+		.pipe(gulp.dest("./dist/javascripts/"));
+
 	return browserify("./javascripts/custom.js", {
 		debug: true,
 		standalone: "app"
