@@ -2,7 +2,20 @@
 	<% if (typeof external_links !== "undefined"){
 		print(smark.generate(external_links).html);
 	} %>
-	<%= content %>
+
+	{{#ifEquals type "events"}}
+		<% if(content){
+			print(content);
+		}else if(ebData.description){
+			print(ebData.description);
+		} %>
+
+		<% if(eventbrite_url){ %>
+			Visit <a href="<%= eventbrite_url %>" target=_blank>here</a> for more details.
+		<% } %>
+	{{else}}
+		<%= content %>
+	{{/ifEquals}}
 
 	<div class="all-tags">
 	<%

@@ -307,7 +307,7 @@ app.helpers.handleExternalLinks = function(slug){
 	var model = app[type].collection.findWhere({slug: uniqueID});
 
 	var externalLink = model.get("external_links");
-	if(typeof externalLink !== "undefined"){
+	if(typeof externalLink !== "undefined" && externalLink !== ""){
 		var linkType = smark.generate(model.get("external_links")).type;
 		if(type == "directories"){
 			if(linkType == "youtube" || linkType == "vimeo" || linkType == "paragraph"){
@@ -366,6 +366,11 @@ app.helpers.dynamicImageSize = function($image){
 };
 
 app.helpers.redirectHomeFlag = false;
+
+app.helpers.additionalEmbeds = function(link){
+	var soundCloud = /soundcloud/;
+	var lynda = /^(?:https?:\/\/)?(?:www\.)?lynda\.com\/.+?\/.+?\/\d+?\/(\d+?)-\d\.html/;
+};
 
 app.errorFetchingData = function(e){
 	console.error(e.status + " " + e.statusText);

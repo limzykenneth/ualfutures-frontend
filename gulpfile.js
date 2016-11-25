@@ -34,6 +34,13 @@ gulp.task("handlebars", function(){
             	return str.fn(this).replace(/\w\S*/g, function(txt){
 					return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 				});
+            },
+            ifEquals: function(a, b, opts){
+            	if(a == b){
+			        return opts.fn(this);
+            	}else{
+			        return opts.inverse(this);
+			    }
             }
 		}
 	};
