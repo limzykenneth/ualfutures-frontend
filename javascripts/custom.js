@@ -212,6 +212,8 @@ app.registerRoutes = function(router){
 
 			app.renderPost(slug, type);
 
+			app.helpers.bindSidebarEvents();
+
 			app.bindEvents();
 
 			$(window).scrollTop(0);
@@ -294,6 +296,19 @@ app.helpers.bindCardEvents = function(){
 
 		if(willTrigger){
 			app.router.navigate(slug, {trigger: true});
+		}
+	});
+};
+
+app.helpers.bindSidebarEvents = function(){
+	var $sidebar = $("#page-content .single-post .sidebar");
+	var sidebarY = $sidebar.offset().top;
+
+	$(window).scroll(function(){
+		if($(this).scrollTop() > sidebarY - 100){
+			$sidebar.addClass("fixed");
+		}else{
+			$sidebar.removeClass("fixed");
 		}
 	});
 };
