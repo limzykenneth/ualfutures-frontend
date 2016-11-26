@@ -1,5 +1,12 @@
 <script type="text/template" id="directories-card-view">
-	<article href="<%= 'media/' + appData + '/post=' + slug %>" class="grid-item level-<%= level %>
+	<a href="
+		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
+			<%= external_links %>" target="_blank"
+		<% }else{ %>
+			<%= '#media/' + appData + '/post=' + slug %>"
+		<% } %>
+
+		class="grid-item level-<%= level %>
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
@@ -13,7 +20,7 @@
 			}
 		%>
 
-		<p class="card-category"><a href="#"><%= app.helpers.makeTitleCase(category) %></a></p>
+		<p class="card-category"><%= app.helpers.makeTitleCase(category) %></p>
 
 		<div class="card-title">
 			<h3 class="title"><%= title %></h3>
@@ -29,9 +36,7 @@
 
 		<%
 		_.each(tags, function(el, i){
-			var str = '<a href="#">';
-			str += el;
-			str += "</a>"
+			var str = el;
 			if(i < tags.length - 1){
 				str += ", ";
 			}
@@ -39,11 +44,18 @@
 		});
 		%>
 		</p>
-	</article>
+	</a>
 </script>
 
 <script type="text/template" id="directories-4column-card">
-	<article href="<%= 'media/' + appData + '/post=' + slug %>" class="grid-item <% if(cover_photo !== false) print('with-image') %>">
+	<a href="
+		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
+			<%= external_links %>" target="_blank"
+		<% }else{ %>
+			<%= '#media/' + appData + '/post=' + slug %>"
+		<% } %>
+
+		class="grid-item <% if(cover_photo !== false) print('with-image') %>">
 		<% if(cover_photo !== false){ %>
 
 		<div class="card-title">
@@ -58,18 +70,15 @@
 
 		<div class="card-title">
 			<h3 class="title"><%= title %></h3>
-			<% if (subtitle !== ""){
-			%>
-			<h4 class="subtitle"><%= subtitle %></h4>
-			<%
-			}
-			%>
+			<% if (subtitle !== ""){ %>
+				<h4 class="subtitle"><%= subtitle %></h4>
+			<% } %>
 
 			<p class="authors"><%= created_by %></p>
 		</div>
 
 		<% } %>
-	</article>
+	</a>
 </script>
 
 <script type="text/template" id="directories-single-view">

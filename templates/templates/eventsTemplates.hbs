@@ -1,5 +1,12 @@
 <script type="text/template" id="events-card-view">
-	<article href="<%= 'media/' + appData + '/post=' + slug %>" class="grid-item level-<%= level %>
+	<a href="
+		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
+			<%= external_links %>" target="_blank"
+		<% }else{ %>
+			<%= '#media/' + appData + '/post=' + slug %>"
+		<% } %>
+
+		class="grid-item level-<%= level %>
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
@@ -13,7 +20,7 @@
 			}
 		%>
 
-		<p class="card-category"><a href="#"><%= app.helpers.makeTitleCase(category) %></a></p>
+		<p class="card-category"><%= app.helpers.makeTitleCase(category) %></p>
 
 		<div class="card-title">
 			<h3 class="title"><%= title %></h3>
@@ -66,7 +73,7 @@
 			%>
 			<br><%= location %>
 		</p>
-	</article>
+	</a>
 </script>
 
 <script type="text/template" id="events-single-view">

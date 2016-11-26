@@ -49,18 +49,6 @@ helpers.bindNavEvents = function(){
 	});
 };
 
-helpers.bindCardEvents = function(){
-	$("#page-content .grid .grid-item").one("click", function(e) {
-		var slug = $(this).attr("href");
-
-		var willTrigger = app.helpers.handleExternalLinks(slug);
-
-		if(willTrigger){
-			app.router.navigate(slug, {trigger: true});
-		}
-	});
-};
-
 helpers.bindSidebarEvents = function(){
 	var $sidebar = $("#page-content .single-post .sidebar");
 	var sidebarY = $sidebar.offset().top;
@@ -72,35 +60,6 @@ helpers.bindSidebarEvents = function(){
 			$sidebar.removeClass("fixed");
 		}
 	});
-};
-
-helpers.handleExternalLinks = function(slug){
-	var slugList = slug.split("/");
-	var type = slugList[1];
-	var IDReg = /^post=(.*)$/;
-	var uniqueID = slugList[2].replace(IDReg, "$1");
-
-	var model = app[type].collection.findWhere({slug: uniqueID});
-
-	var externalLink = model.get("external_links");
-	if(typeof externalLink !== "undefined" && externalLink !== ""){
-		var linkType = smark.generate(model.get("external_links")).type;
-		if(type == "directories"){
-			if(linkType == "youtube" || linkType == "vimeo" || linkType == "paragraph"){
-				$("#page-content .post-content").html(app[type].singleView.render(model));
-			}else{
-				window.open(model.get("external_links"), "_blank");
-				app.helpers.redirectHomeFlag = true;
-				return false;
-			}
-		}else if(type == "events" || type == "opportunities"){
-			window.open(model.get("external_links"), "_blank");
-			app.helpers.redirectHomeFlag = true;
-			return false;
-		}
-	}
-
-	return true;
 };
 
 helpers.clearAllViews = function(){

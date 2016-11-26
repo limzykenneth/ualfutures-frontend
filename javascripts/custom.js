@@ -204,24 +204,20 @@ app.registerRoutes = function(router){
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
-		if(app.helpers.handleExternalLinks("media" + "/" + type + "/post=" + slug)){
-			$("#page-content .main-lists").addClass("hide");
-			$("#page-content .post-content").removeClass("hide");
-			$("#page-content .main-lists .page-name").removeClass("hide");
-			$("#page-header").removeClass("home-page");
-			$("#page-content").removeClass("home-page");
-			$("#page-header .nav-slide-in").css("display", "none");
+		$("#page-content .main-lists").addClass("hide");
+		$("#page-content .post-content").removeClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-header").removeClass("home-page");
+		$("#page-content").removeClass("home-page");
+		$("#page-header .nav-slide-in").css("display", "none");
 
-			app.renderPost(slug, type);
+		app.renderPost(slug, type);
 
-			app.helpers.bindSidebarEvents();
+		app.helpers.bindSidebarEvents();
 
-			app.bindEvents();
+		app.bindEvents();
 
-			$(window).scrollTop(0);
-		}else{
-			app.router.navigate("", {trigger: true});
-		}
+		$(window).scrollTop(0);
 	});
 };
 
@@ -243,7 +239,6 @@ app.startMasonry = function($selector, postType){
 
 app.bindEvents = function(){
 	this.helpers.bindNavEvents();
-	this.helpers.bindCardEvents();
 };
 
 
