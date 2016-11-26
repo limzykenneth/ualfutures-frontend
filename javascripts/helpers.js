@@ -62,11 +62,6 @@ helpers.bindSidebarEvents = function(){
 	});
 };
 
-helpers.clearAllViews = function(){
-	$("#page-content .main-lists .grid").html("");
-	$("#page-content .post-content").html("");
-};
-
 helpers.makeTitleCase = function(str){
 	return str.replace(/\w\S*/g, function(txt){
 		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -98,11 +93,6 @@ helpers.dynamicImageSize = function($image){
 			}
 		});
 	});
-};
-
-helpers.additionalEmbeds = function(link){
-	var soundCloud = /soundcloud/;
-	var lynda = /^(?:https?:\/\/)?(?:www\.)?lynda\.com\/.+?\/.+?\/\d+?\/(\d+?)-\d\.html/;
 };
 
 module.exports = helpers;

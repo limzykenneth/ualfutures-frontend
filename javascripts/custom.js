@@ -24,19 +24,10 @@ var genericAllView = require("./genericCollectionView.js");
 var appRouter = require("./routes.js");
 
 var app = app || {
-	features: {
-		requestAttempt: 0
-	},
-	events: {
-		requestAttempt: 0,
-		"api_token": "OJ5HVNKGGDKY2AS6ZQKO"
-	},
-	opportunities: {
-		requestAttempt: 0
-	},
-	directories: {
-		requestAttempt: 0
-	},
+	features: {},
+	events: {},
+	opportunities: {},
+	directories: {},
 	slideshow: {
 		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
 		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
@@ -88,14 +79,6 @@ app.start = function(){
 	app.registerRoutes(app.router);
 
 	Backbone.history.start();
-
-	// Initialize masonry
-	// app.startMasonry($("#page-content .grid"));
-
-	// Initialize slick
-	// $("#page-content .main-lists .slideshow").slick();
-
-	// app.bindEvents();
 };
 
 app.renderSlideshow = function(){
@@ -185,7 +168,6 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
 
 		var $grid = $("#page-content .grid");
-		$grid.masonry("remove", $("#page-content .grid .grid-item"));
 		app.startMasonry($grid, type);
 		$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
