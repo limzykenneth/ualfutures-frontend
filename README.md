@@ -52,7 +52,7 @@ CSS for the site is written in [less](http://lesscss.org). The entry point is `s
 The compiled less file is also passed through [autoprefixer](https://github.com/postcss/autoprefixer) and [clean-css](https://github.com/jakubpawlowicz/clean-css) so there is no need to write browser prefix on most rules (ie. no need for -webkit, -moz, etc).
 
 #### Javascript
-The site uses [backbone.js](http://backbonejs.org) as a frontend framework and most of the site is just a sible page app. The post types are seperated into their individual folders containing their model, collection and all their relevant views. The main controller for the app is in `custom.js` and the router is defined in `routes.js`.
+The site uses [backbone.js](http://backbonejs.org) as a frontend framework and most of the site is just a single page app. The post types are seperated into their individual folders containing their model, collection and all their relevant views. The main controller for the app is in `custom.js` and the router is defined in `routes.js`.
 
 The javacsript files are compiled with [browserify](http://browserify.org) and then minified with [uglifyJS](https://github.com/mishoo/UglifyJS2). Please note that all libraries should be aquired from cdnjs.com with a local backup and not compiled or concat into the main js file (except for when the library is not available through a CDN).
 
