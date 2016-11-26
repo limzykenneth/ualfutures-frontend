@@ -179,6 +179,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-header").removeClass("home-page");
 		$("#page-content").removeClass("home-page");
+		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 
 		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
@@ -209,6 +210,7 @@ app.registerRoutes = function(router){
 			$("#page-content .main-lists .page-name").removeClass("hide");
 			$("#page-header").removeClass("home-page");
 			$("#page-content").removeClass("home-page");
+			$("#page-header .nav-slide-in").css("display", "none");
 
 			app.renderPost(slug, type);
 
