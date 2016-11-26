@@ -137,7 +137,8 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-name").addClass("hide");
 		$("#page-header").addClass("home-page");
 		$("#page-content").addClass("home-page");
-		$("#page-content .main-lists .page-description").text("Connecting UAL students, graduates and industry.");
+		$("#page-content .main-lists .page-description").addClass("hide");
+		// $("#page-content .main-lists .page-description").text("Connecting UAL students, graduates and industry.");
 
 		if(!($("#page-content .main-lists .slideshow").hasClass("slick-initialized"))){
 			app.renderSlideshow();
@@ -162,6 +163,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-header").removeClass("home-page");
 		$("#page-content").removeClass("home-page");
+		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 
@@ -191,6 +193,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-header").removeClass("home-page");
 		$("#page-content").removeClass("home-page");
+		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
 
 		app.renderPost(slug, type);
