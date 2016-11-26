@@ -212,7 +212,7 @@ app.startMasonry = function($selector, postType){
 		});
 	}else{
 		$selector.masonry({
-			columnWidth: ".grid-item.level-0",
+			columnWidth: $(window).width() * 0.75 / 3 - 20,
 			itemSelector: ".grid-item",
 			gutter: 20
 		});
