@@ -14,7 +14,7 @@ var allView = Backbone.View.extend({
 
 	addModel: function(model){
 		var singleView = new cardView();
-		this.$el.append(singleView.render(model));
+		this.$el.prepend(singleView.render(model));
 	}
 });
 
