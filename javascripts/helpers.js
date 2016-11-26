@@ -32,13 +32,20 @@ helpers.bindNavEvents = function(){
 		$("#page-header .nav-dropdown").css("transform", "translateY(-100%)");
 	});
 
+	var $navSlideIn = $("#page-header .nav-slide-in");
 	$("#page-header .home-menu").hover(function() {
-		$("#page-header .nav-slide-in").css("right", "0");
+		$navSlideIn.css("display", "block");
+		setTimeout(function(){
+			$navSlideIn.addClass("in");
+		}, 1);
 	});
 
 	$("#page-header").hover(function(){},
 	function() {
-		$("#page-header .nav-slide-in").css("right", "calc(0px - 15em)");
+		$("#page-header .nav-slide-in").removeClass("in");
+		setTimeout(function(){
+			$navSlideIn.css("display", "none");
+		}, 300);
 	});
 };
 

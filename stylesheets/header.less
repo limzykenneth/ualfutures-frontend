@@ -59,7 +59,6 @@
 
 	&.home-page{
 		position: relative;
-		overflow-x: hidden;
 
 		.full-width-container{
 			background-color: rgba(255, 255, 255, 0);
@@ -110,7 +109,7 @@
 		.nav-slide-in{
 			.title-font;
 
-			display: block;
+			display: none;
 			position: absolute;
 
 			right: ~"calc(0px - 15em)";
@@ -122,6 +121,10 @@
 			line-height: 2rem;
 			margin-top: -1rem;
 			z-index: 10;
+
+			&.in{
+				right: 0;
+			}
 
 			ul{
 				list-style: none;
