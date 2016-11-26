@@ -151,6 +151,7 @@ app.registerRoutes = function(router){
 
 		app.renderGrid(app.collection, null, genericAllView);
 
+		$("#page-content .main-lists .grid").append("<a href='#' class='hide grid-item level-0'></a>");
 		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
 
@@ -180,6 +181,7 @@ app.registerRoutes = function(router){
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 			app.renderGrid(app[type].collection, app[type].allView);
 		}
+		$("#page-content .main-lists .grid").append("<a href='#' class='hide grid-item level-0'></a>");
 
 		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
@@ -215,7 +217,7 @@ app.startMasonry = function($selector, postType){
 		});
 	}else{
 		$selector.masonry({
-			columnWidth: $(window).width() * 0.75 / 3 - 20,
+			columnWidth: ".grid-item.level-0",
 			itemSelector: ".grid-item",
 			gutter: 20
 		});
