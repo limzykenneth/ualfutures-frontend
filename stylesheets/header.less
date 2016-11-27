@@ -11,7 +11,7 @@
 		height: 60px;
 
 		.ual{
-			img{
+			#Layer_1{
 				width: 47px;
 				top: 19px;
 			}
@@ -35,7 +35,7 @@
 
 	&.large{
 		.ual{
-			img{
+			#Layer_1{
 				width: 65px;
 				top: 29px;
 			}
@@ -64,8 +64,10 @@
 			background-color: rgba(255, 255, 255, 0);
 			color: @purple;
 
-			.ual{
-				filter: brightness(0.25) url("#purple");;
+			.ual #Layer_1{
+				.cls-1{
+					fill: @purple;
+				}
 			}
 
 			.nav-container{
@@ -164,6 +166,22 @@
 
 			@media @small{
 				display: inline-block;
+			}
+
+			#Layer_1{
+				position: absolute;
+				margin-left: 3em;
+				height: auto;
+				display: inline-block;
+				transition: all 0.5s ease;
+
+				@media @small{
+					position: relative;
+				}
+
+				.cls-1{
+					fill: @white;
+				}
 			}
 
 			img{
