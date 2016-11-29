@@ -7,6 +7,20 @@
 		<% } %>
 
 		class="grid-item level-<%= level %>
+		<% if(category == "Internships"){
+			print(" bg-light-blue");
+		}else if(category == "Freelance"){
+			print(" bg-light-green");
+		}else if(category == "Full-Time"){
+			print(" bg-light-purple");
+		}else if(category == "Part-Time"){
+			print(" bg-light-grey");
+		}else if(category == "Competition"){
+			print(" bdr-light-green");
+		}else if(category == "Open Call"){
+			print(" bdr-light-blue");
+		} %>
+
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');

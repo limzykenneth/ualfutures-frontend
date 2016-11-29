@@ -7,6 +7,16 @@
 		<% } %>
 
 		class="grid-item level-<%= level %>
+		<% if(category == "Audio"){
+			print(" bg-light-blue");
+		}else if(category == "Video"){
+			print(" bg-light-green");
+		}else if(category == "Reading"){
+			print(" bg-light-purple");
+		}else if(category == "Tools & Platforms"){
+			print(" bg-light-grey");
+		} %>
+
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
@@ -55,7 +65,21 @@
 			<%= '#media/' + appData + '/post=' + slug + '"'%>
 		<% } %>
 
-		class="grid-item <% if(cover_photo !== false) print('with-image') %>">
+		class="grid-item
+		<%
+			if(category == "Audio"){
+				print(" bg-light-blue");
+			}else if(category == "Video"){
+				print(" bg-light-green");
+			}else if(category == "Reading"){
+				print(" bg-light-purple");
+			}else if(category == "Tools & Platforms"){
+				print(" bg-light-grey");
+			}
+
+			if(cover_photo !== false) print('with-image')
+		%>">
+
 		<% if(cover_photo !== false){ %>
 
 		<div class="card-title">

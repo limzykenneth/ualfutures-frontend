@@ -7,6 +7,14 @@
 		<% } %>
 
 		class="grid-item level-<%= level %>
+		<% if(category == "Futures Event"){
+			print(" bg-light-blue");
+		}else if(category == "UAL Event"){
+			print(" bg-light-green");
+		}else if(category == "External Event"){
+			print(" bg-light-purple");
+		} %>
+
 		<%
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
