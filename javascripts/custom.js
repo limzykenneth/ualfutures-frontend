@@ -196,7 +196,7 @@ app.registerRoutes = function(router){
 		$(window).scrollTop(0);
 	});
 
-	router.route("media/directories/category=:category", function(category){
+	router.route("media/directories/category=:category(/p:page)", function(category){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
