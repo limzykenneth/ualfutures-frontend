@@ -181,6 +181,27 @@ app.registerRoutes = function(router){
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 			app.renderGrid(app[type].collection, app[type].allView);
 		}
+
+		if(type == "directories"){
+			$("#page-content .main-lists .page-description").addClass("hide");
+			if($("#page-content .main-lists .directories-header").length === 0){
+				$grid.before(app.directories.allView.renderHeader());
+			}
+
+			// var subcategoryReg = /subcategory=(.*?)/i;
+			// var subcategoryQuery = "";
+			// console.log("t");
+			// _.find(subquery, function(el, i){
+			// 	subcategoryQuery = el.replace(subcategoryReg, "$1");
+			// 	console.log(subcategoryQuery);
+			// 	if(subcategoryQuery !== ""){
+			// 		return true;
+			// 	}
+			// });
+		}else{
+			$("#page-content .main-lists .directories-header").remove();
+		}
+
 		$("#page-content .main-lists .grid").append("<a href='#' class='hide grid-item level-0'></a>");
 
 		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
@@ -199,6 +220,10 @@ app.registerRoutes = function(router){
 		$("#page-header .nav-slide-in").css("display", "none");
 
 		app.renderPost(slug, type);
+
+		if(type == "directories"){
+			$("#page-content .main-content").before(app.directories.allView.renderHeader());
+		}
 
 		app.helpers.bindSidebarEvents();
 

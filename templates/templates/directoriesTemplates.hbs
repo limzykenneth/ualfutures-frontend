@@ -52,7 +52,7 @@
 		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
 			<%= external_links %>" target="_blank"
 		<% }else{ %>
-			<%= '#media/' + appData + '/post=' + slug %>"
+			<%= '#media/' + appData + '/post=' + slug + '"'%>
 		<% } %>
 
 		class="grid-item <% if(cover_photo !== false) print('with-image') %>">
@@ -79,6 +79,17 @@
 
 		<% } %>
 	</a>
+</script>
+
+<script type="text/template" id="directories-grid-header">
+	<section class="directories-header">
+		<span class="subcategory"><a href="#media/directories/subcategory=video">Video</a></span>
+		<span class="subcategory"><a href="#media/directories/subcategory=audio">Audio</a></span>
+		<span class="subcategory"><a href="#media/directories/subcategory=reading">Reading</a></span>
+		<span class="subcategory"><a href="#media/directories/subcategory=tools%26platforms">Tools &amp; Platforms</a></span>
+
+		<span class="search-topic"><a href="#media/directories">Search by Topic</a></span>
+	</section>
 </script>
 
 <script type="text/template" id="directories-single-view">
