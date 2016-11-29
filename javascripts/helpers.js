@@ -68,6 +68,15 @@ helpers.makeTitleCase = function(str){
 	});
 };
 
+helpers.makeCompressCase = function(str){
+	var result = this.makeTitleCase(str);
+	var spaceReg = /\s/g;
+
+	result = result.replace(spaceReg, "");
+	result = result.toLowerCase();
+	return result;
+};
+
 helpers.dynamicImageSize = function($image){
 	$image.each(function(index, el) {
 		var $self = $(this);

@@ -96,21 +96,28 @@ app.renderSlideshow = function(){
 	app.helpers.dynamicImageSize($("#page-content .slideshow .slide"));
 };
 
-app.renderGrid = function(collection, view, viewConstructor){
+app.renderGrid = function(collection, type, view, viewConstructor){
 	var gridView = view;
+	var $grid = $("#page-content .grid");
 
-	$("#page-content .grid").removeClass("directories-grid");
+	app.startMasonry($grid, type);
+	$grid.masonry("remove", $("#page-content .grid .grid-item"));
+
+	$grid.removeClass("directories-grid");
 
 	if(viewConstructor){
 		gridView = new viewConstructor(collection);
-		$("#page-content .grid").html(gridView.render());
+		$grid.html(gridView.render());
 	}else{
 		$("#page-content .grid").html(gridView.render(collection));
 
-		if(collection == app.directories.collection){
-			$("#page-content .grid").addClass("directories-grid");
+		if(type == "directories"){
+			$grid.addClass("directories-grid");
 		}
 	}
+
+	$grid.append("<a href='#' class='hide grid-item level-0'></a>");
+	$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 
 	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
 };
@@ -146,13 +153,8 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
-		app.startMasonry($grid);
-		$grid.masonry("remove", $("#page-content .grid .grid-item"));
+		app.renderGrid(app.collection, "", null, genericAllView);
 
-		app.renderGrid(app.collection, null, genericAllView);
-
-		$("#page-content .main-lists .grid").append("<a href='#' class='hide grid-item level-0'></a>");
-		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
 
 		$(window).scrollTop(0);
@@ -171,15 +173,13 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
 
 		var $grid = $("#page-content .grid");
-		app.startMasonry($grid, type);
-		$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
-			app.renderGrid(app.collection, null, genericAllView);
+			app.renderGrid(app.collection, type, null, genericAllView);
 		}else{
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
-			app.renderGrid(app[type].collection, app[type].allView);
+			app.renderGrid(app[type].collection, type, app[type].allView);
 		}
 
 		if(type == "directories"){
@@ -187,27 +187,42 @@ app.registerRoutes = function(router){
 			if($("#page-content .main-lists .directories-header").length === 0){
 				$grid.before(app.directories.allView.renderHeader());
 			}
-
-			// var subcategoryReg = /subcategory=(.*?)/i;
-			// var subcategoryQuery = "";
-			// console.log("t");
-			// _.find(subquery, function(el, i){
-			// 	subcategoryQuery = el.replace(subcategoryReg, "$1");
-			// 	console.log(subcategoryQuery);
-			// 	if(subcategoryQuery !== ""){
-			// 		return true;
-			// 	}
-			// });
 		}else{
 			$("#page-content .main-lists .directories-header").remove();
 		}
 
-		$("#page-content .main-lists .grid").append("<a href='#' class='hide grid-item level-0'></a>");
-
-		$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 		app.bindEvents();
 
 		$(window).scrollTop(0);
+	});
+
+	router.route("media/directories/category=:category", function(category){
+		$("#page-content .main-lists").removeClass("hide");
+		$("#page-content .post-content").addClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-header").removeClass("home-page");
+		$("#page-content").removeClass("home-page");
+		$("#page-content .main-lists .page-description").removeClass("hide");
+		$("#page-header .nav-slide-in").css("display", "none");
+		$("#page-content .main-lists .slideshow").remove();
+
+		$("#page-content .main-lists .page-name").text("Directories");
+		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
+
+		var $grid = $("#page-content .grid");
+		var filtered = new dirCollection(app.directories.collection.filter(function(model){
+			var comparator = model.toJSON().category;
+			comparator = app.helpers.makeCompressCase(comparator);
+
+			return comparator == category.toLowerCase();
+		}));
+
+		app.renderGrid(filtered, "directories", app.directories.allView);
+
+		$("#page-content .main-lists .page-description").addClass("hide");
+		if($("#page-content .main-lists .directories-header").length === 0){
+			$grid.before(app.directories.allView.renderHeader());
+		}
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
@@ -226,7 +241,6 @@ app.registerRoutes = function(router){
 		}
 
 		app.helpers.bindSidebarEvents();
-
 		app.bindEvents();
 
 		$(window).scrollTop(0);
