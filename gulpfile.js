@@ -142,7 +142,7 @@ gulp.task("copy-css", function(){
 });
 
 gulp.task("copy-images", function(){
-	return gulp.src("./images/*")
+	return gulp.src("./images/**/*")
 		.pipe(gulp.dest("./dist/images"));
 });
 
@@ -165,7 +165,7 @@ gulp.task("server", ["default"], function(){
 
     gulp.watch("./templates/**/*", ["handlebars"]);
 
-    gulp.watch("./images/*", ["copy-images"]);
+    gulp.watch("./images/**/*", ["copy-images"]);
     gulp.watch("./responses/*", ["copy-json"]);
 
     gulp.watch("./dist/*.html").on("change", browserSync.reload);
