@@ -1,90 +1,219 @@
 #page-header{
-	top: 0px;
-	position: fixed;
-	width: 100vw;
-	height: 90px;
-	z-index: 999;
-	font-size: 1rem;
-	transition: height 0.5s ease;
-
-	&.small{
-		height: 60px;
-
-		.ual{
-			#Layer_1{
-				width: 47px;
-				top: 19px;
-			}
-		}
-
-		.nav-container{
-			.logo{
-				margin-top: 19px;
-			}
-
-			.ualfutures-logo{
-				height: 21px;
-			}
-
-			.main-nav{
-				transform: translateY(100%);
-				font-size: 20px;
-			}
-		}
-	}
-
-	&.large{
-		.ual{
-			#Layer_1{
-				width: 65px;
-				top: 29px;
-			}
-		}
-
-		.nav-container{
-			.logo{
-				margin-top: 29px;
-			}
-
-			.ualfutures-logo{
-				height: 29px;
-			}
-
-			.main-nav{
-				transform: translateY(150%);
-				font-size: 22px;
-			}
-		}
-	}
-
-	&.home-page{
-		position: relative;
+	// Other pages ----------------------------------------------------------------------
+	.main-header{
+		top: 0px;
+		position: fixed;
+		width: 100vw;
+		height: 90px;
+		z-index: 999;
+		font-size: 1rem;
+		transition: height 0.5s ease, opacity 0.2s ease;
 
 		.full-width-container{
-			background-color: rgba(255, 255, 255, 0);
-			color: @purple;
+			background-color: @purple;
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 5;
+			color: @white;
 
-			.ual #Layer_1{
-				.cls-1{
-					fill: @purple;
+			.ual{
+				display: block;
+
+				@media @small{
+					display: inline-block;
+				}
+
+				#Layer_1{
+					position: absolute;
+					margin-left: 3em;
+					height: auto;
+					display: inline-block;
+					transition: all 0.5s ease;
+					width: 65px;
+					top: 29px;
+
+					@media @small{
+						position: relative;
+					}
+
+					.cls-1{
+						fill: @white;
+					}
 				}
 			}
 
 			.nav-container{
-				text-align: center;
+				width: 75vw;
+				margin: 0 ~"calc(12.5% - 10px)";
 
 				.logo{
+					.title-font;
+
 					display: inline-block;
+					transition: all 0.5s ease;
+					margin-top: 29px;
+
+					@media @small{
+						width: 200px;
+					}
 
 					.ualfutures-logo{
+						width: auto;
+						transition: all 0.5s ease;
+						height: 29px;
+
 						.a{
-							fill: @purple;
-						}
+					        fill: #fff;
+					    }
 					}
 				}
 
 				.main-nav{
-					display: none;
+					.title-font;
+
+					display: inline-block;
+					float: right;
+					transition: all 0.5s ease;
+					transform: translateY(150%);
+					font-size: 22px;
+
+					span{
+						margin: 0 2.5rem;
+
+						&.active, &:hover{
+							border-bottom: 2px solid;
+						}
+
+						a{
+							color: @white;
+						}
+					}
+				}
+			}
+		}
+
+		.nav-dropdown{
+			position: relative;
+			transform: translateY(-100%);
+			width: 100%;
+			background-color: @light-green;
+			transition: transform 0.3s ease;
+			height: 53px;
+			padding: 17px 0;
+
+			.dropdown-container{
+				width: ~"calc(75vw - 20px)";
+				margin: 0 ~"calc(12.5% - 10px)";
+
+				.sub-menu{
+					float: right;
+					font-size: 1.35rem;
+
+					span{
+						padding-left: 35px;
+
+						a{
+							color: @dark-purple;
+
+							&:hover, &.active{
+								border-bottom: 2px solid;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.small{
+			height: 60px;
+
+			.ual{
+				#Layer_1{
+					width: 47px;
+					top: 19px;
+				}
+			}
+
+			.nav-container{
+				.logo{
+					margin-top: 19px;
+
+					.ualfutures-logo{
+						height: 21px;
+					}
+				}
+
+				.main-nav{
+					transform: translateY(100%);
+					font-size: 20px;
+				}
+			}
+		}
+	}
+
+
+	// Home page -----------------------------------------------------------------------------
+	.home-header{
+		height: 90px;
+
+		.full-width-container{
+			background-color: rgba(255, 255, 255, 0);
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 5;
+			color: @purple;
+
+			.ual{
+				display: block;
+
+				@media @small{
+					display: inline-block;
+				}
+
+				#Layer_1{
+					position: absolute;
+					margin-left: 3em;
+					height: auto;
+					display: inline-block;
+					transition: all 0.5s ease;
+					width: 65px;
+					top: 29px;
+
+					@media @small{
+						position: relative;
+					}
+
+					.cls-1{
+						fill: @purple;
+					}
+				}
+			}
+
+			.nav-container{
+				width: 75vw;
+				margin: 0 ~"calc(12.5% - 10px)";
+				text-align: center;
+
+				.logo{
+					.title-font;
+
+					display: inline-block;
+					margin-top: 29px;
+
+					@media @small{
+						width: 200px;
+					}
+
+					.ualfutures-logo{
+						width: auto;
+						height: 29px;
+
+						.a{
+							fill: @purple;
+						}
+					}
 				}
 			}
 
@@ -102,10 +231,6 @@
 					margin: 0;
 				}
 			}
-		}
-
-		.nav-dropdown{
-			display: none;
 		}
 
 		.nav-slide-in{
@@ -151,136 +276,5 @@
 				padding-right: 1rem;
 			}
 		}
-	}
-
-	.full-width-container{
-		background: @purple;
-		position: relative;
-		width: 100%;
-		height: 100%;
-		z-index: 5;
-		color: @white;
-
-		.ual{
-			display: block;
-
-			@media @small{
-				display: inline-block;
-			}
-
-			#Layer_1{
-				position: absolute;
-				margin-left: 3em;
-				height: auto;
-				display: inline-block;
-				transition: all 0.5s ease;
-
-				@media @small{
-					position: relative;
-				}
-
-				.cls-1{
-					fill: @white;
-				}
-			}
-
-			img{
-				position: absolute;
-				margin-left: 3em;
-				height: auto;
-				display: inline-block;
-				transition: all 0.5s ease;
-
-				@media @small{
-					position: relative;
-					top: 0px;
-				}
-			}
-		}
-
-		.nav-container{
-			width: 75vw;
-			margin: 0 ~"calc(12.5% - 10px)";
-
-			.logo{
-				.title-font;
-
-				display: inline-block;
-				transition: all 0.5s ease;
-
-				@media @small{
-					width: 200px;
-				}
-
-				.ualfutures-logo{
-					width: auto;
-					transition: all 0.5s ease;
-
-					.a{
-				        fill: #fff;
-				    }
-				}
-			}
-
-			.main-nav{
-				.title-font;
-
-				display: inline-block;
-				float: right;
-				transition: all 0.5s ease;
-
-				span{
-					margin: 0 2.5rem;
-
-					&.active, &:hover{
-						border-bottom: 2px solid;
-					}
-
-					a{
-						color: @white;
-					}
-				}
-			}
-		}
-
-		.home-menu{
-			display: none;
-		}
-	}
-
-	.nav-dropdown{
-		position: relative;
-		transform: translateY(-100%);
-		width: 100%;
-		background-color: @light-green;
-		transition: transform 0.3s ease;
-		height: 53px;
-		padding: 17px 0;
-
-		.dropdown-container{
-			width: ~"calc(75vw - 20px)";
-			margin: 0 ~"calc(12.5% - 10px)";
-
-			.sub-menu{
-				float: right;
-				font-size: 1.35rem;
-
-				span{
-					padding-left: 35px;
-
-					a{
-						color: @dark-purple;
-
-						&:hover, &.active{
-							border-bottom: 2px solid;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	.nav-slide-in{
-		display: none;
 	}
 }

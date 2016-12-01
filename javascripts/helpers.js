@@ -4,47 +4,69 @@
 var helpers = {};
 
 helpers.bindNavEvents = function(){
+	var $header = $("#page-header");
+	var $mainHeader = $("#page-header .main-header");
+	var $dropdown = $("#page-header .main-header .nav-dropdown");
+
+	var $homeHeader = $("#page-header .home-header");
+	var $slideIn = $("#page-header .home-header .nav-slide-in");
+
 	$(window).scroll(function(e) {
-		if(!($("#page-header").hasClass("home-page"))){
-			if($(window).scrollTop() > 0){
-				$("#page-header").removeClass("large").addClass("small");
-			}else{
-				$("#page-header").removeClass("small").addClass("large");
+		if($(window).scrollTop() > 0){
+			$mainHeader.addClass("small");
+		}else{
+			$mainHeader.removeClass("small");
+		}
+
+		if(!$homeHeader.hasClass("hide")){
+			$mainHeader.addClass("small");
+
+			if($(window).scrollTop() > 100 && $mainHeader.css("opacity") === 0){
+				$mainHeader.removeClass("hide");
+				setTimeout(function(){
+					$mainHeader.removeClass("transparent");
+				}, 10);
+			}else if($(window).scrollTop() < 50 && $mainHeader.css("opacity") == 1){
+				$mainHeader.addClass("transparent");
+				setTimeout(function(){
+					$mainHeader.addClass("hide");
+				}, 300);
 			}
 		}
 	});
 
-	$("#page-header").hover(function() {
-		if($(window).scrollTop() > 0 && !($("#page-header").hasClass("home-page"))){
-			$("#page-header").removeClass("small").addClass("large");
+	$header.hover(function() {
+		if($(window).scrollTop() > 0){
+			$header.removeClass("small");
 		}
 	}, function() {
-		if($(window).scrollTop() > 0 && !($("#page-header").hasClass("home-page"))){
-			$("#page-header").removeClass("large").addClass("small");
+		if($(window).scrollTop() > 0){
+			$mainHeader.addClass("small");
 		}
 	});
 
-	$("#page-header .main-nav #media").hover(function() {
-		$("#page-header .nav-dropdown").css("transform", "translateY(0%)");
+	$mainHeader.find(".main-nav #media").hover(function() {
+		$dropdown.css("transform", "translateY(0%)");
 	});
 
-	$("#page-header").hover(function(){}, function(){
-		$("#page-header .nav-dropdown").css("transform", "translateY(-100%)");
+	$mainHeader.hover(function(){}, function(){
+		$dropdown.css("transform", "translateY(-100%)");
 	});
 
-	var $navSlideIn = $("#page-header .nav-slide-in");
-	$("#page-header .home-menu").hover(function() {
-		$navSlideIn.css("display", "block");
+
+
+	$homeHeader.find(".home-menu").hover(function() {
+		$slideIn.css("display", "block");
 		setTimeout(function(){
-			$navSlideIn.addClass("in");
+			$slideIn.addClass("in");
 		}, 1);
 	});
 
-	$("#page-header").hover(function(){},
+	$homeHeader.hover(function(){},
 	function() {
-		$("#page-header .nav-slide-in").removeClass("in");
+		$slideIn.removeClass("in");
 		setTimeout(function(){
-			$navSlideIn.css("display", "none");
+			$slideIn.css("display", "none");
 		}, 300);
 	});
 };

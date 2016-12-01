@@ -142,7 +142,11 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").addClass("hide");
-		$("#page-header").addClass("home-page");
+
+		$("#page-header .main-header").addClass("hide");
+		$("#page-header .main-header").addClass("transparent");
+		$("#page-header .home-header").removeClass("hide");
+
 		$("#page-content").addClass("home-page");
 		$("#page-content .main-lists .page-description").addClass("hide");
 		// $("#page-content .main-lists .page-description").text("Connecting UAL students, graduates and industry.");
@@ -164,7 +168,11 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
-		$("#page-header").removeClass("home-page");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
 		$("#page-content").removeClass("home-page");
 		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
@@ -200,8 +208,11 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
-		$("#page-header").removeClass("home-page");
-		$("#page-content").removeClass("home-page");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
 		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();

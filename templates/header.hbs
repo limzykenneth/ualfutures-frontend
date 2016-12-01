@@ -1,50 +1,64 @@
-<header id="page-header" class="large">
-    <section class="full-width-container">
-        <div class="ual"><a href="http://www.arts.ac.uk/">{{> ual.svg }}</a></div>
+<header id="page-header">
+    <div class="main-header">
+        <section class="full-width-container">
+            <div class="ual"><a href="http://www.arts.ac.uk/">{{> ual.svg }}</a></div>
 
-        <div class="nav-container">
-            <div class="logo">
-                <a href="/">{{> logo.svg }}</a>
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="/">{{> logo.svg }}</a>
+                </div>
+
+                <nav class="main-nav">
+                    <span id="media"><a href="./#media">Media</a></span>
+                    <span id="studio"><a href="./#studio">Studio</a></span>
+                    <span id="about"><a href="./about.html">About</a></span>
+                </nav>
+            </div>
+        </section>
+
+        <section class="nav-dropdown">
+            <div class="dropdown-container">
+                <div class="sub-menu">
+                    <span><a href="./#media/events">Events</a></span>
+                    <span><a href="./#media/opportunities">Jobs &amp; Opportunities</a></span>
+                    <span><a href="./#media/directories">Directories</a></span>
+                    <span><a href="./#media/features">Features</a></span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="home-header hide">
+        <section class="full-width-container">
+            <div class="ual"><a href="http://www.arts.ac.uk/">{{> ual.svg }}</a></div>
+
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="/">{{> logo.svg }}</a>
+                </div>
             </div>
 
-            <nav class="main-nav">
-                <span id="media"><a href="./#media">Media</a></span>
-                <span id="studio"><a href="./#studio">Studio</a></span>
-                <span id="about"><a href="./about.html">About</a></span>
-            </nav>
-        </div>
-
-        <div class="home-menu">
-            <p class="menu-button">Menu</p>
-        </div>
-    </section>
-
-    <section class="nav-dropdown">
-        <div class="dropdown-container">
-            <div class="sub-menu">
-                <span><a href="./#media/events">Events</a></span>
-                <span><a href="./#media/opportunities">Jobs &amp; Opportunities</a></span>
-                <span><a href="./#media/directories">Directories</a></span>
-                <span><a href="./#media/features">Features</a></span>
+            <div class="home-menu">
+                <p class="menu-button">Menu</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="nav-slide-in">
-        <div class="slide-in-container">
-            <ul class="tier-0">
-                <li><a href="./#media">Media</a></li>
-                <li>
-                    <ul class="tier-1">
-                        <li><a href="./#media/events">Events</a></li>
-                        <li><a href="./#media/opportunities">Jobs &amp; Opportunities</a></li>
-                        <li><a href="./#media/directories">Directories</a></li>
-                        <li><a href="./#media/features">Features</a></li>
-                    </ul>
-                </li>
-                <li><a href="./#studio">Studio</a></li>
-                <li><a href="./about.html">About</a></li>
-            </ul>
-        </div>
-    </section>
+        <section class="nav-slide-in">
+            <div class="slide-in-container">
+                <ul class="tier-0">
+                    <li><a href="./#media">Media</a></li>
+                    <li>
+                        <ul class="tier-1">
+                            <li><a href="./#media/events">Events</a></li>
+                            <li><a href="./#media/opportunities">Jobs &amp; Opportunities</a></li>
+                            <li><a href="./#media/directories">Directories</a></li>
+                            <li><a href="./#media/features">Features</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./#studio">Studio</a></li>
+                    <li><a href="./about.html">About</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
 </header>
