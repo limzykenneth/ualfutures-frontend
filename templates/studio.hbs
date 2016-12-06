@@ -15,8 +15,8 @@
 	</div>
 </section>
 
-<section class="register">
-	<form>
+<section class="register hide">
+	<form class="registration-form">
 		<fieldset>
 			<legend><h1>Studio: Register</h1></legend>
 
@@ -30,12 +30,14 @@
 				<input type="text" name="surname" id="surname">
 			</p>
 
-			<p>
-				<input type="radio" name="role" id="role-1" value="student_graduate">
-				<label for="role-1">Student/Graduate</label>
+			<p class="radio-buttons">
+				<label for="role-1" id="student-graduate">
+					<input type="radio" name="role" id="role-1" value="student_graduate">Student/Graduate
+				</label>
 
-				<input type="radio" name="role" id="role-2" value="industry_academia">
-				<label for="role-2">Industry/Academia</label>
+				<label for="role-2" id="industry-academia">
+					<input type="radio" name="role" id="role-2" value="industry_academia">Industry/Academia
+				</label>
 			</p>
 
 			<p>
@@ -53,19 +55,25 @@
 	</form>
 </section>
 
-<section class="method">
+<section class="method hide">
 	<div class="method-intro">
 		<h1 class="title">Studio: Method</h1>
 
-		<div class="method-name"></div>
-		<div class="method-intro-content hide"></div>
+		<div class="flex-items method-name"></div>
+		<div class="clearfix"></div>
+
+		<p class="flex-items method-intro-content">
+		</p>
+
+		<p class="flex-items method-intro-content">
+		</p>
 	</div>
 
 	<div class="graphics">
-
+		{{> studioMethods.svg }}
 	</div>
 
-	<div class="method-content">
+	<div class="method-content grid">
 
 	</div>
 </section>

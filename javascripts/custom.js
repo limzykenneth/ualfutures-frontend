@@ -168,6 +168,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-content .studio-page").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -208,6 +209,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-content .studio-page").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -240,7 +242,12 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").removeClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
-		$("#page-header").removeClass("home-page");
+		$("#page-content .studio-page").addClass("hide");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
 		$("#page-content").removeClass("home-page");
 		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
@@ -255,6 +262,43 @@ app.registerRoutes = function(router){
 		app.bindEvents();
 
 		$(window).scrollTop(0);
+	});
+
+	router.route("studio(/:page)", function(page){
+		$("#page-content .main-lists").addClass("hide");
+		$("#page-content .post-content").addClass("hide");
+		$("#page-content .studio-page").removeClass("hide");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
+		$("#page-content").removeClass("home-page");
+
+		$("#page-content .studio-page .intro").removeClass("hide");
+		$("#page-content .studio-page .register").addClass("hide");
+		$("#page-content .studio-page .method").addClass("hide");
+
+		if(page == "register"){
+			$("#page-content .studio-page .intro").addClass("hide");
+			$("#page-content .studio-page .register").removeClass("hide");
+
+			$("#page-content .studio-page .register .registration-form .radio-buttons label").click(function(e) {
+				$(this).addClass("selected").find("input").attr("checked", true);
+				$(this).siblings("label").removeClass("selected").find("input").attr("checked", false);
+			});
+		}else if(page == "method"){
+			$("#page-content .studio-page .intro").addClass("hide");
+			$("#page-content .studio-page .method").removeClass("hide");
+
+			// Draw the SVG and apply hover and click events on them
+			$(window).scroll(function(e) {
+				if($(this).scrollTop() > 50){
+					var opacity = app.helpers.map($(this).scrollTop(), 50, 450, 1.0, 0.0);
+					$("#page-content .studio-page .method .graphics").css("opacity", opacity);
+				}
+			});
+		}
 	});
 };
 
