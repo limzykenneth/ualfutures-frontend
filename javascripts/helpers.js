@@ -21,12 +21,12 @@ helpers.bindNavEvents = function(){
 		if(!$homeHeader.hasClass("hide")){
 			$mainHeader.addClass("small");
 
-			if($(window).scrollTop() > 100 && $mainHeader.css("opacity") === 0){
+			if($(window).scrollTop() > 100 && $mainHeader.hasClass("transparent")){
 				$mainHeader.removeClass("hide");
 				setTimeout(function(){
 					$mainHeader.removeClass("transparent");
 				}, 10);
-			}else if($(window).scrollTop() < 50 && $mainHeader.css("opacity") == 1){
+			}else if($(window).scrollTop() < 50 && !$mainHeader.hasClass("transparent")){
 				$mainHeader.addClass("transparent");
 				setTimeout(function(){
 					$mainHeader.addClass("hide");
