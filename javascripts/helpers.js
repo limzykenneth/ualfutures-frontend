@@ -71,6 +71,16 @@ helpers.bindNavEvents = function(){
 	});
 };
 
+helpers.bindCardEvents = function(router){
+	$("#page-content .grid .grid-item .card-category").click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var href = $(this).attr("data-href").substr(1);
+		router.navigate(href, {trigger: true});
+	});
+};
+
 helpers.bindSidebarEvents = function(){
 	var $sidebar = $("#page-content .single-post .sidebar");
 	var sidebarY = $sidebar.offset().top;

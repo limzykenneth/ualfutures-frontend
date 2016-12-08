@@ -324,6 +324,7 @@ app.startMasonry = function($selector, postType){
 
 app.bindEvents = function(){
 	this.helpers.bindNavEvents();
+	this.helpers.bindCardEvents(app.router);
 };
 
 

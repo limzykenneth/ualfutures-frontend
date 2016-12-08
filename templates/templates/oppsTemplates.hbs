@@ -34,7 +34,7 @@
 			}
 		%>
 
-		<p class="card-category"><%= app.helpers.makeTitleCase(category) %></p>
+		<p class="card-category" data-href="#media/<%= appData %>/category=<%= encodeURI(app.helpers.makeCompressCase(category)) %>"><%= app.helpers.makeTitleCase(category) %></p>
 
 		<div class="card-title">
 			<h3 class="title"><%= title %></h3>
