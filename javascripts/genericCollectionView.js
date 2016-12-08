@@ -30,9 +30,9 @@ var view = Backbone.View.extend({
 		if(type == "features"){
 			this.$el.prepend(mView.render(model));
 		}else if(type == "events"){
-			this.$el.prepend(eView.render(model));
+			this.$el.prepend(eView.renderWithFullCategory(model));
 		}else if(type == "opportunities"){
-			this.$el.prepend(oView.render(model));
+			this.$el.prepend(oView.renderWithFullCategory(model));
 		}else if(type == "directories"){
 			this.$el.prepend(dView.render(model));
 		}

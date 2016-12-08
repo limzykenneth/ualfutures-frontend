@@ -9,11 +9,6 @@ var allView = Backbone.View.extend({
 	render: function(collection){
 		this.$el.html("");
 		collection.each(this.addModel, this);
-		this.$el.find(".card-category").each(function(i, el) {
-			var reg = /\sEvent$/i;
-			var str = $(this).text().replace(reg, "");
-			$(this).text(str);
-		});
 		return this.$el.html();
 	},
 
