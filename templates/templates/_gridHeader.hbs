@@ -1,0 +1,15 @@
+<script type="text/template" id="grid-header">
+	<section class="secondary-header">
+		<%
+		_.each(availableCategories, function(el, i){
+		%>
+
+			<span class="subcategory"><a href="#media/<%= postType %>/category=<%= encodeURI(app.helpers.makeCompressCase(el)) %>"><%= el %></a></span>
+
+		<%
+		});
+		%>
+
+		{{!-- <span class="search-topic"><a href="#media/directories">Search by Topic</a></span> --}}
+	</section>
+</script>

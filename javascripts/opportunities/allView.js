@@ -15,6 +15,13 @@ var allView = Backbone.View.extend({
 	addModel: function(model){
 		var singleView = new cardView();
 		this.$el.prepend(singleView.render(model));
+	},
+
+	renderHeader: function(){
+		var headerTemplate = _.template($("#grid-header").html());
+		var renderedHeader = headerTemplate(app.opportunities);
+
+		return renderedHeader;
 	}
 });
 

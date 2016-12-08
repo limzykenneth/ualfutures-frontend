@@ -19,9 +19,8 @@ var allView = Backbone.View.extend({
 	},
 
 	renderHeader: function(){
-		// var headerTemplate = _.template($("#directories-grid-header").html());
-		// var renderedHeader = headerTemplate();
-		var renderedHeader = $("#directories-grid-header").html();
+		var headerTemplate = _.template($("#grid-header").html());
+		var renderedHeader = headerTemplate(app.directories);
 
 		return renderedHeader;
 	}

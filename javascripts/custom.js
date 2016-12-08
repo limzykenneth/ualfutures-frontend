@@ -2,53 +2,60 @@ var $ = require("jquery");
 var _ = require("underscore");
 var Backbone = require("backbone");
 window.smark = require("smark");
-var featuresCollection = require("./features/collection.js");
-var featuresAllView = require("./features/allView.js");
-var featuresSingleView = require("./features/singleView.js");
-
-var eventsCollection = require("./events/collection.js");
-var eventsAllView = require("./events/allView.js");
-var eventsSingleView = require("./events/singleView.js");
-
-var oppsCollection = require("./opportunities/collection.js");
-var oppsAllView = require("./opportunities/allView.js");
-var oppsSingleView = require("./opportunities/singleView.js");
-
-var dirCollection = require("./directories/collection.js");
-var dirAllView = require("./directories/allView.js");
-var dirSingleView = require("./directories/singleView.js");
 
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
-
 var appRouter = require("./routes.js");
 
 var app = app || {
-	features: {},
-	events: {},
-	opportunities: {},
-	directories: {},
+	categories: {
+		partialURL: "http://localhost/ual_futures/wp-json/futures_categories/"
+	},
+	features: {
+		postType: "features",
+		collectionConstructor: require("./features/collection.js"),
+		allViewConstructor: require("./features/allView.js"),
+		singleViewConstructor: require("./features/singleView.js"),
+	},
+	events: {
+		postType: "events",
+		collectionConstructor: require("./events/collection.js"),
+		allViewConstructor: require("./events/allView.js"),
+		singleViewConstructor: require("./events/singleView.js"),
+	},
+	opportunities: {
+		postType: "opportunities",
+		collectionConstructor: require("./opportunities/collection.js"),
+		allViewConstructor: require("./opportunities/allView.js"),
+		singleViewConstructor: require("./opportunities/singleView.js"),
+	},
+	directories: {
+		postType: "directories",
+		collectionConstructor: require("./directories/collection.js"),
+		allViewConstructor: require("./directories/allView.js"),
+		singleViewConstructor: require("./directories/singleView.js"),
+	},
 	slideshow: {
 		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
 		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
 	},
 	helpers: {}
 };
-app.features.collection = new featuresCollection();
-app.features.allView = new featuresAllView();
-app.features.singleView = new featuresSingleView();
+app.features.collection = new app.features.collectionConstructor();
+app.features.allView = new app.features.allViewConstructor();
+app.features.singleView = new app.features.singleViewConstructor();
 
-app.directories.collection = new dirCollection();
-app.directories.allView = new dirAllView();
-app.directories.singleView = new dirSingleView();
+app.directories.collection = new app.directories.collectionConstructor(null, app);
+app.directories.allView = new app.directories.allViewConstructor();
+app.directories.singleView = new app.directories.singleViewConstructor();
 
-app.events.collection = new eventsCollection();
-app.events.allView = new eventsAllView();
-app.events.singleView = new eventsSingleView();
+app.events.collection = new app.events.collectionConstructor(null, app);
+app.events.allView = new app.events.allViewConstructor();
+app.events.singleView = new app.events.singleViewConstructor();
 
-app.opportunities.collection = new oppsCollection();
-app.opportunities.allView = new oppsAllView();
-app.opportunities.singleView = new oppsSingleView();
+app.opportunities.collection = new app.opportunities.collectionConstructor(null, app);
+app.opportunities.allView = new app.opportunities.allViewConstructor();
+app.opportunities.singleView = new app.opportunities.singleViewConstructor();
 
 app.init = function(){
 	var deffereds = [];
@@ -183,21 +190,17 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
+		$("#page-content .main-lists .secondary-header").remove();
+
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
 			app.renderGrid(app.collection, type, null, genericAllView);
 		}else{
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 			app.renderGrid(app[type].collection, type, app[type].allView);
-		}
 
-		if(type == "directories"){
 			$("#page-content .main-lists .page-description").addClass("hide");
-			if($("#page-content .main-lists .directories-header").length === 0){
-				$grid.before(app.directories.allView.renderHeader());
-			}
-		}else{
-			$("#page-content .main-lists .directories-header").remove();
+			$grid.before(app[type].allView.renderHeader());
 		}
 
 		app.bindEvents();
@@ -205,7 +208,7 @@ app.registerRoutes = function(router){
 		$(window).scrollTop(0);
 	});
 
-	router.route("media/directories/category=:category(/p:page)", function(category){
+	router.route("media/:type/category=:category(/p:page)", function(type, category, page){
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
@@ -219,23 +222,23 @@ app.registerRoutes = function(router){
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 
-		$("#page-content .main-lists .page-name").text("Directories");
+		$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
 
 		var $grid = $("#page-content .grid");
-		var filtered = new dirCollection(app.directories.collection.filter(function(model){
+
+		var filtered = new app[type].collectionConstructor(app[type].collection.filter(function(model){
 			var comparator = model.toJSON().category;
 			comparator = app.helpers.makeCompressCase(comparator);
 
 			return comparator == category.toLowerCase();
-		}));
+		}), app);
 
-		app.renderGrid(filtered, "directories", app.directories.allView);
+		app.renderGrid(filtered, type, app[type].allView);
 
 		$("#page-content .main-lists .page-description").addClass("hide");
-		if($("#page-content .main-lists .directories-header").length === 0){
-			$grid.before(app.directories.allView.renderHeader());
-		}
+		$("#page-content .main-lists .secondary-header").remove();
+		$grid.before(app[type].allView.renderHeader());
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
@@ -254,9 +257,8 @@ app.registerRoutes = function(router){
 
 		app.renderPost(slug, type);
 
-		if(type == "directories"){
-			$("#page-content .main-content").before(app.directories.allView.renderHeader());
-		}
+		$("#page-content .main-lists .secondary-header").remove();
+		$("#page-content .main-content").before(app[type].allView.renderHeader());
 
 		app.helpers.bindSidebarEvents();
 		app.bindEvents();
@@ -264,6 +266,8 @@ app.registerRoutes = function(router){
 		$(window).scrollTop(0);
 	});
 
+
+	// Studio page ---------------------------------------------------------------------------------
 	router.route("studio(/:page)", function(page){
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").addClass("hide");
