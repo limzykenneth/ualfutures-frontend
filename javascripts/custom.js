@@ -9,8 +9,8 @@ var appRouter = require("./routes.js");
 
 var app = app || {
 	categories: {
-		partialURL: "http://localhost/ual_futures/wp-json/futures_categories/"
-		// partialURL: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/futures_categories/"
+		// partialURL: "http://localhost/ual_futures/wp-json/futures_categories/"
+		partialURL: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/futures_categories/"
 	},
 	features: {
 		postType: "features",
@@ -240,6 +240,10 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-description").addClass("hide");
 		$("#page-content .main-lists .secondary-header").remove();
 		$grid.before(app[type].allView.renderHeader());
+
+		app.bindEvents();
+
+		$(window).scrollTop(0);
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
@@ -306,6 +310,8 @@ app.registerRoutes = function(router){
 
 		app.renderGrid(filtered, "", null, genericAllView);
 
+		app.bindEvents();
+
 		$(window).scrollTop(0);
 	});
 
@@ -346,6 +352,10 @@ app.registerRoutes = function(router){
 				}
 			});
 		}
+
+		app.bindEvents();
+
+		$(window).scrollTop(0);
 	});
 };
 
