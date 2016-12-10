@@ -6,7 +6,11 @@ Backbone.$ = $;
 var collection = Backbone.Collection.extend({
 	comparator: "date",
 	tags: ["Untagged"],
-	category: "Uncategorized"
+	category: "Uncategorized",
+
+	initialize: function(models, app){
+
+	}
 });
 
 module.exports = collection;

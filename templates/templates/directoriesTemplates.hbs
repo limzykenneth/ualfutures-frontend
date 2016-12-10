@@ -46,7 +46,11 @@
 
 		<%
 		_.each(tags, function(el, i){
-			var str = el;
+			var str = "<span data-href='";
+			str += "#media/tags=" + encodeURIComponent(el);
+			str += "' class='card-tag'>";
+			str += el;
+			str += "</span>"
 			if(i < tags.length - 1){
 				str += ", ";
 			}
@@ -140,7 +144,7 @@
 			<%
 				_.each(tags, function(el, i){
 			%>
-				<a href="" class="tag"><%= el %></a>
+				<a href="#media/tags=<%= encodeURIComponent(el) %>" class="tag"><%= el %></a>
 			<%
 				})
 			%>

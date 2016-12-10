@@ -9,6 +9,14 @@ var view = Backbone.View.extend({
 	render: function(model){
 		renderedTemplate = this.template(model.toJSON());
 		return renderedTemplate;
+	},
+
+	renderWithFullCategory: function(model){
+		var modelObject = model.toJSON();
+		modelObject.fullCategory = "Jobs & Opps: " + modelObject.category;
+
+		renderedTemplate = this.template(modelObject);
+		return renderedTemplate;
 	}
 });
 

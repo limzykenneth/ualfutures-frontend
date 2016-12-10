@@ -10,6 +10,7 @@ var appRouter = require("./routes.js");
 var app = app || {
 	categories: {
 		partialURL: "http://localhost/ual_futures/wp-json/futures_categories/"
+		// partialURL: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/futures_categories/"
 	},
 	features: {
 		postType: "features",
@@ -262,6 +263,48 @@ app.registerRoutes = function(router){
 
 		app.helpers.bindSidebarEvents();
 		app.bindEvents();
+
+		$(window).scrollTop(0);
+	});
+
+	// Tags -------------------------------------------------------------------------------------------
+	router.route("media/tags=:tags", function(tags){
+		$("#page-content .main-lists").removeClass("hide");
+		$("#page-content .post-content").addClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-content .studio-page").addClass("hide");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
+		$("#page-content").removeClass("home-page");
+		$("#page-content .main-lists .page-description").removeClass("hide");
+		$("#page-header .nav-slide-in").css("display", "none");
+		$("#page-content .main-lists .slideshow").remove();
+
+		$("#page-content .main-lists .page-name").text("Futures");
+
+		var tagsArray = tags.split("+");
+
+		var filtered = app.helpers.filterCollection(app.collection, genericCollection, function(modelObject){
+			var intersect = false;
+			_.each(tagsArray, function(el1, i){
+				var chosenTag = decodeURI(el1).toLowerCase();
+
+				_.each(modelObject.tags, function(el2, i){
+					var givenTag = decodeURIComponent(el2).toLowerCase();
+
+					if(chosenTag == givenTag){
+						intersect = true;
+					}
+				});
+			});
+
+			return intersect;
+		});
+
+		app.renderGrid(filtered, "", null, genericAllView);
 
 		$(window).scrollTop(0);
 	});

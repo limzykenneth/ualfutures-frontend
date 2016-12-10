@@ -23,7 +23,7 @@
 	<%
 		_.each(tags, function(el, i){
 	%>
-		<a href="" class="tag"><%= el %></a>
+		<a href="#media/tags=<%= encodeURIComponent(el) %>" class="tag"><%= el %></a>
 	<%
 		})
 	%>

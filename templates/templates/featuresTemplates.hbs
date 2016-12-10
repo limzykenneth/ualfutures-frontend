@@ -29,7 +29,11 @@
 
 		<%
 		_.each(tags, function(el, i){
-			var str = el;
+			var str = "<span data-href='";
+			str += "#media/tags=" + encodeURIComponent(el);
+			str += "' class='card-tag'>";
+			str += el;
+			str += "</span>"
 			if(i < tags.length - 1){
 				str += ", ";
 			}

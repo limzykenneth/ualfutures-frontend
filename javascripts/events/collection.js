@@ -14,11 +14,13 @@ var collection = genericCollection.extend({
 	// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/events",
 
 	initialize: function(models, app){
-		var url = app.categories.partialURL + "events";
+		if(typeof app.events.availableCategories == "undefined"){
+			var url = app.categories.partialURL + "events";
 
-		$.getJSON(url, function(data) {
-			app.events.availableCategories = data;
-		});
+			$.getJSON(url, function(data) {
+				app.events.availableCategories = data;
+			});
+		}
 	}
 });
 

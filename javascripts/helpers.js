@@ -79,6 +79,14 @@ helpers.bindCardEvents = function(router){
 		var href = $(this).attr("data-href").substr(1);
 		router.navigate(href, {trigger: true});
 	});
+
+	$("#page-content .grid .grid-item .card-tag").click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var href = $(this).attr("data-href").substr(1);
+		router.navigate(href, {trigger: true});
+	});
 };
 
 helpers.bindSidebarEvents = function(){
@@ -138,6 +146,21 @@ helpers.dynamicImageSize = function($image){
 
 helpers.map = function (n, start1, stop1, start2, stop2) {
 	return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
+};
+
+helpers.filterCollection = function(collection, collectionConstructor, predicate){
+	// bool predicate = function(modelObject)
+	var rawCollection = [];
+	collection.each(function(model, i){
+		if(predicate(model.toJSON())){
+			rawCollection.push(model);
+		}
+	});
+
+	var newCollection;
+	newCollection = new collectionConstructor(rawCollection, window.app);
+
+	return newCollection;
 };
 
 module.exports = helpers;
