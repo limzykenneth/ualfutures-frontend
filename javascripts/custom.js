@@ -286,6 +286,7 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .page-description").removeClass("hide");
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
+		$("#page-content .main-lists .secondary-header").remove();
 
 		$("#page-content .main-lists .page-name").text("Futures");
 
@@ -357,6 +358,32 @@ app.registerRoutes = function(router){
 
 		$(window).scrollTop(0);
 	});
+
+	// Search page ---------------------------------------------------------------------------------
+	router.route("search=:searchTerm", function(searchTerm){
+		$("#page-content .main-lists").removeClass("hide");
+		$("#page-content .post-content").addClass("hide");
+		$("#page-content .main-lists .page-name").removeClass("hide");
+		$("#page-content .studio-page").addClass("hide");
+
+		$("#page-header .main-header").removeClass("hide");
+		$("#page-header .main-header").removeClass("transparent");
+		$("#page-header .home-header").addClass("hide");
+
+		$("#page-content").removeClass("home-page");
+		$("#page-content .main-lists .page-description").removeClass("hide");
+		$("#page-header .nav-slide-in").css("display", "none");
+		$("#page-content .main-lists .slideshow").remove();
+		$("#page-content .main-lists .secondary-header").remove();
+
+		$("#page-content .main-lists .page-name").text("Futures");
+
+		app.renderGrid(app.searchCollection(searchTerm), "", null, genericAllView);
+
+		app.bindEvents();
+
+		$(window).scrollTop(0);
+	});
 };
 
 app.startMasonry = function($selector, postType){
@@ -378,6 +405,32 @@ app.startMasonry = function($selector, postType){
 app.bindEvents = function(){
 	this.helpers.bindNavEvents();
 	this.helpers.bindCardEvents(app.router);
+};
+
+app.searchCollection = function(searchTerm){
+	var term = decodeURIComponent(searchTerm).toLowerCase();
+	var searchResults = this.helpers.filterCollection(this.collection, genericCollection, function(modelObject){
+		var found = false;
+
+		if(modelObject.title.toLowerCase().search(term) != -1 ||
+		   modelObject.subtitle.toLowerCase().search(term) != -1 ||
+		   modelObject.category.toLowerCase().search(term) != -1 ||
+		   modelObject.appData.toLowerCase().search(term) != -1 ||
+		   modelObject.created_by.toLowerCase().search(term) != -1){
+			found = true;
+		}
+
+		var foundTags = _.find(modelObject.tags, function(el){
+			if(el.toLowerCase().search(term) != -1){
+				return true;
+			}
+		});
+		if(foundTags) found = true;
+
+		return found;
+	});
+
+	return searchResults;
 };
 
 
