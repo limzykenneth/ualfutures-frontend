@@ -4,15 +4,9 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var cardView = require("./directoriesView.js");
+var baseAllView = require("../baseAllView.js");
 
-var allView = Backbone.View.extend({
-	render: function(collection){
-		this.$el.html("");
-		collection.each(this.addModel, this);
-
-		return this.$el.html();
-	},
-
+var allView = baseAllView.extend({
 	addModel: function(model){
 		var singleView = new cardView();
 		this.$el.prepend(singleView.render(model));

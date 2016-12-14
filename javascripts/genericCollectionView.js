@@ -20,7 +20,7 @@ var view = Backbone.View.extend({
 
 	// Collection passed in should be in the right order
 	// Use the generic collection object
-	render: function(customCollection){
+	render: function(){
 		this.collection.each(this.addModel, this);
 		return this.$el.html();
 	},

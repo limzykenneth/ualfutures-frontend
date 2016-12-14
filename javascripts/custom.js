@@ -43,19 +43,15 @@ var app = app || {
 	helpers: {}
 };
 app.features.collection = new app.features.collectionConstructor();
-app.features.allView = new app.features.allViewConstructor();
 app.features.singleView = new app.features.singleViewConstructor();
 
 app.directories.collection = new app.directories.collectionConstructor(null, app);
-app.directories.allView = new app.directories.allViewConstructor();
 app.directories.singleView = new app.directories.singleViewConstructor();
 
 app.events.collection = new app.events.collectionConstructor(null, app);
-app.events.allView = new app.events.allViewConstructor();
 app.events.singleView = new app.events.singleViewConstructor();
 
 app.opportunities.collection = new app.opportunities.collectionConstructor(null, app);
-app.opportunities.allView = new app.opportunities.allViewConstructor();
 app.opportunities.singleView = new app.opportunities.singleViewConstructor();
 
 app.init = function(){
@@ -76,12 +72,14 @@ app.init = function(){
 };
 
 app.start = function(){
+	var types = ["features", "events", "opportunities", "directories"];
 	// Put all models into the generic collection and prepare its view
 	app.collection = new genericCollection();
-	app.collection.add(app.features.collection.toJSON());
-	app.collection.add(app.events.collection.toJSON());
-	app.collection.add(app.opportunities.collection.toJSON());
-	app.collection.add(app.directories.collection.toJSON());
+
+	_.each(types, function(el, i){
+		app.collection.add(app[el].collection.toJSON());
+		app[el].allView = new app[el].allViewConstructor(app[el].collection);
+	});
 
 	app.router = new appRouter();
 	app.registerRoutes(app.router);
@@ -104,30 +102,36 @@ app.renderSlideshow = function(){
 	app.helpers.dynamicImageSize($("#page-content .slideshow .slide"));
 };
 
-app.renderGrid = function(collection, type, view, viewConstructor){
-	var gridView = view;
+app.renderGrid = function(type, view){
 	var $grid = $("#page-content .grid");
 
 	app.startMasonry($grid, type);
 	$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
+	$grid.html(view.render());
+
 	$grid.removeClass("directories-grid");
-
-	if(viewConstructor){
-		gridView = new viewConstructor(collection);
-		$grid.html(gridView.render());
-	}else{
-		$("#page-content .grid").html(gridView.render(collection));
-
-		if(type == "directories"){
-			$grid.addClass("directories-grid");
-		}
+	if(type == "directories"){
+		$grid.addClass("directories-grid");
 	}
 
 	$grid.append("<a href='#' class='hide grid-item level-0'></a>");
 	$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 
 	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
+
+	// Render next page when scrolled to the bottom
+	var loadMore = _.debounce(function(){
+		var $append = $(view.nextPage());
+		$grid.append($append.html());
+		$grid.masonry("appended", $append.find(".grid-item"));
+	}, 500, true);
+
+	$(window).scroll(function(e){
+		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100){
+			loadMore();
+		}
+	});
 };
 
 app.renderPost = function(slug, type){
@@ -165,7 +169,8 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
-		app.renderGrid(app.collection, "", null, genericAllView);
+		var customView = new genericAllView(app.collection);
+		app.renderGrid("", customView);
 
 		app.bindEvents();
 
@@ -195,10 +200,11 @@ app.registerRoutes = function(router){
 
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
-			app.renderGrid(app.collection, type, null, genericAllView);
+			var customView = new genericAllView(app.collection);
+			app.renderGrid("", customView);
 		}else{
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
-			app.renderGrid(app[type].collection, type, app[type].allView);
+			app.renderGrid(type, app[type].allView);
 
 			$("#page-content .main-lists .page-description").addClass("hide");
 			$grid.before(app[type].allView.renderHeader());
@@ -235,7 +241,7 @@ app.registerRoutes = function(router){
 			return comparator == category.toLowerCase();
 		}), app);
 
-		app.renderGrid(filtered, type, app[type].allView);
+		app.renderGrid(type, app[type].allView);
 
 		$("#page-content .main-lists .page-description").addClass("hide");
 		$("#page-content .main-lists .secondary-header").remove();
@@ -309,7 +315,8 @@ app.registerRoutes = function(router){
 			return intersect;
 		});
 
-		app.renderGrid(filtered, "", null, genericAllView);
+		var customView = new genericAllView(filtered);
+		app.renderGrid("", customView);
 
 		app.bindEvents();
 
@@ -378,7 +385,8 @@ app.registerRoutes = function(router){
 
 		$("#page-content .main-lists .page-name").text("Futures");
 
-		app.renderGrid(app.searchCollection(searchTerm), "", null, genericAllView);
+		var customView = new genericAllView(app.searchCollection(searchTerm));
+		app.renderGrid("", customView);
 
 		app.bindEvents();
 
