@@ -13,8 +13,16 @@ var collection = genericCollection.extend({
 	url: "http://localhost/ual_futures/wp-json/wp/v2/posts",
 	// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/posts",
 
-	initialize: function(models, app){
+	fetchNextPage: function(page){
+		// Came from genericCollection's getNextPage
+		this.currentPage++;
+		var fetchUrl = this.url + "?page=" + this.currentPage;
 
+		var self = this;
+		// return a deferred promise
+		return $.getJSON(fetchUrl, function(data){
+			self.add(data);
+		});
 	}
 });
 

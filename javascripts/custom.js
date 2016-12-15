@@ -57,10 +57,15 @@ app.opportunities.singleView = new app.opportunities.singleViewConstructor();
 app.init = function(){
 	var deffereds = [];
 
-	deffereds.push(app.features.collection.fetch());
-	deffereds.push(app.events.collection.fetch());
-	deffereds.push(app.opportunities.collection.fetch());
-	deffereds.push(app.directories.collection.fetch());
+	var success = function(collection, response, options){
+		var totalPages = options.xhr.getResponseHeader('X-WP-TotalPages');
+		collection.totalPages = parseInt(totalPages);
+		collection.currentPage = 1;
+	};
+	deffereds.push(app.features.collection.fetch({success: success}));
+	deffereds.push(app.events.collection.fetch({success: success}));
+	deffereds.push(app.opportunities.collection.fetch({success: success}));
+	deffereds.push(app.directories.collection.fetch({success: success}));
 	deffereds.push(
 		$.getJSON(app.slideshow.url, function(data) {
 			app.slideshow.data = data;
@@ -122,9 +127,10 @@ app.renderGrid = function(type, view){
 
 	// Render next page when scrolled to the bottom
 	var loadMore = _.debounce(function(){
-		var $append = $(view.nextPage());
-		$grid.append($append.html());
-		$grid.masonry("appended", $append.find(".grid-item"));
+		view.nextPage(function(append){
+			$append = $(append);
+			$grid.append($append).masonry("appended", $append).masonry();
+		});
 	}, 500, true);
 
 	$(window).scroll(function(e){
