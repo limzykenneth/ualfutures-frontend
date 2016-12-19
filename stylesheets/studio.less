@@ -146,8 +146,36 @@
 			position: relative;
 			left: -16.9%;
 
-			svg{
+			#studio-svg{
 				width: 100vw;
+
+				.group{
+					cursor: pointer;
+
+					&.active{
+						.shape{
+							fill: @purple;
+						}
+						text{
+							fill: @white;
+						}
+						.arrow line, .arrow polyline{
+							stroke: @white;
+						}
+					}
+
+					&.inactive{
+						.shape{
+							fill: @light-grey;
+						}
+						text{
+							fill: @black;
+						}
+						.arrow line, .arrow polyline{
+							stroke: @black;
+						}
+					}
+				}
 			}
 		}
 	}

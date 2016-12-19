@@ -361,12 +361,13 @@ app.registerRoutes = function(router){
 
 			// Draw the SVG and apply hover and click events on them
 			$(window).scroll(function(e) {
-				if($(this).scrollTop() > 50){
-					var opacity = app.helpers.map($(this).scrollTop(), 50, 450, 1.0, 0.0);
+				if($(this).scrollTop() > 250){
+					var opacity = app.helpers.map($(this).scrollTop(), 250, 650, 1.0, 0.0);
 					$("#page-content .studio-page .method .graphics").css("opacity", opacity);
 				}
 			});
 		}
+		app.bindStudioEvents();
 
 		app.bindEvents();
 
@@ -420,6 +421,27 @@ app.startMasonry = function($selector, postType){
 app.bindEvents = function(){
 	this.helpers.bindNavEvents();
 	this.helpers.bindCardEvents(app.router);
+};
+
+app.bindStudioEvents = function(){
+	var $svg = $("#page-content .studio-page .method .graphics #studio-svg");
+
+	$svg.find(".group").hover(function() {
+		var cls1 = $(this).attr("class");
+		var cls2 = cls1 + " inactive";
+		cls1 += " active";
+		$(this).attr("class", cls1);
+
+		$(this).siblings(".group").attr("class", cls2);
+	}, function() {
+		var activeReg = / active/g;
+		var inactiveReg = / inactive/g;
+		var cls1 = $(this).attr("class");
+		cls1 = cls1.replace(activeReg, "");
+		cls1 = cls1.replace(inactiveReg, "");
+		$(this).attr("class", cls1);
+		$(this).siblings(".group").attr("class", cls1);
+	});
 };
 
 app.searchCollection = function(searchTerm){
