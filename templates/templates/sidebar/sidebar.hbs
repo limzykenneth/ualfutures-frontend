@@ -2,7 +2,7 @@
 	{{#unless type}}
 	<div class="additional-info">
 		<p>
-			<% if (appData == "events"){
+			<% if (appData == "events" && ebData !== null){
 				print(moment(ebData.startTime).format("ddd D MMMM YYYY"));
 				print("<br>" + moment(ebData.startTime).format("HH:mm") + " - " + moment(ebData.endTime).format("HH:mm"));
 				print("<br>" + ebData.address);
