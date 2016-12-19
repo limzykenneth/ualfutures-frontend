@@ -18,7 +18,7 @@ var allView = baseAllView.extend({
 
 	nextPage: function(callback){
 		// This is step 1
-		this.collection.getNextPage(1, function(nextPageCollection){
+		this.collection.getNextPage(this.collection.currentPage, function(nextPageCollection){
 			// Came back from collection
 			var append = "";
 			var singleView = new cardView();

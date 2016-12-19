@@ -14,26 +14,42 @@ var collection = Backbone.Collection.extend({
 
 	getNextPage: function(page, callback){
 		// Came from nextPage() in view
-		var offset = page * 10;
-		var defer = jQuery.Deferred();
-		if (this.length < offset + 10 && this.currentPage < this.totalPages){
-			defer = this.fetchNextPage(offset / 10 + 1);
-		}else if(this.currentPage != this.totalPages){
-			defer.resolve();
-		}
+		var defer = [];
+		var types = ["features", "opportunities", "events", "directories"];
+		var original = {};
+
+		_.each(types, function(el, i){
+			var col = window.app[el].collection;
+
+			original[el] = col.length;
+			if (col.currentPage < col.totalPages){
+				defer.push(col.fetchNextPage(col.currentPage + 1));
+			}else{
+				defer.push(el);
+			}
+		}, this);
 
 		var self = this;
-		defer.then(function(){
-			var offsetEnd = Math.min(offset + 10, self.length);
-			var offsetLength = offsetEnd - offset;
-			var nextPageCollection = self.slice(0, offsetLength);
-			callback(nextPageCollection);
-			// Going back
-		});
-	},
+		$.when.apply($, defer).then(function(){
+			var nextPageCollection = [];
+			_.each(defer, function(el, i){
+				var type;
+				if(typeof el != "string" && el.responseJSON.length !== 0){
+					type = el.responseJSON[0].appData;
+				}else if(typeof el == "string"){
+					type = el;
+				}
 
-	fetchNextPage: function(page){
-		// Implemented in individual collections
+				if(typeof type != "undefined"){
+					var col = window.app[type].collection;
+					var offsetLength = col.length - original[type];
+					nextPageCollection = nextPageCollection.concat(col.slice(0, offsetLength));
+				}
+			});
+
+			self.add(nextPageCollection);
+			callback(nextPageCollection);
+		});
 	}
 });
 

@@ -17,6 +17,21 @@ var allView = baseAllView.extend({
 		var renderedHeader = headerTemplate(app.directories);
 
 		return renderedHeader;
+	},
+
+	nextPage: function(callback){
+		// This is step 1
+		this.collection.getNextPage(this.collection.currentPage, function(nextPageCollection){
+			// Came back from collection
+			var append = "";
+			var singleView = new cardView();
+			_.each(nextPageCollection, function(el, i){
+				append += singleView.render(el);
+			});
+
+			callback(append);
+			// Going back
+		});
 	}
 });
 

@@ -108,6 +108,7 @@ app.renderSlideshow = function(){
 };
 
 app.renderGrid = function(type, view){
+	$(window).off("scroll");
 	var $grid = $("#page-content .grid");
 
 	app.startMasonry($grid, type);
