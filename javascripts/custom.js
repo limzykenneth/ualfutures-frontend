@@ -100,8 +100,8 @@ app.renderSlideshow = function(){
 		dots: true,
 		autoplay: true,
 		autoplaySpeed: 5000,
-		prevArrow: '<span class="prev"><img src="./images/arrows/arrow-left.png"></span>',
-		nextArrow: '<span class="next"><img src="./images/arrows/arrow-right.png"></span>',
+		prevArrow: $("#slideshow-template-arrow-left").html(),
+		nextArrow: $("#slideshow-template-arrow-right").html(),
 	});
 
 	app.helpers.dynamicImageSize($("#page-content .slideshow .slide"));

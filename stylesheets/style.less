@@ -181,27 +181,24 @@ p{
 			.slick-arrow{
 				position: absolute;
 				top: 50%;
-				transform: translateY(-50%);
+				// transform: translateY(-50%);
 				z-index: 10;
 				cursor: pointer;
+				width: 1.5rem;
+				height: auto;
 
-				&::before{
-					display: none;
-					content: none;
-				}
-
-				img{
-					width: 70px;
-					height: auto;
+				@media @small{
+					width: 0.8rem;
 				}
 			}
 
 			.prev{
-				left: 1rem;
+				transform: translate(-150%, -50%);
 			}
 
 			.next{
-				right: 1rem;
+				right: 0;
+				transform: translate(150%, -50%);
 			}
 		}
 
