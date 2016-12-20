@@ -33,7 +33,12 @@
 			margin-top: 40px;
 			margin-bottom: 20px;
 			font-size: 2.7rem;
+			line-height: 3rem;
 			font-weight: bold;
+
+			@media @small{
+				font-size: 2rem;
+			}
 		}
 
 		.post-date, .authors{
@@ -55,6 +60,10 @@
 		font-size: 1.5rem;
 		line-height: 1.9rem;
 
+		@media @small{
+			width: 100%;
+		}
+
 		p img{
 			max-width: 100%;
 			height: auto;
@@ -69,6 +78,11 @@
 			font-weight: bold;
 			font-size: 1.5em;
 			line-height: 1.2em;
+
+			@media @small{
+				width: 100%;
+				font-size: 1.2em;
+			}
 		}
 
 		.all-tags{
@@ -79,6 +93,7 @@
 				color: @purple;
 				margin-right: 2.5rem;
 				border: solid 2px @purple;
+				line-height: 5rem;
 			}
 		}
 	}

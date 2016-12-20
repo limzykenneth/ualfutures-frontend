@@ -1,8 +1,12 @@
 .sidebar{
 	position: relative;
-	width: 23.6vw;
+	width: 23vw;
 	margin-top: 70px;
 	margin-left: 6%;
+
+	@media @small{
+		display: none;
+	}
 
 	&.fixed{
 		position: fixed;
