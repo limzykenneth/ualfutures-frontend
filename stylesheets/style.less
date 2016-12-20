@@ -130,18 +130,22 @@ p{
 
 				h1{
 					position: relative;
-					transform: translateY(25%);
+					transform: translateY(-60%);
+					top: 50%;
 					color: @light-green;
 					margin-left: 15rem;
 					margin-right: 15rem;
 
-					@media @small{
-						transform: translateY(50%);
-						padding: 0 1rem;
-						font-size: 1.75rem;
+					@media @large{
+						margin: 0 6rem;
+						font-size: 2rem;
 					}
 
 					@media @small{
+						top: 0%;
+						transform: translateY(50%);
+						padding: 0 1rem;
+						font-size: 1.75rem;
 						margin: 0 auto;
 					}
 				}
@@ -258,6 +262,10 @@ p{
 							@media @small{
 								font-size: 2.1rem;
 							}
+
+							@media @x-small{
+								font-size: 1.5rem;
+							}
 						}
 
 						.subtitle{
@@ -285,6 +293,10 @@ p{
 							@media @large{
 								font-size: 2.1rem;
 							}
+
+							@media @x-small{
+								font-size: 1.5rem;
+							}
 						}
 					}
 				}
@@ -310,6 +322,10 @@ p{
 
 							@media @large{
 								font-size: 2.1rem;
+							}
+
+							@media @x-small{
+								font-size: 1.5rem;
 							}
 						}
 					}

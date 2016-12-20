@@ -54,7 +54,7 @@ helpers.bindNavEvents = function(){
 	});
 
 
-
+	// Home header ------------------------------------------------------------------
 	$homeHeader.find(".home-menu").hover(function() {
 		$slideIn.css("display", "block");
 		setTimeout(function(){
@@ -68,6 +68,19 @@ helpers.bindNavEvents = function(){
 		setTimeout(function(){
 			$slideIn.css("display", "none");
 		}, 300);
+	});
+
+	// Mobile header ----------------------------------------------------------------
+	$header.find(".mobile-menu").removeClass("nav-slide-in");
+	$header.find(".mobile-menu-toggle").off("click");
+	$header.find(".mobile-menu-toggle").click(function(e) {
+		var $mobile = $header.find(".mobile-menu");
+
+		if($mobile.hasClass("nav-slide-in")){
+			$mobile.removeClass("nav-slide-in");
+		}else{
+			$mobile.addClass("nav-slide-in");
+		}
 	});
 };
 
