@@ -1,9 +1,23 @@
 .studio-page{
 	margin-bottom: 100px;
 
+	@media @small{
+		h1{
+			font-size: 2rem;
+		}
+	}
+
 	.intro{
 		width: 62%;
 		font-size: 1.7rem;
+
+		@media @medium{
+			width: 100%;
+		}
+
+		@media @small{
+			font-size: 1.4rem;
+		}
 
 		.intro-buttons{
 			a{
@@ -27,12 +41,26 @@
 		min-width: 700px;
 		font-size: 1.7rem;
 
+		@media @medium{
+			width: 100%;
+			min-width: 0;
+		}
+
+		@media @small{
+			font-size: 1.3rem;
+		}
+
 		.registration-form{
 			fieldset{
 				border: 0px;
+				padding: 0;
 
 				p{
 					margin: 50px 0;
+
+					@media @small{
+						margin: 10px 0;
+					}
 
 					input{
 						.secondary-font;
@@ -48,6 +76,12 @@
 						label{
 							position: relative;
 							cursor: pointer;
+
+							@media @small{
+								display: block;
+								margin-top: 20px;
+								margin-bottom: 40px;
+							}
 
 							input{
 								opacity: 0;
@@ -87,6 +121,10 @@
 
 						label#student-graduate{
 							margin-right: 15%;
+
+							@media @medium{
+								margin-right: 7%;
+							}
 						}
 					}
 				}
@@ -145,6 +183,10 @@
 			opacity: 1;
 			position: relative;
 			left: -16.9%;
+
+			@media @small{
+				left: -20px;
+			}
 
 			#studio-svg{
 				width: 100vw;
