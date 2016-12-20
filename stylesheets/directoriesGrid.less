@@ -1,8 +1,16 @@
 &.directories-grid{
 	.grid-item{
-		// background-color: @light-purple;
 		width: ~"calc(75vw / 4 - 20px)";
 		height: ~"calc((75vw / 3 - 20px) * 0.9)";
+
+		@media @large{
+			width: ~"calc(75vw / 3 - 20px)";
+		}
+
+		@media @small{
+			width: 100%;
+			height: ~"calc(75vw - 20px)";
+		}
 
 		&.with-image{
 			.card-title{
@@ -23,6 +31,10 @@
 			.subtitle{
 				margin-top: 2rem;
 				font-size: @medium-font;
+
+				@media @large{
+					font-size: 1rem;
+				}
 			}
 		}
 
