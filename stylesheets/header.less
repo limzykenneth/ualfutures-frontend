@@ -9,6 +9,15 @@
 		font-size: 1rem;
 		transition: height 0.5s ease, opacity 0.2s ease;
 
+		@media @small{
+			display: block !important;
+			opacity: 1 !important;
+		}
+
+		@media @small{
+			height: 60px;
+		}
+
 		.full-width-container{
 			background-color: @purple;
 			position: relative;
@@ -34,7 +43,9 @@
 					top: 29px;
 
 					@media @small{
-						position: relative;
+						width: 47px;
+						top: 19px;
+						margin-left: 1rem;
 					}
 
 					.cls-1{
@@ -47,6 +58,10 @@
 				width: 75vw;
 				margin: 0 ~"calc(12.5% - 10px)";
 
+				@media @small{
+					text-align: center;
+				}
+
 				.logo{
 					.title-font;
 
@@ -56,12 +71,18 @@
 
 					@media @small{
 						width: 200px;
+						display: inline-block;
+						margin-top: 5px;
 					}
 
 					.ualfutures-logo{
 						width: auto;
 						transition: all 0.5s ease;
 						height: 29px;
+
+						@media @small{
+							height: 21px;
+						}
 
 						.a{
 					        fill: #fff;
@@ -77,6 +98,10 @@
 					transition: all 0.5s ease;
 					transform: translateY(150%);
 					font-size: 22px;
+
+					@media @small{
+						display: none;
+					}
 
 					span{
 						margin: 0 2.5rem;
@@ -101,6 +126,10 @@
 			transition: transform 0.3s ease;
 			height: 53px;
 			padding: 17px 0;
+
+			@media @small{
+				display: none;
+			}
 
 			.dropdown-container{
 				width: ~"calc(75vw - 20px)";
@@ -139,6 +168,10 @@
 				.logo{
 					margin-top: 19px;
 
+					@media @small{
+						margin-top: 5px;
+					}
+
 					.ualfutures-logo{
 						height: 21px;
 					}
@@ -156,6 +189,10 @@
 	// Home page -----------------------------------------------------------------------------
 	.home-header{
 		height: 90px;
+
+		@media @small{
+			display: none;
+		}
 
 		.full-width-container{
 			background-color: rgba(255, 255, 255, 0);

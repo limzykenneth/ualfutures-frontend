@@ -72,8 +72,18 @@ p{
 	margin: 0 ~"calc(12.5% - 10px)";
 	margin-top: 165px;
 
+	@media @small{
+		margin: 0 auto;
+		margin-top: 90px;
+		width: ~"calc(100vw - 20px)";
+	}
+
 	&.home-page{
 		margin-top: -10px;
+
+		@media @small{
+			margin-top: 80px;
+		}
 	}
 
 	.main-lists{
@@ -90,12 +100,21 @@ p{
 			padding-top: 4px;
 			color: @purple;
 			border: @purple 2px solid;
+
+			@media @small{
+				display: none;
+			}
 		}
 
 		.slideshow{
 			width: 100%;
 			height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
 			margin-bottom: 20px;
+
+			@media @small{
+				width: 100%;
+				height: ~"calc(75vw - 50px)";
+			}
 
 			.slide{
 				display: block;
@@ -105,13 +124,26 @@ p{
 				text-align: center;
 				overflow: hidden;
 
+				@media @small{
+					height: ~"calc(75vw - 50px)";
+				}
+
 				h1{
 					position: relative;
-					top: 50%;
-					transform: translateY(-100%);
+					transform: translateY(25%);
 					color: @light-green;
 					margin-left: 15rem;
 					margin-right: 15rem;
+
+					@media @small{
+						transform: translateY(50%);
+						padding: 0 1rem;
+						font-size: 1.75rem;
+					}
+
+					@media @small{
+						margin: 0 auto;
+					}
 				}
 
 				img{
@@ -184,6 +216,11 @@ p{
 				height: ~"calc((75vw / 3 - 20px) * 0.75)";
 				cursor: pointer;
 
+				@media @small{
+					width: 100%;
+					height: ~"calc(75vw - 20px)";
+				}
+
 				&.bg-light-blue{
 					background-color: @light-blue;
 				}
@@ -217,6 +254,10 @@ p{
 
 						.title{
 							margin-top: 0;
+
+							@media @small{
+								font-size: 2.1rem;
+							}
 						}
 
 						.subtitle{
@@ -227,6 +268,11 @@ p{
 
 				&.level-1{
 					height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
+
+					@media @small{
+						width: 100%;
+						height: ~"calc(75vw - 20px)";
+					}
 
 					.card-title{
 						position: relative;
@@ -248,6 +294,12 @@ p{
 					min-width: 400px;
 					height: ~"calc((75vw / 3 - 20px) * 1.5 + 20px)";
 
+					@media @small{
+						min-width: 0;
+						width: 100%;
+						height: ~"calc(75vw - 20px)";
+					}
+
 					.card-title{
 						position: relative;
 						top: ~"calc(50% - 20px - 1rem)";
@@ -255,6 +307,10 @@ p{
 
 						.title{
 							font-size: 3.1rem;
+
+							@media @large{
+								font-size: 2.1rem;
+							}
 						}
 					}
 				}

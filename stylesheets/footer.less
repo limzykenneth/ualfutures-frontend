@@ -10,6 +10,11 @@
 		width: 75vw;
 		margin: 0 ~"calc(12.5% - 10px)";
 
+		@media @small{
+			width: ~"calc(100vw - 20px)";
+			margin: 0 auto;
+		}
+
 		.social-media{
 			float: left;
 
@@ -29,8 +34,10 @@
 		}
 
 		.newsletter{
+			.secondary-font;
+
 			float: right;
-			margin-right: 1.5rem;
+			margin-right: 0.5rem;
 			margin-top: 5px;
 
 			a{
