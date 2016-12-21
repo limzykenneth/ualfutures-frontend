@@ -80,11 +80,18 @@ app.start = function(){
 	var types = ["features", "events", "opportunities", "directories"];
 	// Put all models into the generic collection and prepare its view
 	app.collection = new genericCollection();
+	app.tags = [];
 
 	_.each(types, function(el, i){
 		app.collection.add(app[el].collection.toJSON());
 		app[el].allView = new app[el].allViewConstructor(app[el].collection);
 	});
+
+	app.collection.each(function(el, i){
+		app.tags = app.tags.concat(el.toJSON().tags);
+	});
+
+	app.tags = _.uniq(app.tags);
 
 	app.router = new appRouter();
 	app.registerRoutes(app.router);
@@ -134,7 +141,7 @@ app.renderGrid = function(type, view){
 		});
 	}, 500, true);
 
-	$(window).scroll(function(e){
+	$(window).on("scroll.nextPage", function(e){
 		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100){
 			loadMore();
 		}
@@ -158,9 +165,11 @@ app.renderPost = function(slug, type){
 
 app.registerRoutes = function(router){
 	router.route("", function(){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").addClass("hide");
 		$("#page-header .main-header").addClass("transparent");
@@ -185,10 +194,12 @@ app.registerRoutes = function(router){
 	});
 
 	router.route("media(/:type)(/p:page)", function(type, page){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -223,10 +234,12 @@ app.registerRoutes = function(router){
 	});
 
 	router.route("media/:type/category=:category(/p:page)", function(type, category, page){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -248,7 +261,8 @@ app.registerRoutes = function(router){
 			return comparator == category.toLowerCase();
 		}), app);
 
-		app.renderGrid(type, app[type].allView);
+		var customView = new genericAllView(filtered);
+		app.renderGrid("", customView);
 
 		$("#page-content .main-lists .page-description").addClass("hide");
 		$("#page-content .main-lists .secondary-header").remove();
@@ -256,14 +270,18 @@ app.registerRoutes = function(router){
 
 		app.bindEvents();
 
+		// Attention needed for next line
+		$(window).off("scroll.nextPage");
 		$(window).scrollTop(0);
 	});
 
 	router.route("media/:type/post=:slug", function(type, slug){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").removeClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -286,10 +304,12 @@ app.registerRoutes = function(router){
 
 	// Tags -------------------------------------------------------------------------------------------
 	router.route("media/tags=:tags", function(tags){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -327,15 +347,18 @@ app.registerRoutes = function(router){
 
 		app.bindEvents();
 
+		$(window).off("scroll.nextPage");
 		$(window).scrollTop(0);
 	});
 
 
 	// Studio page ---------------------------------------------------------------------------------
 	router.route("studio(/:page)", function(page){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").addClass("hide");
 		$("#page-content .studio-page").removeClass("hide");
+		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
@@ -375,26 +398,65 @@ app.registerRoutes = function(router){
 	});
 
 	// Search page ---------------------------------------------------------------------------------
-	router.route("search=:searchTerm", function(searchTerm){
-		$("#page-content .main-lists").removeClass("hide");
+	router.route("search=(:searchTerm)", function(searchTerm){
+		$("#page-content").removeClass("search-page");
 		$("#page-content .post-content").addClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
+		$("#page-content .search").addClass("hide");
 
+		$("#page-header .home-header").addClass("hide");
 		$("#page-header .main-header").removeClass("hide");
 		$("#page-header .main-header").removeClass("transparent");
-		$("#page-header .home-header").addClass("hide");
+		// Attention needed for next line
+		$("#page-header .nav-slide-in").css("display", "none");
 
 		$("#page-content").removeClass("home-page");
-		$("#page-content .main-lists .page-description").removeClass("hide");
-		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 		$("#page-content .main-lists .secondary-header").remove();
 
-		$("#page-content .main-lists .page-name").text("Futures");
+		if(searchTerm){
+			$("#page-content .main-lists").removeClass("hide");
+			$("#page-content .main-lists .page-name").removeClass("hide");
+			$("#page-content .main-lists .page-name").text("Futures");
+			$("#page-content .main-lists .page-description").removeClass("hide");
 
-		var customView = new genericAllView(app.searchCollection(searchTerm));
-		app.renderGrid("", customView);
+			var customView = new genericAllView(app.searchCollection(searchTerm));
+			app.renderGrid("", customView);
+
+			$(window).off("scroll.nextPage");
+		}else{
+			$("#page-content .main-lists").addClass("hide");
+			$("#page-content .search").removeClass("hide");
+			$("#page-content").addClass("search-page");
+			$("#page-content .search #search-field").focus();
+
+			var tagsTemplate = _.template("<span class='tag'><a href='./#media/tags=<%= encodeURIComponent(tag) %>'><%= tag %></a></span>");
+			var tagsRendered = "";
+			_.each(app.tags, function(el, i){
+				var obj = {tag: el};
+				tagsRendered += tagsTemplate(obj);
+			});
+
+			$("#page-content .search .all-tags").html(tagsRendered);
+
+			$("#page-content .search #search-field").on("input", function() {
+				var term = $("#page-content .search #search-field").val();
+				$("#page-content .search .all-tags .tag").each(function(i, el) {
+					if($(this).find("a").text().indexOf(term) > -1){
+						$(this).removeClass("hide");
+					}else{
+						$(this).addClass("hide");
+					}
+				});
+			});
+
+			$("#page-content .search #search-field").keyup(function(e) {
+				if(e.which == 13){
+					var value = encodeURIComponent($("#page-content .search #search-field").val());
+					app.router.navigate("search=" + value, {trigger: true});
+				}
+			});
+		}
 
 		app.bindEvents();
 

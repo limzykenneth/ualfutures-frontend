@@ -1,0 +1,40 @@
+.search{
+	.title-font;
+
+	width: 75vw;
+	margin: 0 auto;
+	margin-top: 105px;
+
+	#search-field{
+		width: ~"calc(100% - 1rem)";
+		margin: 0.5rem;
+		background-color: transparent;
+		border: none;
+		border-bottom: 2px solid @dark-purple;
+		outline: none;
+		font-size: 2.5rem;
+
+		&::placeholder{
+			color: @dark-purple;
+		}
+	}
+
+	.all-tags{
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		text-align: justify;
+		margin-top: 2rem;
+
+		.tag{
+			font-size: 1.3rem;
+			padding: 0.5rem;
+			margin: 0.5rem;
+			border: 2px solid @dark-purple;
+
+			a{
+				color: @dark-purple;
+			}
+		}
+	}
+}
