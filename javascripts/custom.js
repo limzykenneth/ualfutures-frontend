@@ -375,8 +375,13 @@ app.registerRoutes = function(router){
 			$("#page-content .studio-page .register").removeClass("hide");
 
 			$("#page-content .studio-page .register .registration-form .radio-buttons label").click(function(e) {
-				$(this).addClass("selected").find("input").attr("checked", true);
-				$(this).siblings("label").removeClass("selected").find("input").attr("checked", false);
+				e.preventDefault();
+				if($(this).find("input").attr("checked") == "checked"){
+					$(this).removeClass("selected").find("input").removeAttr("checked");
+				}else{
+					$(this).addClass("selected").find("input").attr("checked", true);
+				}
+				// $(this).siblings("label").removeClass("selected").find("input").attr("checked", false);
 			});
 		}else if(page == "method"){
 			$("#page-content .studio-page .intro").addClass("hide");
