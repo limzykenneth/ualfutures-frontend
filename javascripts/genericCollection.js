@@ -5,8 +5,9 @@ Backbone.$ = $;
 
 var collection = Backbone.Collection.extend({
 	comparator: "date",
-	tags: ["Untagged"],
+	tags: [],
 	category: "Uncategorized",
+	url: "",
 
 	initialize: function(models, app){
 		this.currentPage = 1;

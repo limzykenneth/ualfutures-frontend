@@ -60,7 +60,6 @@ app.init = function(){
 	var success = function(collection, response, options){
 		var totalPages = options.xhr.getResponseHeader('X-WP-TotalPages');
 		collection.totalPages = parseInt(totalPages);
-		collection.currentPage = 1;
 	};
 	deffereds.push(app.features.collection.fetch({success: success}));
 	deffereds.push(app.events.collection.fetch({success: success}));
@@ -115,30 +114,38 @@ app.renderSlideshow = function(){
 };
 
 app.renderGrid = function(type, view){
+	// Remove scroll event because they will be rebind later
 	$(window).off("scroll");
+	// Just caching
 	var $grid = $("#page-content .grid");
 
+	// Start masonry and reset previously set grid
 	app.startMasonry($grid, type);
 	$grid.masonry("remove", $("#page-content .grid .grid-item"));
 
-	$grid.html(view.render());
+	// Render the view and display it
+	view.render();
+	$grid.html(view.$el.html());
 
+	// Reset directories grid and add it back if necessary
 	$grid.removeClass("directories-grid");
 	if(type == "directories"){
 		$grid.addClass("directories-grid");
 	}
 
+	// Append a hidden level-0 grid item so that the masonry grid works correctly in the
+	// absence of a level-0 grid item
 	$grid.append("<a href='#' class='hide grid-item level-0'></a>");
+	// "Append" all the grid items to the masonry grid and start laying them out
 	$grid.masonry("appended", $("#page-content .grid .grid-item")).masonry();
 
+	// Resize the background image according to the size of the grid item
 	app.helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
 
 	// Render next page when scrolled to the bottom
 	var loadMore = _.debounce(function(){
-		view.nextPage(function(append){
-			$append = $(append);
-			$grid.append($append).masonry("appended", $append).masonry();
-		});
+		view.nextPage();
+		$grid.append(view.$new.html()).masonry("appended", view.$new).masonry();
 	}, 500, true);
 
 	$(window).on("scroll.nextPage", function(e){

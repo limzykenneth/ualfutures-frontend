@@ -4,9 +4,9 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var cardView = require("./cardView.js");
-var baseAllView = require("../baseAllView.js");
+var genericCollectionView = require("../genericCollectionView.js");
 
-var allView = baseAllView.extend({
+var allView = genericCollectionView.extend({
 	addModel: function(model){
 		var singleView = new cardView();
 		this.$el.prepend(singleView.render(model));
@@ -16,19 +16,12 @@ var allView = baseAllView.extend({
 		return "";
 	},
 
-	nextPage: function(callback){
-		// This is step 1
-		this.collection.getNextPage(this.collection.currentPage, function(nextPageCollection){
-			// Came back from collection
-			var append = "";
-			var singleView = new cardView();
-			_.each(nextPageCollection, function(el, i){
-				append += singleView.render(el);
-			});
+	addNewModel: function(model){
+		this.addModel(model);
 
-			callback(append);
-			// Going back
-		});
+		var singleView = new cardView();
+		this.$new.html("");
+		this.$new.prepend(singleView.render(model));
 	}
 });
 

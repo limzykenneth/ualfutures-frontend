@@ -10,8 +10,8 @@ var collection = genericCollection.extend({
 	model: model,
 
 	// url: "./responses/directories.json",
-	url: "http://localhost/ual_futures/wp-json/wp/v2/directories",
-	// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/directories",
+	// url: "http://localhost/ual_futures/wp-json/wp/v2/directories",
+	url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/directories",
 
 	initialize: function(models, app){
 		if(typeof app.directories.availableCategories == "undefined"){
@@ -23,35 +23,17 @@ var collection = genericCollection.extend({
 		}
 	},
 
-	getNextPage: function(page, callback){
-		// Came from nextPage() in view
-		this.currentPage++;
-		// 10 being the number of post per page
-		var offset = page * 10;
-		var defer = jQuery.Deferred();
-
-		// Check if the collection already has the models and there's still more pages to get from the server
-		if (this.length < offset + 10 && this.currentPage < this.totalPages){
-			defer = this.fetchNextPage();
+	fetchNextPage: function(){
+		if(this.currentPage == this.totalPages){
+			return;
 		}
 
-		var self = this;
-		defer.then(function(){
-			// Get the next set of collection in an array into nextPageCollection
-			var offsetEnd = Math.min(offset + 10, self.length);
-			var offsetLength = offsetEnd - offset;
-			var nextPageCollection = self.slice(0, offsetLength);
-			callback(nextPageCollection);
-			// Going back
-		});
-	},
-
-	fetchNextPage: function(){
+		this.currentPage++;
 		var fetchUrl = this.url + "?page=" + this.currentPage;
 
 		var self = this;
-		// return a deferred promise
-		return $.getJSON(fetchUrl, function(data){
+		$.getJSON(fetchUrl, function(data){
+			window.app.collection.add(data);
 			self.add(data);
 		});
 	}

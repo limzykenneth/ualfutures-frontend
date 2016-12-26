@@ -16,8 +16,9 @@ var dView = new dirView();
 var view = Backbone.View.extend({
 	initialize: function(collection){
 		this.collection = collection;
-		this.listenTo(this.collection, "add", this.nextPage);
 		this.renderedItemsNumber = 0;
+		this.$new = $();
+		this.listenTo(this.collection, "add", this.nextPage);
 	},
 
 	// Collection passed in should be in the right order
@@ -25,7 +26,7 @@ var view = Backbone.View.extend({
 	render: function(){
 		this.$el.html("");
 		this.collection.each(this.addModel, this);
-		return this.$el.html();
+		return this;
 	},
 
 	// Will be overwritten by the children views
@@ -45,14 +46,28 @@ var view = Backbone.View.extend({
 	},
 
 	nextPage: function(){
-		var renderedItemsNumber = this.renderedItemsNumber;
 		var toRenderItemsNumber = this.collection.length - this.renderedItemsNumber;
-
 		var toRenderItems = this.collection.slice(this.collection.length - toRenderItemsNumber, this.collection.length);
 
-		_.each(toRenderitems, addModel, this);
+		_.each(toRenderItems, this.addNewModel, this);
 
-		return this.$el.html();
+		return this;
+	},
+
+	addNewModel: function(model){
+		this.addModel(model);
+
+		this.$new.html("");
+		var type = model.get("appData");
+		if(type == "features"){
+			this.$new.prepend(mView.render(model));
+		}else if(type == "events"){
+			this.$new.prepend(eView.renderWithFullCategory(model));
+		}else if(type == "opportunities"){
+			this.$new.prepend(oView.renderWithFullCategory(model));
+		}else if(type == "directories"){
+			this.$new.prepend(dView.render(model));
+		}
 	}
 });
 
