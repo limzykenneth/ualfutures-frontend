@@ -4,7 +4,9 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var collection = Backbone.Collection.extend({
-	comparator: "date",
+	comparator: function(model){
+		return -moment(model.toJSON().date_gmt).format("X");
+	},
 	tags: [],
 	category: "Uncategorized",
 	url: "",

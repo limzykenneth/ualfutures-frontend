@@ -8,8 +8,10 @@ var genericCollectionView = require("../genericCollectionView.js");
 
 var allView = genericCollectionView.extend({
 	addModel: function(model){
+		this.renderedItemsNumber++;
+
 		var singleView = new cardView();
-		this.$el.prepend(singleView.render(model));
+		this.$el.append(singleView.render(model));
 	},
 
 	renderHeader: function(){
@@ -17,14 +19,6 @@ var allView = genericCollectionView.extend({
 		var renderedHeader = headerTemplate(app.events);
 
 		return renderedHeader;
-	},
-
-	addNewModel: function(model){
-		this.addModel(model);
-
-		var singleView = new cardView();
-		this.$new.html("");
-		this.$new.prepend(singleView.render(model));
 	}
 });
 

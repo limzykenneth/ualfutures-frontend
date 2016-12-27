@@ -14,6 +14,7 @@ var collection = genericCollection.extend({
 	url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/opportunities",
 
 	initialize: function(models, app){
+		this.currentPage = 1;
 		if(typeof app.opportunities.availableCategories == "undefined"){
 			var url = app.categories.partialURL + "opportunities";
 
