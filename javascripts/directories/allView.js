@@ -15,6 +15,12 @@ var allView = genericCollectionView.extend({
 	},
 
 	render: function(){
+		var types = ["features", "directories", "opportunities", "events"];
+		_.each(types, function(el, i){
+			window.app[el].allView.stopListening(window.app[el].allView.collection);
+		});
+		this.listenTo(this.collection, "update", this.nextPage);
+
 		this.$el.addClass("directories-grid");
 		this.$el.masonry({
 			columnWidth: ".grid-item",

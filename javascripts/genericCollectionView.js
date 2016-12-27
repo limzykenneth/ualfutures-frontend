@@ -18,27 +18,34 @@ var view = Backbone.View.extend({
 	initialize: function(collection){
 		this.collection = collection;
 		this.renderedItemsNumber = 0;
-		this.listenTo(this.collection, "update", this.nextPage);
 		this.$el = $("#page-content .grid");
 	},
 
 	// Collection passed in should be in the right order
 	// Use the generic collection object
 	render: function(){
+		var types = ["features", "directories", "opportunities", "events"];
+		_.each(types, function(el, i){
+			window.app[el].allView.stopListening(window.app[el].allView.collection);
+		});
+		this.listenTo(this.collection, "update", this.nextPage);
+
 		this.$el.removeClass("directories-grid");
 		this.$el.masonry({
-			columnWidth: ".grid-item.level-0",
+			columnWidth: ".grid-item",
 			itemSelector: ".grid-item",
 			gutter: 20
-		});
-		this.$el.masonry("remove", this.$el.find(".grid-item"));
+		}).masonry("remove", this.$el.find(".grid-item"));
 		this.$el.html("");
+
 		this.collection.each(this.addModel, this);
-		// Append a hidden level-0 grid item so that the masonry grid works correctly in the
+		// Prepend a temporary level-0 grid item so that the masonry grid works correctly in the
 		// absence of a level-0 grid item
-		this.$el.append("<a href='#' class='hide grid-item level-0'></a>");
-		// "Append" all the grid items to the masonry grid and start laying them out
-		this.$el.masonry("appended", this.$el.find(".grid-item")).masonry();
+		this.$el.prepend("<a href='#' class='to-be-remove grid-item level-0'></a>");
+		this.$el.masonry("appended", this.$el.find(".grid-item"))
+				.masonry()
+				.masonry("remove", this.$el.find(".grid-item.to-be-remove"))
+				.masonry();
 
 		// Resize the background image according to the size of the grid item
 		helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
@@ -52,23 +59,23 @@ var view = Backbone.View.extend({
 
 		var type = model.get("appData");
 		if(type == "features"){
-			this.$el.prepend(mView.render(model));
+			this.$el.append(mView.render(model));
 		}else if(type == "events"){
-			this.$el.prepend(eView.renderWithFullCategory(model));
+			this.$el.append(eView.renderWithFullCategory(model));
 		}else if(type == "opportunities"){
-			this.$el.prepend(oView.renderWithFullCategory(model));
+			this.$el.append(oView.renderWithFullCategory(model));
 		}else if(type == "directories"){
-			this.$el.prepend(dView.render(model));
+			this.$el.append(dView.render(model));
 		}
 	},
 
-	nextPage: function(){
+	nextPage: function(param1){
 		var toRenderItemsNumber = this.collection.length - this.renderedItemsNumber;
 		var toRenderItems = this.collection.slice(this.collection.length - toRenderItemsNumber, this.collection.length);
 
 		_.each(toRenderItems, this.addModel, this);
-		console.log(this.$el.find(".grid-item").slice(this.collection.length - toRenderItemsNumber, this.collection.length + 1));
-		this.$el.masonry("appended", this.$el.find(".grid-item").slice(this.collection.length - toRenderItemsNumber, this.collection.length + 1)).masonry();
+		var $newItems = this.$el.find(".grid-item").slice(this.collection.length - toRenderItemsNumber, this.collection.length + 1);
+		this.$el.masonry("appended", $newItems).masonry();
 
 		helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
 

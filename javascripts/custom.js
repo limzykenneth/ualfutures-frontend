@@ -123,7 +123,7 @@ app.renderGrid = function(type, view){
 	// Render next page when scrolled to the bottom
 	var loadMore = _.debounce(function(){
 		view.collection.fetchNextPage();
-	}, 500, true);
+	}, 1000, true);
 
 	$(window).on("scroll.nextPage", function(e){
 		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100){

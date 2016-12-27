@@ -7,6 +7,9 @@ var model = require("./model.js");
 var genericCollection = require("../genericCollection.js");
 
 var collection = genericCollection.extend({
+	comparator: function(model){
+		return -moment(model.toJSON().date_gmt).format("X");
+	},
 	model: model,
 
 	// url: "./responses/opportunities.json",
@@ -34,7 +37,7 @@ var collection = genericCollection.extend({
 
 		var self = this;
 		$.getJSON(fetchUrl, function(data){
-			window.app.collection.add(data);
+			window.app.collection.add(data, {sort: false});
 			self.add(data);
 		});
 	}
