@@ -21,8 +21,8 @@ var collection = Backbone.Collection.extend({
 
 		_.each(types, function(el, i){
 			var col = window.app[el].collection;
-			col.fetchNextPage();
-		});
+			col.fetchNextPage(this);
+		}, this);
 	}
 });
 

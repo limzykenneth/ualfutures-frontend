@@ -7,6 +7,9 @@ var model = require("./model.js");
 var genericCollection = require("../genericCollection.js");
 
 var collection = genericCollection.extend({
+	initialize: function(){
+		this.currentPage = 1;
+	},
 	comparator: function(model){
 		return -moment(model.toJSON().date_gmt).format("X");
 	},
@@ -16,7 +19,7 @@ var collection = genericCollection.extend({
 	url: "http://localhost/ual_futures/wp-json/wp/v2/posts",
 	// url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/posts",
 
-	fetchNextPage: function(){
+	fetchNextPage: function(origin){
 		if(this.currentPage == this.totalPages){
 			return;
 		}
@@ -26,6 +29,9 @@ var collection = genericCollection.extend({
 
 		var self = this;
 		$.getJSON(fetchUrl, function(data){
+			if(typeof origin != "undefined" && !_.isEqual(origin, window.app.collection)){
+				origin.add(data, {sort: false});
+			}
 			window.app.collection.add(data, {sort: false});
 			self.add(data);
 		});

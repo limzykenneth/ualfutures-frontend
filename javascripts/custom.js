@@ -5,6 +5,7 @@ window.smark = require("smark");
 
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
+var filteredView = require("./filteredView.js");
 var appRouter = require("./routes.js");
 
 var app = app || {
@@ -245,8 +246,8 @@ app.registerRoutes = function(router){
 			return comparator == category.toLowerCase();
 		}), app);
 
-		var customView = new genericAllView(filtered);
-		app.renderGrid("", customView);
+		var customView = new app[type].allViewConstructor(filtered);
+		app.renderGrid(type, customView);
 
 		$("#page-content .main-lists .page-description").addClass("hide");
 		$("#page-content .main-lists .secondary-header").remove();
@@ -254,8 +255,6 @@ app.registerRoutes = function(router){
 
 		app.bindEvents();
 
-		// Attention needed for next line
-		$(window).off("scroll.nextPage");
 		$(window).scrollTop(0);
 	});
 
@@ -331,7 +330,6 @@ app.registerRoutes = function(router){
 
 		app.bindEvents();
 
-		$(window).off("scroll.nextPage");
 		$(window).scrollTop(0);
 	});
 
@@ -403,16 +401,31 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .slideshow").remove();
 		$("#page-content .main-lists .secondary-header").remove();
 
+		// Page showing search results
 		if(searchTerm){
 			$("#page-content .main-lists").removeClass("hide");
 			$("#page-content .main-lists .page-name").removeClass("hide");
 			$("#page-content .main-lists .page-name").text("Futures");
 			$("#page-content .main-lists .page-description").removeClass("hide");
 
-			var customView = new genericAllView(app.searchCollection(searchTerm));
+			// var customView = new genericAllView(app.searchCollection(searchTerm));
+			var customView = new filteredView(app.collection, function(model){
+				var modelObject = model.toJSON();
+				var term = new RegExp(decodeURIComponent(searchTerm), "i");
+
+				if(term.test(modelObject.title) ||
+				   term.test(modelObject.subtitle) ||
+				   term.test(modelObject.category) ||
+				   term.test(modelObject.appData) ||
+				   term.test(modelObject.created_by)){
+					return true;
+				}else{
+					return false;
+				}
+			});
 			app.renderGrid("", customView);
 
-			$(window).off("scroll.nextPage");
+		// The search page itself
 		}else{
 			$("#page-content .main-lists").addClass("hide");
 			$("#page-content .search").removeClass("hide");

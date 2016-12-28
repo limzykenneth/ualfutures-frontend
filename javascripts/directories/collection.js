@@ -27,7 +27,7 @@ var collection = genericCollection.extend({
 		}
 	},
 
-	fetchNextPage: function(){
+	fetchNextPage: function(origin){
 		if(this.currentPage == this.totalPages){
 			return;
 		}
@@ -37,6 +37,9 @@ var collection = genericCollection.extend({
 
 		var self = this;
 		$.getJSON(fetchUrl, function(data){
+			if(typeof origin != "undefined" && !_.isEqual(origin, window.app.collection)){
+				origin.add(data, {sort: false});
+			}
 			window.app.collection.add(data, {sort: false});
 			self.add(data);
 		});

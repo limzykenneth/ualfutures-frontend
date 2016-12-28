@@ -1,5 +1,5 @@
 <script type="text/template" id="directories-card-view">
-	<a href="
+	<a id="<%= slug %>" href="
 		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
 			<%= external_links %>" target="_blank"
 		<% }else{ %>
@@ -62,7 +62,7 @@
 </script>
 
 <script type="text/template" id="directories-4column-card">
-	<a href="
+	<a id="<%= slug %>" href="
 		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
 			<%= external_links %>" target="_blank"
 		<% }else{ %>
