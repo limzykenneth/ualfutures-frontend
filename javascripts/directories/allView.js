@@ -19,7 +19,7 @@ var allView = genericCollectionView.extend({
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
-		this.listenTo(this.collection, "update", this.nextPage);
+		this.listenTo(this.collection, "add", this.nextPage);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
 		this.$el.addClass("directories-grid");

@@ -28,7 +28,7 @@ var view = Backbone.View.extend({
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
-		this.listenTo(this.collection, "update", this.nextPage);
+		this.listenTo(this.collection, "add", this.nextPage);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
 		this.$el.removeClass("directories-grid");
@@ -70,16 +70,16 @@ var view = Backbone.View.extend({
 		}
 	},
 
-	nextPage: function(){
-		var toRenderItemsNumber = this.collection.length - this.renderedItemsNumber;
-		var toRenderItems = this.collection.slice(this.collection.length - toRenderItemsNumber, this.collection.length);
+	nextPage: function(model){
+		var $gridItems = $("#page-content .grid .grid-item");
+		var slug = model.get("slug");
+		$gridItems = $gridItems.filter("#" + slug);
+		if($gridItems.length === 0){
+			this.addModel(model);
+			this.$el.masonry("appended", this.$el.find(".grid-item#" + slug)).masonry();
 
-		_.each(toRenderItems, this.addModel, this);
-		var $newItems = this.$el.find(".grid-item").slice(this.collection.length - toRenderItemsNumber, this.collection.length + 1);
-		console.log(this.collection.toJSON(), toRenderItemsNumber);
-		this.$el.masonry("appended", $newItems).masonry();
-
-		helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
+			helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
+		}
 
 		return this;
 	},
@@ -89,6 +89,7 @@ var view = Backbone.View.extend({
 		$("#page-content .grid .grid-item").each(function(){
 			if($(this).attr("id") == model.get("slug")){
 				$(this).remove();
+				self.$el.masonry();
 			}
 		});
 	}
