@@ -41,8 +41,17 @@ var app = app || {
 		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
 		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/slideshow?per_page=1&page=1"
 	},
-	helpers: {}
+	helpers: {},
+	types: [
+		"features",
+		"opportunities",
+		"events",
+		"directories"
+	]
 };
+
+app.allView = new genericAllView();
+
 app.features.collection = new app.features.collectionConstructor();
 app.features.singleView = new app.features.singleViewConstructor();
 
@@ -77,12 +86,11 @@ app.init = function(){
 };
 
 app.start = function(){
-	var types = ["features", "events", "opportunities", "directories"];
 	// Put all models into the generic collection and prepare its view
 	app.collection = new genericCollection();
 	app.tags = [];
 
-	_.each(types, function(el, i){
+	_.each(app.types, function(el, i){
 		app.collection.add(app[el].collection.toJSON());
 		app[el].allView = new app[el].allViewConstructor(app[el].collection);
 	});
@@ -117,6 +125,10 @@ app.renderSlideshow = function(){
 app.renderGrid = function(type, view){
 	// Remove scroll event because they will be rebind later
 	$(window).off("scroll");
+	app.allView.stopListening();
+	_.each(app.types, function(el, i){
+		app[el].allView.stopListening();
+	});
 
 	// Render the view and display it
 	view.render();
@@ -126,7 +138,7 @@ app.renderGrid = function(type, view){
 		view.collection.fetchNextPage();
 	}, 1000, true);
 
-	$(window).on("scroll.nextPage", function(e){
+	$(window).on("scroll", function(e){
 		if($(window).scrollTop() + $(window).height() >= $(document).height() - 100){
 			loadMore();
 		}
@@ -150,6 +162,7 @@ app.renderPost = function(slug, type){
 
 app.registerRoutes = function(router){
 	router.route("", function(){
+		// app.allView.stopListening();
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
@@ -170,8 +183,8 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
-		var customView = new genericAllView(app.collection);
-		app.renderGrid("", customView);
+		app.allView = new genericAllView(app.collection);
+		app.renderGrid("", app.allView);
 
 		app.bindEvents();
 
@@ -203,8 +216,8 @@ app.registerRoutes = function(router){
 
 		if(type === null){
 			$("#page-content .main-lists .page-name").text("Media");
-			var customView = new genericAllView(app.collection);
-			app.renderGrid("", customView);
+			app.allView = new genericAllView(app.collection);
+			app.renderGrid("", app.allView);
 		}else{
 			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 			app.renderGrid(type, app[type].allView);
@@ -306,26 +319,16 @@ app.registerRoutes = function(router){
 
 		$("#page-content .main-lists .page-name").text("Futures");
 
-		var tagsArray = tags.split("+");
+		var customView = new filteredView(app.collection, function(model){
+			var modelObject = model.toJSON();
+			var tagsArray = tags.split("+");
 
-		var filtered = app.helpers.filterCollection(app.collection, genericCollection, function(modelObject){
-			var intersect = false;
-			_.each(tagsArray, function(el1, i){
-				var chosenTag = decodeURI(el1).toLowerCase();
-
-				_.each(modelObject.tags, function(el2, i){
-					var givenTag = decodeURIComponent(el2).toLowerCase();
-
-					if(chosenTag == givenTag){
-						intersect = true;
-					}
-				});
-			});
-
-			return intersect;
+			if(_.intersection(modelObject.tags, tagsArray).length === 0){
+				return false;
+			}else{
+				return true;
+			}
 		});
-
-		var customView = new genericAllView(filtered);
 		app.renderGrid("", customView);
 
 		app.bindEvents();
@@ -408,7 +411,6 @@ app.registerRoutes = function(router){
 			$("#page-content .main-lists .page-name").text("Futures");
 			$("#page-content .main-lists .page-description").removeClass("hide");
 
-			// var customView = new genericAllView(app.searchCollection(searchTerm));
 			var customView = new filteredView(app.collection, function(model){
 				var modelObject = model.toJSON();
 				var term = new RegExp(decodeURIComponent(searchTerm), "i");
@@ -417,7 +419,8 @@ app.registerRoutes = function(router){
 				   term.test(modelObject.subtitle) ||
 				   term.test(modelObject.category) ||
 				   term.test(modelObject.appData) ||
-				   term.test(modelObject.created_by)){
+				   term.test(modelObject.created_by) ||
+				   _.contains(modelObject.tags, decodeURIComponent(searchTerm))){
 					return true;
 				}else{
 					return false;
