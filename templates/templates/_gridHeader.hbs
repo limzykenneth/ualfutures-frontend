@@ -1,10 +1,10 @@
 <script type="text/template" id="grid-header">
 	<section class="secondary-header">
 		<%
-		_.each(availableCategories, function(el, i){
+		_.each(availableCategories, function(el, key){
 		%>
 
-			<span class="subcategory"><a href="#media/<%= postType %>/category=<%= encodeURI(app.helpers.makeCompressCase(el)) %>"><%= el %></a></span>
+			<span class="subcategory"><a href="#media/<%= postType %>/category=<%= encodeURI(app.helpers.makeCompressCase(key)) %>"><%= el %></a></span>
 
 		<%
 		});
