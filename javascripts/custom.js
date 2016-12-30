@@ -252,15 +252,13 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
-		var filtered = new app[type].collectionConstructor(app[type].collection.filter(function(model){
-			var comparator = model.toJSON().category;
-			comparator = app.helpers.makeCompressCase(comparator);
+		var customView = new filteredView(app.collection, function(model){
+			var modelObject = model.toJSON();
+			var term = new RegExp(decodeURIComponent(category), "i");
 
-			return comparator == category.toLowerCase();
-		}), app);
-
-		var customView = new app[type].allViewConstructor(filtered);
-		app.renderGrid(type, customView);
+			return term.test(modelObject.category);
+		});
+		app.renderGrid("", customView);
 
 		$("#page-content .main-lists .page-description").addClass("hide");
 		$("#page-content .main-lists .secondary-header").remove();
