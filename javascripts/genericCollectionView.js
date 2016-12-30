@@ -3,6 +3,7 @@ var _ = require("underscore");
 var Backbone = require("backbone");
 Backbone.$ = $;
 var helpers = require("./helpers.js");
+var genericCollection = require("./genericCollection.js");
 
 var mediaView = require("./features/cardView.js");
 var eventsView = require("./events/cardView.js");
@@ -15,10 +16,17 @@ var oView = new oppsView();
 var dView = new dirView();
 
 var view = Backbone.View.extend({
-	initialize: function(collection){
-		this.collection = collection;
-		this.renderedItemsNumber = 0;
+	initialize: function(collection, filter){
 		this.$el = $("#page-content .grid");
+
+		if(typeof filter == "function"){
+			this.collection = new genericCollection();
+			this.filter = filter;
+			this.listenTo(this.collection, "add", this.filterCollection);
+			this.collection.add(collection.toJSON());
+		}else{
+			this.collection = collection;
+		}
 	},
 
 	// Collection passed in should be in the right order
@@ -28,7 +36,9 @@ var view = Backbone.View.extend({
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
+		this.stopListening(this.collection);
 		this.listenTo(this.collection, "add", this.nextPage);
+		this.listenTo(this.collection, "add", this.filterCollection);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
 		this.$el.removeClass("directories-grid");
@@ -56,8 +66,6 @@ var view = Backbone.View.extend({
 
 	// Will be overwritten by the children views
 	addModel: function(model){
-		this.renderedItemsNumber++;
-
 		var type = model.get("appData");
 		if(type == "features"){
 			this.$el.append(mView.render(model));
@@ -92,6 +100,12 @@ var view = Backbone.View.extend({
 				self.$el.masonry();
 			}
 		});
+	},
+
+	filterCollection: function(model, collection, options){
+		if(typeof this.filter == "function" && !this.filter(model)){
+			this.collection.remove(model);
+		}
 	}
 });
 

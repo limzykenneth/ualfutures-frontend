@@ -5,7 +5,6 @@ window.smark = require("smark");
 
 var genericCollection = require("./genericCollection.js");
 var genericAllView = require("./genericCollectionView.js");
-var filteredView = require("./filteredView.js");
 var appRouter = require("./routes.js");
 
 var app = app || {
@@ -252,7 +251,7 @@ app.registerRoutes = function(router){
 
 		var $grid = $("#page-content .grid");
 
-		var customView = new filteredView(app.collection, function(model){
+		var customView = new app[type].allViewConstructor(app[type].collection, function(model){
 			var modelObject = model.toJSON();
 			var term = new RegExp(decodeURIComponent(category), "i");
 
@@ -317,7 +316,7 @@ app.registerRoutes = function(router){
 
 		$("#page-content .main-lists .page-name").text("Futures");
 
-		var customView = new filteredView(app.collection, function(model){
+		var customView = new genericAllView(app.collection, function(model){
 			var modelObject = model.toJSON();
 			var tagsArray = tags.split("+");
 
@@ -409,7 +408,7 @@ app.registerRoutes = function(router){
 			$("#page-content .main-lists .page-name").text("Futures");
 			$("#page-content .main-lists .page-description").removeClass("hide");
 
-			var customView = new filteredView(app.collection, function(model){
+			var customView = new genericAllView(app.collection, function(model){
 				var modelObject = model.toJSON();
 				var term = new RegExp(decodeURIComponent(searchTerm), "i");
 

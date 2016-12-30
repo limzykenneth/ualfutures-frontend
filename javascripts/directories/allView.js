@@ -8,8 +8,6 @@ var genericCollectionView = require("../genericCollectionView.js");
 
 var allView = genericCollectionView.extend({
 	addModel: function(model){
-		this.renderedItemsNumber++;
-
 		var singleView = new cardView();
 		this.$el.append(singleView.render(model));
 	},
@@ -19,7 +17,9 @@ var allView = genericCollectionView.extend({
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
+		this.stopListening(this.collection);
 		this.listenTo(this.collection, "add", this.nextPage);
+		this.listenTo(this.collection, "add", this.filterCollection);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
 		this.$el.addClass("directories-grid");
