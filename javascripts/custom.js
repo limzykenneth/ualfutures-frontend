@@ -14,24 +14,28 @@ var app = app || {
 	},
 	features: {
 		postType: "features",
+		modelConstructor: require("./features/model.js"),
 		collectionConstructor: require("./features/collection.js"),
 		allViewConstructor: require("./features/allView.js"),
 		singleViewConstructor: require("./features/singleView.js"),
 	},
 	events: {
 		postType: "events",
+		modelConstructor: require("./events/model.js"),
 		collectionConstructor: require("./events/collection.js"),
 		allViewConstructor: require("./events/allView.js"),
 		singleViewConstructor: require("./events/singleView.js"),
 	},
 	opportunities: {
 		postType: "opportunities",
+		modelConstructor: require("./opportunities/model.js"),
 		collectionConstructor: require("./opportunities/collection.js"),
 		allViewConstructor: require("./opportunities/allView.js"),
 		singleViewConstructor: require("./opportunities/singleView.js"),
 	},
 	directories: {
 		postType: "directories",
+		modelConstructor: require("./directories/model.js"),
 		collectionConstructor: require("./directories/collection.js"),
 		allViewConstructor: require("./directories/allView.js"),
 		singleViewConstructor: require("./directories/singleView.js"),
@@ -147,15 +151,36 @@ app.renderGrid = function(type, view){
 app.renderPost = function(slug, type){
 	var model = app[type].collection.findWhere({slug: slug});
 
-	if(typeof model == "undefined" || app.helpers.redirectHomeFlag){
-		app.router.navigate("");
-	}
+	if(typeof model == "undefined"){
+		// Attempt to fetch it and if not 404 and redirect.
+		// Fetch it directly from server and don't add it into any collection!
+		var url = app[type].collection.url + "?slug=" + slug;
 
-	if(type == "events" && typeof model.toJSON().ebData == "undefined"){
-		$("#page-content .post-content").html("");
-		$("#page-content .post-content").html(app[type].singleView.render(model));
+		$.getJSON(url, function(data){
+			if(data.length === 0){
+				app.router.navigate("", {trigger: true});
+				return;
+			}
+			var model = new app[type].modelConstructor(data[0]);
+
+			if(type == "events" && typeof model.toJSON().ebData == "undefined"){
+				$("#page-content .post-content").html("");
+				$("#page-content .post-content").html(app[type].singleView.render(model));
+			}else{
+				$("#page-content .post-content").html(app[type].singleView.render(model));
+			}
+
+			app.helpers.bindSidebarEvents();
+		});
 	}else{
-		$("#page-content .post-content").html(app[type].singleView.render(model));
+		if(type == "events" && typeof model.toJSON().ebData == "undefined"){
+			$("#page-content .post-content").html("");
+			$("#page-content .post-content").html(app[type].singleView.render(model));
+		}else{
+			$("#page-content .post-content").html(app[type].singleView.render(model));
+		}
+
+		app.helpers.bindSidebarEvents();
 	}
 };
 
@@ -289,7 +314,6 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .secondary-header").remove();
 		$("#page-content .main-content").before(app[type].allView.renderHeader());
 
-		app.helpers.bindSidebarEvents();
 		app.bindEvents();
 
 		$(window).scrollTop(0);
