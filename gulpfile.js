@@ -23,6 +23,10 @@ gulp.task("handlebars", function(){
 		about: true
 	};
 
+	var subscribeData = {
+		subscribe: true
+	};
+
 	var options = {
 		ignorePartials: true,
 		batch: ["./templates", "./templates/head", "./templates/svg", "./templates/templates", "./templates/templates/sidebar"],
@@ -52,6 +56,14 @@ gulp.task("handlebars", function(){
 		}))
         .pipe(handlebars(aboutData, options))
         .pipe(rename("about.html"))
+        .pipe(gulp.dest("dist"));
+
+    gulp.src("templates/main.hbs")
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+        .pipe(handlebars(subscribeData, options))
+        .pipe(rename("subscribe.html"))
         .pipe(gulp.dest("dist"));
 
 	return gulp.src("templates/main.hbs")
@@ -106,6 +118,21 @@ gulp.task("javascripts", function(){
 		.pipe(buffer())
 		.pipe(uglifyjs(uglifyOptions))
 		.pipe(rename("about.min.js"))
+		.pipe(gulp.dest("./dist/javascripts/"));
+
+	browserify("./javascripts/subscribe.js", {
+		debug: true
+	})
+		.bundle()
+		.on("error", onError)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+		.pipe(source("subscribe.js"))
+		.pipe(gulp.dest("./dist/javascripts/"))
+		.pipe(buffer())
+		.pipe(uglifyjs(uglifyOptions))
+		.pipe(rename("subscribe.min.js"))
 		.pipe(gulp.dest("./dist/javascripts/"));
 
 	return browserify("./javascripts/custom.js", {

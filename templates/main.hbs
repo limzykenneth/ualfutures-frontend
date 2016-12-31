@@ -17,6 +17,8 @@
             {{> index }}
         {{else if about }}
             {{> about }}
+        {{else if subscribe}}
+            {{> subscribe }}
         {{/if}}
 		</div>
 
@@ -39,6 +41,8 @@
         </script>
         {{else if about }}
         <script src="./javascripts/about.min.js"></script>
+        {{else if subscribe}}
+        <script src="./javascripts/subscribe.min.js"></script>
         {{/if}}
     </body>
 </html>
