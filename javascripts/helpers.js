@@ -9,7 +9,6 @@ helpers.bindNavEvents = function(){
 	var $dropdown = $("#page-header .main-header .nav-dropdown");
 
 	var $homeHeader = $("#page-header .home-header");
-	var $slideIn = $("#page-header .home-header .nav-slide-in");
 
 	$(window).scroll(function(e) {
 		if($(window).scrollTop() > 0){
@@ -17,22 +16,15 @@ helpers.bindNavEvents = function(){
 		}else{
 			$mainHeader.removeClass("small");
 		}
+	});
 
-		if(!$homeHeader.hasClass("hide")){
-			$mainHeader.addClass("small");
-
-			if($(window).scrollTop() > 100 && $mainHeader.hasClass("transparent")){
-				$mainHeader.removeClass("hide");
-				setTimeout(function(){
-					$mainHeader.removeClass("transparent");
-				}, 10);
-			}else if($(window).scrollTop() < 50 && !$mainHeader.hasClass("transparent")){
-				$mainHeader.addClass("transparent");
-				setTimeout(function(){
-					$mainHeader.addClass("hide");
-				}, 300);
-			}
-		}
+	$homeHeader.find(".home-menu").click(function(){
+		$homeHeader.addClass("hide");
+		$("#page-content").removeClass("home-page");
+		$mainHeader.removeClass("hide");
+		setTimeout(function(){
+			$mainHeader.removeClass("transparent");
+		}, 10);
 	});
 
 	$header.hover(function() {
@@ -55,20 +47,20 @@ helpers.bindNavEvents = function(){
 
 
 	// Home header ------------------------------------------------------------------
-	$homeHeader.find(".home-menu").hover(function() {
-		$slideIn.css("display", "block");
-		setTimeout(function(){
-			$slideIn.addClass("in");
-		}, 1);
-	});
+	// $homeHeader.find(".home-menu").hover(function() {
+	// 	$slideIn.css("display", "block");
+	// 	setTimeout(function(){
+	// 		$slideIn.addClass("in");
+	// 	}, 1);
+	// });
 
-	$homeHeader.hover(function(){},
-	function() {
-		$slideIn.removeClass("in");
-		setTimeout(function(){
-			$slideIn.css("display", "none");
-		}, 300);
-	});
+	// $homeHeader.hover(function(){},
+	// function() {
+	// 	$slideIn.removeClass("in");
+	// 	setTimeout(function(){
+	// 		$slideIn.css("display", "none");
+	// 	}, 300);
+	// });
 
 	// Mobile header ----------------------------------------------------------------
 	$header.find(".mobile-menu").removeClass("nav-slide-in");

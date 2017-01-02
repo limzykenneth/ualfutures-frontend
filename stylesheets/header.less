@@ -342,49 +342,5 @@
 				}
 			}
 		}
-
-		.nav-slide-in{
-			.title-font;
-
-			display: none;
-			position: absolute;
-
-			right: ~"calc(0px - 15em)";
-			transition: right 0.3s ease;
-
-			padding-right: 2rem;
-			text-align: right;
-			font-size: 1.2rem;
-			line-height: 2rem;
-			margin-top: -1rem;
-			z-index: 10;
-
-			&.in{
-				right: 0;
-			}
-
-			ul{
-				list-style: none;
-				margin: 0;
-
-				li{
-					background-color: @white;
-					padding-left: 1rem;
-				}
-			}
-
-			.tier-0{
-				padding-left: 0;
-
-				li:last-child{
-					padding-bottom: 1rem;
-				}
-			}
-
-			.tier-1{
-				padding-left: 0;
-				padding-right: 1rem;
-			}
-		}
 	}
 }
