@@ -58,9 +58,6 @@ var view = Backbone.View.extend({
 				.masonry("remove", this.$el.find(".grid-item.to-be-remove"))
 				.masonry();
 
-		// Resize the background image according to the size of the grid item
-		helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
-
 		return this;
 	},
 
@@ -76,6 +73,10 @@ var view = Backbone.View.extend({
 		}else if(type == "directories"){
 			this.$el.append(dView.render(model));
 		}
+
+		// Resize the background image according to the size of the grid item
+		helpers.dynamicImageSize($("#page-content .grid .grid-item .bg-image-container"));
+		helpers.bindCardEvents(app.router);
 	},
 
 	nextPage: function(model){

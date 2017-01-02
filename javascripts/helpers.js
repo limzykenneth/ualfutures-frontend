@@ -45,23 +45,6 @@ helpers.bindNavEvents = function(){
 		$dropdown.css("transform", "translateY(-100%)");
 	});
 
-
-	// Home header ------------------------------------------------------------------
-	// $homeHeader.find(".home-menu").hover(function() {
-	// 	$slideIn.css("display", "block");
-	// 	setTimeout(function(){
-	// 		$slideIn.addClass("in");
-	// 	}, 1);
-	// });
-
-	// $homeHeader.hover(function(){},
-	// function() {
-	// 	$slideIn.removeClass("in");
-	// 	setTimeout(function(){
-	// 		$slideIn.css("display", "none");
-	// 	}, 300);
-	// });
-
 	// Mobile header ----------------------------------------------------------------
 	$header.find(".mobile-menu").removeClass("nav-slide-in");
 	$header.find(".mobile-menu-toggle").off("click");
@@ -86,6 +69,7 @@ helpers.bindCardEvents = function(router){
 	});
 
 	$("#page-content .grid .grid-item .card-tag").click(function(e) {
+		console.log("click");
 		e.preventDefault();
 		e.stopPropagation();
 
