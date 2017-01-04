@@ -529,7 +529,26 @@ app.bindStudioEvents = function(){
 		cls1 = cls1.replace(inactiveReg, "");
 		$(this).attr("class", cls1);
 		$(this).siblings(".group").attr("class", cls1);
+	})
+	.click(function(e){
+		var term = $(this).find("text").text().toLowerCase();
+
+		var customView = new genericAllView(app.collection, function(model){
+			var modelObject = model.toJSON();
+
+			if(_.contains(modelObject.tags, term)){
+				return true;
+			}else{
+				return false;
+			}
+		});
+
+		customView.$el = $("#page-content .studio-page .method .method-content");
+
+		app.renderGrid("", customView);
 	});
+
+
 };
 
 app.searchCollection = function(searchTerm){
