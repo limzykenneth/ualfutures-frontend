@@ -182,6 +182,30 @@ app.renderPost = function(slug, type){
 
 		app.helpers.bindSidebarEvents();
 	}
+
+	var tags = model.get("tags");
+	var relatedModels = [];
+	_.each(tags, function(el, i){
+		app.collection.each(function(mod, i){
+			if(_.contains(mod.get("tags"), el)){
+				relatedModels.push(mod);
+			}
+		}, this);
+	}, this);
+
+	_.each(relatedModels, function(el, i){
+		if(el.get("slug") == slug){
+			relatedModels.splice(i, 1);
+		}
+	}, this);
+
+	var relatedTemplate = _.template($("#related-template").html());
+	var relatedRendered = "";
+	_.each(relatedModels, function(el, i){
+		relatedRendered += relatedTemplate(el.toJSON());
+	});
+
+	$("#page-content .sidebar .related").append(relatedRendered);
 };
 
 app.registerRoutes = function(router){
