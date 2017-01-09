@@ -198,6 +198,7 @@ app.renderPost = function(slug, type){
 			relatedModels.splice(i, 1);
 		}
 	}, this);
+	relatedModels.splice(6, relatedModels.length);
 
 	var relatedTemplate = _.template($("#related-template").html());
 	var relatedRendered = "";
