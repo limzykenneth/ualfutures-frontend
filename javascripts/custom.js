@@ -270,7 +270,9 @@ app.registerRoutes = function(router){
 			app.renderGrid(type, app[type].allView);
 
 			$("#page-content .main-lists .page-description").text(app[type].pageDescription);
-			$grid.before(app[type].allView.renderHeader());
+			if(type != "opportunities"){
+				$grid.before(app[type].allView.renderHeader());
+			}
 		}
 
 		app.bindEvents();
