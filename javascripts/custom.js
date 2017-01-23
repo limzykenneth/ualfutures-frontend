@@ -305,7 +305,7 @@ app.registerRoutes = function(router){
 		});
 		app.renderGrid("", customView);
 
-		$("#page-content .main-lists .page-description").addClass("hide");
+		$("#page-content .main-lists .page-description").text(app[type].pageDescription);
 		$("#page-content .main-lists .secondary-header").remove();
 		$grid.before(app[type].allView.renderHeader());
 
