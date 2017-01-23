@@ -303,7 +303,8 @@ app.registerRoutes = function(router){
 			var modelObject = model.toJSON();
 			var term = new RegExp(decodeURIComponent(category), "i");
 
-			return term.test(modelObject.category);
+
+			return term.test(app.helpers.makeCompressCase(modelObject.category));
 		});
 		app.renderGrid("", customView);
 
