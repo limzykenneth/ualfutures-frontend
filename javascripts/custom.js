@@ -215,7 +215,6 @@ app.registerRoutes = function(router){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
-		$("#page-content .main-lists .page-name").addClass("hide");
 		$("#page-content .search").addClass("hide");
 
 		$("#page-header .main-header").addClass("hide");
@@ -244,7 +243,6 @@ app.registerRoutes = function(router){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
 		$("#page-content .search").addClass("hide");
 
@@ -264,11 +262,9 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .secondary-header").remove();
 
 		if(type === null){
-			$("#page-content .main-lists .page-name").text("Media");
 			app.allView = new genericAllView(app.collection);
 			app.renderGrid("", app.allView);
 		}else{
-			$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 			app.renderGrid(type, app[type].allView);
 
 			$("#page-content .main-lists .page-description").addClass("hide");
@@ -284,7 +280,6 @@ app.registerRoutes = function(router){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
 		$("#page-content .search").addClass("hide");
 
@@ -296,7 +291,6 @@ app.registerRoutes = function(router){
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 
-		$("#page-content .main-lists .page-name").text(app.helpers.makeTitleCase(type));
 		$("#page-content .main-lists .page-description").text("Connecting students to knowledge, inspiration, resources, events & opportunities.");
 
 		var $grid = $("#page-content .grid");
@@ -322,7 +316,6 @@ app.registerRoutes = function(router){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").addClass("hide");
 		$("#page-content .post-content").removeClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
 		$("#page-content .search").addClass("hide");
 
@@ -349,7 +342,6 @@ app.registerRoutes = function(router){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
-		$("#page-content .main-lists .page-name").removeClass("hide");
 		$("#page-content .studio-page").addClass("hide");
 		$("#page-content .search").addClass("hide");
 
@@ -362,8 +354,6 @@ app.registerRoutes = function(router){
 		$("#page-header .nav-slide-in").css("display", "none");
 		$("#page-content .main-lists .slideshow").remove();
 		$("#page-content .main-lists .secondary-header").remove();
-
-		$("#page-content .main-lists .page-name").text("Futures");
 
 		var customView = new genericAllView(app.collection, function(model){
 			var modelObject = model.toJSON();
@@ -453,8 +443,6 @@ app.registerRoutes = function(router){
 		// Page showing search results
 		if(searchTerm){
 			$("#page-content .main-lists").removeClass("hide");
-			$("#page-content .main-lists .page-name").removeClass("hide");
-			$("#page-content .main-lists .page-name").text("Futures");
 			$("#page-content .main-lists .page-description").removeClass("hide");
 
 			var customView = new genericAllView(app.collection, function(model){
