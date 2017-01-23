@@ -19,7 +19,7 @@ var collection = genericCollection.extend({
 	initialize: function(models, app){
 		this.currentPage = 1;
 		if(typeof app.directory.availableCategories == "undefined"){
-			var url = app.categories.partialURL + "directory";
+			var url = app.categories.partialURL + "directories";
 
 			$.getJSON(url, function(data) {
 				app.directory.availableCategories = data;
