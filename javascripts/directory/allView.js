@@ -3,7 +3,7 @@ var _ = require("underscore");
 var Backbone = require("backbone");
 Backbone.$ = $;
 
-var cardView = require("./directoriesView.js");
+var cardView = require("./directoryView.js");
 var genericCollectionView = require("../genericCollectionView.js");
 
 var allView = genericCollectionView.extend({
@@ -13,7 +13,7 @@ var allView = genericCollectionView.extend({
 	},
 
 	render: function(){
-		var types = ["features", "directories", "opportunities", "events"];
+		var types = ["features", "directory", "opportunities", "events"];
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
@@ -22,7 +22,7 @@ var allView = genericCollectionView.extend({
 		this.listenTo(this.collection, "add", this.filterCollection);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
-		this.$el.addClass("directories-grid");
+		this.$el.addClass("directory-grid");
 		this.$el.masonry({
 			columnWidth: ".grid-item",
 			itemSelector: ".grid-item",
@@ -38,7 +38,7 @@ var allView = genericCollectionView.extend({
 
 	renderHeader: function(){
 		var headerTemplate = _.template($("#grid-header").html());
-		var renderedHeader = headerTemplate(app.directories);
+		var renderedHeader = headerTemplate(app.directory);
 
 		return renderedHeader;
 	}

@@ -18,11 +18,11 @@ var collection = genericCollection.extend({
 
 	initialize: function(models, app){
 		this.currentPage = 1;
-		if(typeof app.directories.availableCategories == "undefined"){
-			var url = app.categories.partialURL + "directories";
+		if(typeof app.directory.availableCategories == "undefined"){
+			var url = app.categories.partialURL + "directory";
 
 			$.getJSON(url, function(data) {
-				app.directories.availableCategories = data;
+				app.directory.availableCategories = data;
 			});
 		}
 	},

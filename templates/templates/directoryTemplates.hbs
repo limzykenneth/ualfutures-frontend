@@ -1,4 +1,4 @@
-<script type="text/template" id="directories-card-view">
+<script type="text/template" id="directory-card-view">
 	<a id="<%= slug %>" href="
 		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
 			<%= external_links %>" target="_blank"
@@ -61,7 +61,7 @@
 	</a>
 </script>
 
-<script type="text/template" id="directories-4column-card">
+<script type="text/template" id="directory-4column-card">
 	<a id="<%= slug %>" href="
 		<% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
 			<%= external_links %>" target="_blank"
@@ -109,21 +109,21 @@
 	</a>
 </script>
 
-<script type="text/template" id="directories-grid-header">
-	<section class="directories-header">
-		<span class="subcategory"><a href="#media/directories/category=video">Video</a></span>
-		<span class="subcategory"><a href="#media/directories/category=audio">Audio</a></span>
-		<span class="subcategory"><a href="#media/directories/category=reading">Reading</a></span>
-		<span class="subcategory"><a href="#media/directories/category=tools%26platforms">Tools &amp; Platforms</a></span>
+<script type="text/template" id="directory-grid-header">
+	<section class="directory-header">
+		<span class="subcategory"><a href="#media/directory/category=video">Video</a></span>
+		<span class="subcategory"><a href="#media/directory/category=audio">Audio</a></span>
+		<span class="subcategory"><a href="#media/directory/category=reading">Reading</a></span>
+		<span class="subcategory"><a href="#media/directory/category=tools%26platforms">Tools &amp; Platforms</a></span>
 
-		<span class="search-topic"><a href="#media/directories">Search by Topic</a></span>
+		<span class="search-topic"><a href="#media/directory">Search by Topic</a></span>
 	</section>
 </script>
 
-<script type="text/template" id="directories-single-view">
-	<article class="single-post directories">
+<script type="text/template" id="directory-single-view">
+	<article class="single-post directory">
 		<div class="main-content">
-			<a class="back-to-nav" href="#media/directories"><span>Directories</span></a>
+			<a class="back-to-nav" href="#media/directory"><span>Directory</span></a>
 
 			<div class="media">
 				<%
@@ -150,7 +150,7 @@
 			%>
 			</div>
 
-			<a class="back-to-nav" href="#media/directories"><span>Directories</span></a>
+			<a class="back-to-nav" href="#media/directory"><span>Directory</span></a>
 		</div>
 
 		{{> sidebar type=true }}

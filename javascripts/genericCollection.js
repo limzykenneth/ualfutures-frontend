@@ -16,7 +16,7 @@ var collection = Backbone.Collection.extend({
 	},
 
 	fetchNextPage: function(page, callback){
-		var types = ["features", "opportunities", "events", "directories"];
+		var types = ["features", "opportunities", "events", "directory"];
 		var defer = [];
 
 		_.each(types, function(el, i){

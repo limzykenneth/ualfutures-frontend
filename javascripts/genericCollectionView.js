@@ -8,7 +8,7 @@ var genericCollection = require("./genericCollection.js");
 var mediaView = require("./features/cardView.js");
 var eventsView = require("./events/cardView.js");
 var oppsView = require("./opportunities/cardView.js");
-var dirView = require("./directories/cardView.js");
+var dirView = require("./directory/cardView.js");
 
 var mView = new mediaView();
 var eView = new eventsView();
@@ -32,7 +32,7 @@ var view = Backbone.View.extend({
 	// Collection passed in should be in the right order
 	// Use the generic collection object
 	render: function(){
-		var types = ["features", "directories", "opportunities", "events"];
+		var types = ["features", "directory", "opportunities", "events"];
 		_.each(types, function(el, i){
 			window.app[el].allView.stopListening(window.app[el].allView.collection);
 		});
@@ -41,7 +41,7 @@ var view = Backbone.View.extend({
 		this.listenTo(this.collection, "add", this.filterCollection);
 		this.listenTo(this.collection, "remove", this.removeItem);
 
-		this.$el.removeClass("directories-grid");
+		this.$el.removeClass("directory-grid");
 		this.$el.masonry({
 			columnWidth: ".grid-item",
 			itemSelector: ".grid-item",
@@ -70,7 +70,7 @@ var view = Backbone.View.extend({
 			this.$el.append(eView.renderWithFullCategory(model));
 		}else if(type == "opportunities"){
 			this.$el.append(oView.renderWithFullCategory(model));
-		}else if(type == "directories"){
+		}else if(type == "directory"){
 			this.$el.append(dView.render(model));
 		}
 

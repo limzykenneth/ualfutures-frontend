@@ -4,7 +4,7 @@ var Backbone = require("backbone");
 Backbone.$ = $;
 
 var view = Backbone.View.extend({
-	template: _.template($("#directories-single-view").html()),
+	template: _.template($("#directory-4column-card").html()),
 
 	render: function(model){
 		renderedTemplate = this.template(model.toJSON());

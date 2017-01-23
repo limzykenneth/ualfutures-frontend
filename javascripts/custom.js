@@ -36,12 +36,12 @@ var app = app || {
 		singleViewConstructor: require("./opportunities/singleView.js"),
 		pageDescription: "Futures pick of internships, jobs, competitions and creative opportunities."
 	},
-	directories: {
-		postType: "directories",
-		modelConstructor: require("./directories/model.js"),
-		collectionConstructor: require("./directories/collection.js"),
-		allViewConstructor: require("./directories/allView.js"),
-		singleViewConstructor: require("./directories/singleView.js"),
+	directory: {
+		postType: "directory",
+		modelConstructor: require("./directory/model.js"),
+		collectionConstructor: require("./directory/collection.js"),
+		allViewConstructor: require("./directory/allView.js"),
+		singleViewConstructor: require("./directory/singleView.js"),
 		pageDescription: "The Futures directory: discover, listen, watch, think, play, share."
 	},
 	slideshow: {
@@ -53,7 +53,7 @@ var app = app || {
 		"features",
 		"opportunities",
 		"events",
-		"directories"
+		"directory"
 	]
 };
 
@@ -62,8 +62,8 @@ app.allView = new genericAllView();
 app.features.collection = new app.features.collectionConstructor();
 app.features.singleView = new app.features.singleViewConstructor();
 
-app.directories.collection = new app.directories.collectionConstructor(null, app);
-app.directories.singleView = new app.directories.singleViewConstructor();
+app.directory.collection = new app.directory.collectionConstructor(null, app);
+app.directory.singleView = new app.directory.singleViewConstructor();
 
 app.events.collection = new app.events.collectionConstructor(null, app);
 app.events.singleView = new app.events.singleViewConstructor();
@@ -81,7 +81,7 @@ app.init = function(){
 	deffereds.push(app.features.collection.fetch({success: success}));
 	deffereds.push(app.events.collection.fetch({success: success}));
 	deffereds.push(app.opportunities.collection.fetch({success: success}));
-	deffereds.push(app.directories.collection.fetch({success: success}));
+	deffereds.push(app.directory.collection.fetch({success: success}));
 	deffereds.push(
 		$.getJSON(app.slideshow.url, function(data) {
 			app.slideshow.data = data;
@@ -509,7 +509,7 @@ app.registerRoutes = function(router){
 };
 
 app.startMasonry = function($selector, postType){
-	if(postType == "directories"){
+	if(postType == "directory"){
 		$selector.masonry({
 			columnWidth: ".grid-item",
 			itemSelector: ".grid-item",
