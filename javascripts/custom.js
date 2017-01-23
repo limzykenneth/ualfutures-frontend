@@ -18,6 +18,7 @@ var app = app || {
 		collectionConstructor: require("./features/collection.js"),
 		allViewConstructor: require("./features/allView.js"),
 		singleViewConstructor: require("./features/singleView.js"),
+		pageDescription: "Futures featured news, interviews, opinion and projects we love."
 	},
 	events: {
 		postType: "events",
@@ -25,6 +26,7 @@ var app = app || {
 		collectionConstructor: require("./events/collection.js"),
 		allViewConstructor: require("./events/allView.js"),
 		singleViewConstructor: require("./events/singleView.js"),
+		pageDescription: "Futures pick of events from ual and elsewhere."
 	},
 	opportunities: {
 		postType: "opportunities",
@@ -32,6 +34,7 @@ var app = app || {
 		collectionConstructor: require("./opportunities/collection.js"),
 		allViewConstructor: require("./opportunities/allView.js"),
 		singleViewConstructor: require("./opportunities/singleView.js"),
+		pageDescription: "Futures pick of internships, jobs, competitions and creative opportunities."
 	},
 	directories: {
 		postType: "directories",
@@ -39,6 +42,7 @@ var app = app || {
 		collectionConstructor: require("./directories/collection.js"),
 		allViewConstructor: require("./directories/allView.js"),
 		singleViewConstructor: require("./directories/singleView.js"),
+		pageDescription: "The Futures directory: discover, listen, watch, think, play, share."
 	},
 	slideshow: {
 		// url: "http://localhost/ual_futures/wp-json/wp/v2/slideshow?per_page=1&page=1"
@@ -211,7 +215,6 @@ app.renderPost = function(slug, type){
 
 app.registerRoutes = function(router){
 	router.route("", function(){
-		// app.allView.stopListening();
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
 		$("#page-content .post-content").addClass("hide");
@@ -223,7 +226,6 @@ app.registerRoutes = function(router){
 
 		$("#page-content").addClass("home-page");
 		$("#page-content .main-lists .page-description").addClass("hide");
-		// $("#page-content .main-lists .page-description").text("Connecting UAL students, graduates and industry.");
 
 		if(!($("#page-content .main-lists .slideshow").hasClass("slick-initialized"))){
 			app.renderSlideshow();
@@ -267,7 +269,7 @@ app.registerRoutes = function(router){
 		}else{
 			app.renderGrid(type, app[type].allView);
 
-			$("#page-content .main-lists .page-description").addClass("hide");
+			$("#page-content .main-lists .page-description").text(app[type].pageDescription);
 			$grid.before(app[type].allView.renderHeader());
 		}
 
