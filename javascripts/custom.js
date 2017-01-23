@@ -12,6 +12,9 @@ var app = app || {
 		// partialURL: "http://localhost/ual_futures/wp-json/futures_categories/"
 		partialURL: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/futures_categories/"
 	},
+	studio: {
+		url: "http://ualfutures-backend.default.ualfutures.uk0.bigv.io/wp-json/wp/v2/studio?per_page=1&page=1"
+	},
 	features: {
 		postType: "features",
 		modelConstructor: require("./features/model.js"),
@@ -85,6 +88,11 @@ app.init = function(){
 	deffereds.push(
 		$.getJSON(app.slideshow.url, function(data) {
 			app.slideshow.data = data;
+		})
+	);
+	deffereds.push(
+		$.getJSON(app.studio.url, function(data) {
+			app.studio.data = data;
 		})
 	);
 
@@ -395,6 +403,8 @@ app.registerRoutes = function(router){
 		$("#page-content .studio-page .intro").removeClass("hide");
 		$("#page-content .studio-page .register").addClass("hide");
 		$("#page-content .studio-page .method").addClass("hide");
+
+		$("#page-content .studio-page .intro .intro-content").html(app.studio.data[0].content);
 
 		if(page == "register"){
 			$("#page-content .studio-page .intro").addClass("hide");
