@@ -3,6 +3,8 @@
 	<% if(typeof slideshow !== "undefined"){ %>
 
 		<% for (var i = 1; i <= slideshow.size; i++){ %>
+			<% if(typeof slideshow["url_" + i] != "undefined") print("<a href='" + slideshow["url_" + i] + "'>");%>
+
 			<div class="slide">
 			<% if(slideshow["slide_" + i] == "Text"){ %>
 				<h1><%= slideshow["text_" + i] %></h1>
@@ -10,6 +12,8 @@
 				<img src="<%= slideshow['image_' + i] %>">
 			<% } %>
 			</div>
+
+			<% if(typeof slideshow["url_" + i] != "undefined") print("</a>");%>
 		<% } %>
 
 	<% } %>
