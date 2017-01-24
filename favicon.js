@@ -38,7 +38,10 @@ var favicons = require('favicons'),
 
         // Save images
         response.images.forEach(function(v){
-        	fs.writeFile("./favicon/" + v.name, v.contents, function(err){
+            if (!fs.existsSync("./dist/favicon/")){
+                fs.mkdirSync("./dist/favicon/");
+            }
+        	fs.writeFile("./dist/favicon/" + v.name, v.contents, function(err){
         		if(err){
         			console.log(err);
         		}
@@ -50,7 +53,10 @@ var favicons = require('favicons'),
 
         // Save "random" files
         response.files.forEach(function(v){
-        	fs.writeFile("./favicon/" + v.name, v.contents, function(err){
+            if (!fs.existsSync("./dist/favicon/")){
+                fs.mkdirSync("./dist/favicon/");
+            }
+        	fs.writeFile("./dist/favicon/" + v.name, v.contents, function(err){
         		if(err){
         			console.log(err);
         		}
