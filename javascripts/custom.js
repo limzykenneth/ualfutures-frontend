@@ -98,6 +98,13 @@ app.init = function(){
 
 	$.when.apply($, deffereds)
 		.then(app.start, app.errorFetchingData);
+
+	if(window.location.hash === ""){
+		$("#page-header .main-header").addClass("hide");
+		$("#page-header .main-header").addClass("transparent");
+		$("#page-header .home-header").removeClass("hide");
+		$("#page-content .main-lists .page-description").addClass("hide");
+	}
 };
 
 app.start = function(){
