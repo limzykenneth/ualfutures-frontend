@@ -138,11 +138,10 @@ p{
 
 				h1{
 					position: relative;
-					transform: translateY(-60%);
+					transform: translateY(-50%);
 					top: 50%;
 					color: @light-green;
-					margin-left: 15rem;
-					margin-right: 15rem;
+					margin: 0 15rem;
 
 					@media @large{
 						margin: 0 6rem;
@@ -150,10 +149,12 @@ p{
 					}
 
 					@media @small{
-						top: 0%;
-						transform: translateY(50%);
+						font-size: 2rem;
+					}
+
+					@media @x-small{
 						padding: 0 1rem;
-						font-size: 1.75rem;
+						font-size: 1.5rem;
 						margin: 0 auto;
 					}
 				}
