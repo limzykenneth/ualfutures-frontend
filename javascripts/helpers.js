@@ -7,6 +7,7 @@ helpers.bindNavEvents = function(){
 	var $header = $("#page-header");
 	var $mainHeader = $("#page-header .main-header");
 	var $dropdown = $("#page-header .main-header .nav-dropdown");
+	var $dropdownStudio = $("#page-header .main-header .nav-dropdown-studio");
 
 	var $homeHeader = $("#page-header .home-header");
 
@@ -39,10 +40,17 @@ helpers.bindNavEvents = function(){
 
 	$mainHeader.find(".main-nav #media").hover(function() {
 		$dropdown.css("transform", "translateY(0%)");
+		$dropdownStudio.css("transform", "translateY(-100%)");
+	});
+
+	$mainHeader.find(".main-nav #studio").hover(function() {
+		$dropdownStudio.css("transform", "translateY(0%)");
+		$dropdown.css("transform", "translateY(-100%)");
 	});
 
 	$mainHeader.hover(function(){}, function(){
 		$dropdown.css("transform", "translateY(-100%)");
+		$dropdownStudio.css("transform", "translateY(-100%)");
 	});
 
 	// Mobile header ----------------------------------------------------------------
