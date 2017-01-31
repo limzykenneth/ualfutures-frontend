@@ -288,6 +288,7 @@ app.registerRoutes = function(router){
 		$(window).scrollTop(0);
 	});
 
+	// Categories ---------------------------------------------------------------------------------
 	router.route("media/:type/category=:category(/p:page)", function(type, category, page){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
@@ -320,11 +321,14 @@ app.registerRoutes = function(router){
 		$("#page-content .main-lists .secondary-header").remove();
 		$grid.before(app[type].allView.renderHeader());
 
+		$("#page-content .main-lists .secondary-header").append('<span class="subcategory"><a href="#media/' + type + '">' + "All" + '</a></span>');
+
 		app.bindEvents();
 
 		$(window).scrollTop(0);
 	});
 
+	// Posts ---------------------------------------------------------------------------------
 	router.route("media/:type/post=:slug", function(type, slug){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").addClass("hide");
@@ -350,7 +354,7 @@ app.registerRoutes = function(router){
 		$(window).scrollTop(0);
 	});
 
-	// Tags -------------------------------------------------------------------------------------------
+	// Tags ---------------------------------------------------------------------------------
 	router.route("media/tags=:tags", function(tags){
 		$("#page-content").removeClass("search-page");
 		$("#page-content .main-lists").removeClass("hide");
