@@ -45,7 +45,14 @@
 					@media @medium{
 						width: 47px;
 						top: 20px;
+					}
+
+					@media @small{
 						margin-left: 1rem;
+					}
+
+					@media @x-small{
+						margin-left: 1.5rem;
 					}
 
 					.cls-1{
@@ -183,13 +190,18 @@
 		.mobile-menu-toggle{
 			display: none;
 			position: absolute;
-			right: 10px;
+			right: 0px;
 			top: 12px;
 			padding: 5px;
 			cursor: pointer;
 
 			@media @medium{
 				display: inline-block;
+				margin-right: 1.9rem;
+			}
+
+			@media @x-small{
+				margin-right: 1.4rem;
 			}
 		}
 
