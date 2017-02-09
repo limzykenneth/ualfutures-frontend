@@ -21,7 +21,7 @@
 			if(cover_photo !== false){
 				print(' with-bg-image ">');
 		%>
-			<div class="bg-image-container" style="background-image: url('<%= cover_photo %>'); background-size: cover; background-repeat: no-repeat; background-position: center; background-color: #6159f5; background-blend-mode: multiply;">
+			<div class="bg-image-container" style="background-image: url('<%= cover_photo %>'); background-size: cover; background-repeat: no-repeat; background-position: center; background-color: #6159f5; background-blend-mode: multiply; filter: grayscale(1);">
 				{{!-- <img class="bg-image" src="<%= cover_photo %>"> --}}
 			</div>
 		<%
