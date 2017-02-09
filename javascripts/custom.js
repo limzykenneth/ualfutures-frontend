@@ -479,12 +479,12 @@ app.registerRoutes = function(router){
 				   term.test(modelObject.subtitle) ||
 				   term.test(modelObject.category) ||
 				   term.test(modelObject.appData) ||
-				   term.test(modelObject.created_by) ||
-				   _.contains(modelObject.tags, decodeURIComponent(searchTerm))){
+				   term.test(modelObject.created_by)){
 					return true;
-				}else{
-					return false;
 				}
+				return _.some(modelObject.tags, function(tag){
+					return tag.toLowerCase() == decodeURIComponent(searchTerm).toLowerCase();
+				});
 			});
 			app.renderGrid("", customView);
 
