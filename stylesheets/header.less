@@ -305,36 +305,32 @@
 			z-index: 5;
 			color: @purple;
 
-			.ual{
-				display: block;
-
-				@media @medium{
-					display: inline-block;
-				}
-
-				#Layer_1{
-					position: absolute;
-					margin-left: 3em;
-					height: auto;
-					display: inline-block;
-					transition: all 0.5s ease;
-					width: 65px;
-					top: 29px;
-
-					@media @medium{
-						position: relative;
-					}
-
-					.cls-1{
-						fill: @purple;
-					}
-				}
-			}
-
 			.nav-container{
 				width: 75vw;
 				margin: 0 ~"calc(12.5% - 10px)";
 				text-align: center;
+				display: flex;
+				justify-content: space-between;
+
+				.ual{
+					#Layer_1{
+						position: absolute;
+						margin-left: 1rem;
+						height: auto;
+						display: inline-block;
+						transition: all 0.5s ease;
+						width: 65px;
+						top: 29px;
+
+						@media @medium{
+							position: relative;
+						}
+
+						.cls-1{
+							fill: @purple;
+						}
+					}
+				}
 
 				.logo{
 					.title-font;
@@ -355,20 +351,41 @@
 						}
 					}
 				}
-			}
 
-			.home-menu{
-				.title-font;
+				.home-menu{
+					.title-font;
 
-				display: block;
-				position: absolute;
-				right: 2rem;
-				top: 2.7rem;
-				font-size: 1.5rem;
-				cursor: pointer;
+					position: relative;
+					margin-right: 0.7rem;
+					top: 2.8rem;
+					font-size: 1.5rem;
+					cursor: pointer;
 
-				p{
-					margin: 0;
+					p{
+						margin: 0;
+						display: inline-block;
+					}
+
+					#search{
+						margin-left: 2rem;
+
+						&:hover{
+							border-bottom: none;
+						}
+
+						#search-button{
+							height: 18px;
+							width: 18px;
+
+							circle{
+								fill: none;
+							}
+
+							.cls-1{
+								stroke: @purple;
+							}
+						}
+					}
 				}
 			}
 		}
