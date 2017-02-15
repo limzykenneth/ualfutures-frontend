@@ -213,7 +213,7 @@ app.renderPost = function(slug, type){
 	}, this);
 
 	_.each(relatedModels, function(el, i){
-		if(el.get("slug") == slug){
+		if(typeof el != "undefined" && el.get("slug") == slug){
 			relatedModels.splice(i, 1);
 		}
 	}, this);
