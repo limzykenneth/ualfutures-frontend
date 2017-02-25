@@ -1,3 +1,9 @@
 <script type="text/template" id="related-template">
-    <a href="#media/<%= appData %>/post=<%= slug %>"><%= title %></a>
+    <a href="
+	    <% if(typeof external_links !== "undefined" && smark.generate(external_links).type == "link"){ %>
+			<%= external_links %>" target="_blank"
+		<% }else{ %>
+			<%= '#media/' + appData + '/post=' + slug %>"
+		<% } %>
+	><%= title %></a>
 </script>

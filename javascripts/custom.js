@@ -217,6 +217,10 @@ app.renderPost = function(slug, type){
 			relatedModels.splice(i, 1);
 		}
 	}, this);
+	relatedModels = _.uniq(relatedModels);
+	relatedModels = _.filter(relatedModels, function(el){
+		return el.get("slug") != model.get("slug");
+	});
 	relatedModels.splice(6, relatedModels.length);
 
 	var relatedTemplate = _.template($("#related-template").html());
